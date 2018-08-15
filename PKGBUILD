@@ -16,8 +16,8 @@ _bfq=v8r12
 _bfqdate=20180531
 _sub=0
 _rc=rc0
-_commit=10f3e23f07cb0c20f9bcb77a5b5a7eb2a1b2a2fe
-_shortcommit=${_rc}.0814.g10f3e23
+_commit=31130a16d459de809cd1c03eabc9567d094aae6a
+_shortcommit=${_rc}.0814.g31130a1
 pkgver=${_basekernel}${_shortcommit}
 #pkgver=${_basekernel}.${_sub}
 pkgrel=1
@@ -61,8 +61,8 @@ source=(#"https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.
         '0011-bootsplash.patch'
         '0012-bootsplash.patch'
         '0013-bootsplash.patch')
-sha256sums=('87e301667b17f59cce228f30da9dd0470ab9fbb6b1e4d11aef3f57f68088ae77'
-            '26cd07f6e7045b90b78feff09c52bef0706b64684c56d360f7b77bdfe317c406'
+sha256sums=('f93df0840694f76f92a2c4547e8233e2f6e2a4d2b3cd4df9adf9c369776012cf'
+            'f038d7d2087938c3137b67e9557affbb2c7c72a50f869cac189d3768ee08e56c'
             'a1f34dbcbda9931c01e71fec54f97f2b17165ac55c3cbf77c0389b025d3686ce'
             '43942683a7ff01b180dff7f3de2db4885d43ab3d4e7bd0e1918c3aaf2ee061f4'
             'ae2e95db94ef7176207c690224169594d49445e04249d2499e9d2fbc117a0b21'
@@ -137,7 +137,7 @@ prepare() {
     cat "${srcdir}/config" > ./.config
   fi
 
-  cat "${srcdir}/config.aufs" >> ./.config
+#  cat "${srcdir}/config.aufs" >> ./.config
 
   if [ "${_kernelname}" != "" ]; then
     sed -i "s|CONFIG_LOCALVERSION=.*|CONFIG_LOCALVERSION=\"${_kernelname}\"|g" ./.config
