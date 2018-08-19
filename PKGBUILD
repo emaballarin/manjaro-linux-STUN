@@ -16,8 +16,8 @@ _bfq=v8r12
 _bfqdate=20180531
 _sub=0
 _rc=rc0
-_commit=edb0a20009363ae787bfe0d6fd52abb504f05113
-_shortcommit=${_rc}.0817.gedb0a20
+_commit=08b5fa819970c318e58ab638f497633c25971813
+_shortcommit=${_rc}.0819.g08b5fa8
 pkgver=${_basekernel}${_shortcommit}
 #pkgver=${_basekernel}.${_sub}
 pkgrel=1
@@ -61,8 +61,8 @@ source=(#"https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.
         '0011-bootsplash.patch'
         '0012-bootsplash.patch'
         '0013-bootsplash.patch')
-sha256sums=('52b7e7d2416695758b256f193d8af8ea4e924e164a46d4e81cf39e2aa8216380'
-            '011e23123ebbc4f26a3a1903b04f991b5b2b098c5188d1056ca3b030fbe47ce3'
+sha256sums=('0a0e29ff9c7e3427d315cd420b4bee4ee022a66cd6661d6f7290edc5302932f4'
+            '966ec3bdb2a628ad8726d5ce14e25c2503cda8e0b33633df780647642b39017d'
             'a1f34dbcbda9931c01e71fec54f97f2b17165ac55c3cbf77c0389b025d3686ce'
             '43942683a7ff01b180dff7f3de2db4885d43ab3d4e7bd0e1918c3aaf2ee061f4'
             'ae2e95db94ef7176207c690224169594d49445e04249d2499e9d2fbc117a0b21'
@@ -73,7 +73,7 @@ sha256sums=('52b7e7d2416695758b256f193d8af8ea4e924e164a46d4e81cf39e2aa8216380'
             '8c1c880f2caa9c7ae43281a35410203887ea8eae750fe8d360d0c8bf80fcc6e0'
             '1144d51e5eb980fceeec16004f3645ed04a60fac9e0c7cf88a15c5c1e7a4b89e'
             'dd4b69def2efacf4a6c442202ad5cb93d492c03886d7c61de87696e5a83e2846'
-            'c9ae3f67042a6a008ba0e19c911fae45fbc7003ce704c4a5028c965b2e0881ff'
+            'c12a25d9b181924f34386e2e678e65d2609ec5e04746731b92ca957f99d66d1f'
             'c8b0cb231659d33c3cfaed4b1f8d7c8305ab170bdd4c77fce85270d7b6a68000'
             '8dbb5ab3cb99e48d97d4e2f2e3df5d0de66f3721b4f7fd94a708089f53245c77'
             'a7aefeacf22c600fafd9e040a985a913643095db7272c296b77a0a651c6a140a'
