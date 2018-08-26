@@ -20,7 +20,7 @@ _commit=2923b27e54242acf27fd16b299e102117c82f52f
 _shortcommit=${_rc}.0826.g2923b27
 pkgver=${_basekernel}${_shortcommit}
 #pkgver=${_basekernel}.${_sub}
-pkgrel=1
+pkgrel=3
 arch=('i686' 'x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
@@ -47,6 +47,10 @@ source=(#"https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.
         # ARCH Patches
         0001-add-sysctl-to-disallow-unprivileged-CLONE_NEWUSER-by.patch
         # MANJARO Patches
+        # VBOX Reverts until it is fixed upstream
+        https://github.com/torvalds/linux/commit/2408898.patch
+        https://github.com/torvalds/linux/commit/ba67f54.patch
+        https://github.com/torvalds/linux/commit/1daddbc.patch
         # Bootsplash
         '0001-bootsplash.patch'
         '0002-bootsplash.patch'
@@ -68,6 +72,9 @@ sha256sums=('36a2b6ae32eea9e2dc568fe56647c00b1e8976bef2b1add9c855ccf165bd9a00'
             'ae2e95db94ef7176207c690224169594d49445e04249d2499e9d2fbc117a0b21'
             '90831589b7ab43d6fab11bfa3ad788db14ba77ea4dc03d10ee29ad07194691e1'
             '37b86ca3de148a34258e3176dbf41488d9dbd19e93adbd22a062b3c41332ce85'
+            '628542166efbc3b49e29bfc31fd3e3e94d34d507c569959b5dcac237aeec6ddc'
+            '7eb2f9eeee686d1fa29979b09d9be7951597021c1f6a5daf3829b2386b468d98'
+            '104147530d8e11eff5393295dccee1231f73982957c50368567c561b94bb83ac'
             'a504f6cf84094e08eaa3cc5b28440261797bf4f06f04993ee46a20628ff2b53c'
             'e096b127a5208f56d368d2cb938933454d7200d70c86b763aa22c38e0ddb8717'
             '8c1c880f2caa9c7ae43281a35410203887ea8eae750fe8d360d0c8bf80fcc6e0'
@@ -95,6 +102,13 @@ prepare() {
 
   # disable USER_NS for non-root users by default
   patch -Np1 -i ../0001-add-sysctl-to-disallow-unprivileged-CLONE_NEWUSER-by.patch
+
+  # Revert some VBOX patches until it is fixed upstream
+  # TODO: check if these two need to be reverted
+  patch -Rp1 -i "${srcdir}/2408898.patch"
+  patch -Rp1 -i "${srcdir}/ba67f54.patch"
+  # Introduces the regression
+  patch -Rp1 -i "${srcdir}/1daddbc.patch"
 
   # Add bootsplash - http://lkml.iu.edu/hypermail/linux/kernel/1710.3/01542.html
   patch -Np1 -i "${srcdir}/0001-bootsplash.patch"
