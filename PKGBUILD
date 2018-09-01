@@ -15,12 +15,12 @@ _aufs=20180730
 _bfq=v8r12
 _bfqdate=20180531
 _sub=0
-_rc=rc0
-_commit=2923b27e54242acf27fd16b299e102117c82f52f
-_shortcommit=${_rc}.0826.g2923b27
+_rc=rc1
+_commit=420f51f4ab6bce6e580390729fadb89c31123636
+_shortcommit=${_rc}.0831.g420f51f
 pkgver=${_basekernel}${_shortcommit}
 #pkgver=${_basekernel}.${_sub}
-pkgrel=3
+pkgrel=1
 arch=('i686' 'x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
@@ -65,8 +65,8 @@ source=(#"https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.
         '0011-bootsplash.patch'
         '0012-bootsplash.patch'
         '0013-bootsplash.patch')
-sha256sums=('36a2b6ae32eea9e2dc568fe56647c00b1e8976bef2b1add9c855ccf165bd9a00'
-            '048e8bf7a66be79acfe8e41f12b149f4d12e928ee2df69c7051da136bbe4345a'
+sha256sums=('aa77cb6fb1caf7dd4d2350dd238d147f7c58163523316ac5f3f6ea22687d54bc'
+            'da7deb3c9e979159a00b77e3c607b5d82831de325b3015e2152a94f43194f5fb'
             'a1f34dbcbda9931c01e71fec54f97f2b17165ac55c3cbf77c0389b025d3686ce'
             '43942683a7ff01b180dff7f3de2db4885d43ab3d4e7bd0e1918c3aaf2ee061f4'
             'ae2e95db94ef7176207c690224169594d49445e04249d2499e9d2fbc117a0b21'
@@ -105,8 +105,8 @@ prepare() {
 
   # Revert some VBOX patches until it is fixed upstream
   # TODO: check if these two need to be reverted
-  patch -Rp1 -i "${srcdir}/2408898.patch"
-  patch -Rp1 -i "${srcdir}/ba67f54.patch"
+#  patch -Rp1 -i "${srcdir}/2408898.patch"
+#  patch -Rp1 -i "${srcdir}/ba67f54.patch"
   # Introduces the regression
   patch -Rp1 -i "${srcdir}/1daddbc.patch"
 
