@@ -2,9 +2,8 @@
 # Tobias Powalowski <tpowa@archlinux.org>
 # Thomas Baechler <thomas@archlinux.org>
 
-# Maintainer: Philip Müller <philm@manjaro.org>
-# Maintainer: Guinux <guillaume@manjaro.org>
-# Maintainer: Rob McCathie <rob@manjaro.org>
+# Maintainer: Philip Müller (x86_64) <philm@manjaro.org>
+# Maintainer: Jonathon Fernyhough (i686) <jonathon@manjaro.org>
 
 pkgbase=linux419
 pkgname=('linux419' 'linux419-headers')
@@ -16,8 +15,8 @@ _bfq=v8r12
 _bfqdate=20180531
 _sub=0
 _rc=rc2
-_commit=60c1f89241d49bacf71035470684a8d7b4bb46ea
-_shortcommit=${_rc}.0903.g60c1f89
+_commit=9a5682765a2e5f93cf2fe7b612b8072b18f0c68a
+_shortcommit=${_rc}.0909.g9a56827
 pkgver=${_basekernel}${_shortcommit}
 #pkgver=${_basekernel}.${_sub}
 pkgrel=1
@@ -48,8 +47,6 @@ source=(#"https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.
         0001-add-sysctl-to-disallow-unprivileged-CLONE_NEWUSER-by.patch
         # MANJARO Patches
         # VBOX Reverts until it is fixed upstream
-        https://github.com/torvalds/linux/commit/2408898.patch
-        https://github.com/torvalds/linux/commit/ba67f54.patch
         https://github.com/torvalds/linux/commit/1daddbc.patch
         # Bootsplash
         '0001-bootsplash.patch'
@@ -65,15 +62,13 @@ source=(#"https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.
         '0011-bootsplash.patch'
         '0012-bootsplash.patch'
         '0013-bootsplash.patch')
-sha256sums=('3af0f4d6f1af430d9803ef6360a801ae58ab1d22c095bc1fc7852424c74fdcbd'
-            'da7deb3c9e979159a00b77e3c607b5d82831de325b3015e2152a94f43194f5fb'
-            'a1f34dbcbda9931c01e71fec54f97f2b17165ac55c3cbf77c0389b025d3686ce'
+sha256sums=('5586d6524e8886f34694a6b147ff0488e6cc0b0902b1f990555d4726ec8b14b6'
+            '95e01a4fa17e8cb11f88050516f7f3e4dcb8b66496248599e458ab9e9f8d49c5'
+            '9326bcfcb1d87574ce98f7e543ab22b629474d7af388bd639479198b9d494174'
             '43942683a7ff01b180dff7f3de2db4885d43ab3d4e7bd0e1918c3aaf2ee061f4'
             'ae2e95db94ef7176207c690224169594d49445e04249d2499e9d2fbc117a0b21'
             '90831589b7ab43d6fab11bfa3ad788db14ba77ea4dc03d10ee29ad07194691e1'
             '37b86ca3de148a34258e3176dbf41488d9dbd19e93adbd22a062b3c41332ce85'
-            '628542166efbc3b49e29bfc31fd3e3e94d34d507c569959b5dcac237aeec6ddc'
-            '7eb2f9eeee686d1fa29979b09d9be7951597021c1f6a5daf3829b2386b468d98'
             '104147530d8e11eff5393295dccee1231f73982957c50368567c561b94bb83ac'
             'a504f6cf84094e08eaa3cc5b28440261797bf4f06f04993ee46a20628ff2b53c'
             'e096b127a5208f56d368d2cb938933454d7200d70c86b763aa22c38e0ddb8717'
@@ -104,10 +99,6 @@ prepare() {
   patch -Np1 -i ../0001-add-sysctl-to-disallow-unprivileged-CLONE_NEWUSER-by.patch
 
   # Revert some VBOX patches until it is fixed upstream
-  # TODO: check if these two need to be reverted
-#  patch -Rp1 -i "${srcdir}/2408898.patch"
-#  patch -Rp1 -i "${srcdir}/ba67f54.patch"
-  # Introduces the regression
   patch -Rp1 -i "${srcdir}/1daddbc.patch"
 
   # Add bootsplash - http://lkml.iu.edu/hypermail/linux/kernel/1710.3/01542.html
