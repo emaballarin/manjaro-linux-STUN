@@ -1,0 +1,165 @@
+From patchwork Wed Sep 12 13:07:05 2018
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+X-Patchwork-Submitter: Anisse Astier <anisse@astier.eu>
+X-Patchwork-Id: 10597519
+Return-Path: <linux-input-owner@kernel.org>
+Received: from mail.wl.linuxfoundation.org (pdx-wl-mail.web.codeaurora.org
+ [172.30.200.125])
+	by pdx-korg-patchwork-2.web.codeaurora.org (Postfix) with ESMTP id 5E5F614BD
+	for <patchwork-linux-input@patchwork.kernel.org>;
+ Wed, 12 Sep 2018 13:08:27 +0000 (UTC)
+Received: from mail.wl.linuxfoundation.org (localhost [127.0.0.1])
+	by mail.wl.linuxfoundation.org (Postfix) with ESMTP id 4D9E429F6A
+	for <patchwork-linux-input@patchwork.kernel.org>;
+ Wed, 12 Sep 2018 13:08:27 +0000 (UTC)
+Received: by mail.wl.linuxfoundation.org (Postfix, from userid 486)
+	id 41BDE29F70; Wed, 12 Sep 2018 13:08:27 +0000 (UTC)
+X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
+	pdx-wl-mail.web.codeaurora.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-7.9 required=2.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,MAILING_LIST_MULTI,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
+Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
+	by mail.wl.linuxfoundation.org (Postfix) with ESMTP id D574C29F6A
+	for <patchwork-linux-input@patchwork.kernel.org>;
+ Wed, 12 Sep 2018 13:08:26 +0000 (UTC)
+Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
+        id S1726606AbeILSMv (ORCPT
+        <rfc822;patchwork-linux-input@patchwork.kernel.org>);
+        Wed, 12 Sep 2018 14:12:51 -0400
+Received: from mail-wr1-f65.google.com ([209.85.221.65]:39770 "EHLO
+        mail-wr1-f65.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726359AbeILSMv (ORCPT
+        <rfc822;linux-input@vger.kernel.org>);
+        Wed, 12 Sep 2018 14:12:51 -0400
+Received: by mail-wr1-f65.google.com with SMTP id s14-v6so1976444wrw.6
+        for <linux-input@vger.kernel.org>;
+ Wed, 12 Sep 2018 06:08:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=astier-eu.20150623.gappssmtp.com; s=20150623;
+        h=from:to:cc:subject:date:message-id:in-reply-to:references;
+        bh=hwbvt58dpFzyZB0xFzHk0PKbGIXSeOqwKYkU3pedr2Y=;
+        b=SVSgZl5KFWx01vcVSGbqRk/W68rkYSHi12ilIbAzPLmtZl000tC5+ndJ1hMYs7Fczy
+         csg+OAXnWqq7trMAQ+VbggBXsCv5rWEMDYf6Obhuf9fwDxlLvTp/Ifiog/tsrx41Zbmg
+         L6QJ8YsopuFBoLdCSBJPR1mLD/WPAqHd7IidSWJFnIyBWqEwCqCaaFukYPZCpcPG37H+
+         /ybIXxmpd6cyKOVO+koDZrHMVCd14RAX18OYuO17CycihQz59taoE+sk+nmulvj4J6Qt
+         cN90qtUcnVlC/lGSctcjwoq20YUSEWObj5cPU8cD8pTQJVbxSIKF3NYTGMU5CWk9pCiB
+         Vx4Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references;
+        bh=hwbvt58dpFzyZB0xFzHk0PKbGIXSeOqwKYkU3pedr2Y=;
+        b=Vgfa6Fsqw4iimRGkGjyLYSclp+TSJ+VhguYmbMnkAjGaOFXoQddG4OzUZApbZozz+S
+         am9DJSbHUTw2bP/RoIhLLPZorqaUWayiPyxBHmHjx84m5WAXu/7IFgyUMs1arPZbtLes
+         FH8rQChMNZY52xS0nYSH7T/JAFjHRaU6FcbF1765ZQWk6y4ZXl9Vn9bx15brgntBYzyb
+         xzhgIIEa0qEcVDu2QkdGqLTeKHJGgP2Q6NMWqj2U1E6BVkYetWr4QQsfg488WxD25/Qm
+         RWCVm1+HrCBXidWJWuOqsQi8UqTP1iRHJHvsoiWUVhh5rL87yMoQs+q6HhbHghOjjhAc
+         cJkQ==
+X-Gm-Message-State: APzg51CNQ6ZqpcOvIHb5Gvgc7pTcO4/hyc2bEOf/MjqPFao2d1Gpp8s6
+        FtX+JEkjGH9ccudkIgmllMQbxWkNW1A=
+X-Google-Smtp-Source: 
+ ANB0Vda6mflF7/zmHILcLR3WO/40OFjVeLDkrWwX5DmK70x9A0sKf5f/d4wbSARNa/Ur0f361uHphA==
+X-Received: by 2002:adf:d4c6:: with SMTP id
+ w6-v6mr1458629wrk.185.1536757703195;
+        Wed, 12 Sep 2018 06:08:23 -0700 (PDT)
+Received: from jaya.substantiel.local ([92.103.140.194])
+        by smtp.gmail.com with ESMTPSA id
+ w10-v6sm1610815wrp.31.2018.09.12.06.08.22
+        (version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+        Wed, 12 Sep 2018 06:08:22 -0700 (PDT)
+From: Anisse Astier <anisse@astier.eu>
+To: linux-input@vger.kernel.org, Hans de Goede <hdegoede@redhat.com>
+Cc: Anisse Astier <anisse@astier.eu>, Jiri Kosina <jikos@kernel.org>,
+        Benjamin Tissoires <benjamin.tissoires@redhat.com>,
+        Dmitry Torokhov <dtor@chromium.org>
+Subject: [PATCH v2] HID: i2c-hid: disable runtime PM operations on hantick
+ touchpad
+Date: Wed, 12 Sep 2018 15:07:05 +0200
+Message-Id: <20180912130705.17431-1-anisse@astier.eu>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20180912125545.veuivqpu3klpkrvp@bifrost>
+References: <20180912102213.12518-1-anisse@astier.eu>
+ <20180912125545.veuivqpu3klpkrvp@bifrost>
+Sender: linux-input-owner@vger.kernel.org
+Precedence: bulk
+List-ID: <linux-input.vger.kernel.org>
+X-Mailing-List: linux-input@vger.kernel.org
+X-Virus-Scanned: ClamAV using ClamSMTP
+
+This hantick HTIX5288 touchpad can quickly fall in a wrong state if
+there are too many open/close operations. This will either make it stop
+reporting any input, or will shift all the input reads by a few bytes,
+making it impossible to decode.
+
+Here, we never release the probed touchpad runtime pm while the driver
+is loaded, which should disable all runtime pm suspend/resumes.
+
+This fast repetition of sleep/wakeup is also more likely to happen when
+using runtime PM, which is why the quirk is done there, and not for all
+power downs, which would include suspend or module removal.
+
+Signed-off-by: Anisse Astier <anisse@astier.eu>
+Cc: stable@vger.kernel.org
+Acked-by: Benjamin Tissoires <benjamin.tissoires@redhat.com>
+Reviewed-by: Hans de Goede <hdegoede@redhat.com>
+---
+
+Changes since v1: (thanks Hans de Goede)
+ - no longer uses msleep to delay suspend, but disables runtime suspend it
+   entirely
+ - quirk is now named NO_RUNTIME_PM and OR-ed with the other Hantick quirk
+
+
+Regards,
+
+Anisse
+
+ drivers/hid/i2c-hid/i2c-hid.c | 11 ++++++++---
+ 1 file changed, 8 insertions(+), 3 deletions(-)
+
+diff --git a/drivers/hid/i2c-hid/i2c-hid.c b/drivers/hid/i2c-hid/i2c-hid.c
+index 847b55ad0d60..9917eb2c98f3 100644
+--- a/drivers/hid/i2c-hid/i2c-hid.c
++++ b/drivers/hid/i2c-hid/i2c-hid.c
+@@ -48,6 +48,7 @@
+ #define I2C_HID_QUIRK_SET_PWR_WAKEUP_DEV	BIT(0)
+ #define I2C_HID_QUIRK_NO_IRQ_AFTER_RESET	BIT(1)
+ #define I2C_HID_QUIRK_RESEND_REPORT_DESCR	BIT(2)
++#define I2C_HID_QUIRK_NO_RUNTIME_PM		BIT(3)
+ 
+ /* flags */
+ #define I2C_HID_STARTED		0
+@@ -171,7 +172,8 @@ static const struct i2c_hid_quirks {
+ 	{ USB_VENDOR_ID_WEIDA, USB_DEVICE_ID_WEIDA_8755,
+ 		I2C_HID_QUIRK_SET_PWR_WAKEUP_DEV },
+ 	{ I2C_VENDOR_ID_HANTICK, I2C_PRODUCT_ID_HANTICK_5288,
+-		I2C_HID_QUIRK_NO_IRQ_AFTER_RESET },
++		I2C_HID_QUIRK_NO_IRQ_AFTER_RESET |
++		I2C_HID_QUIRK_NO_RUNTIME_PM },
+ 	{ USB_VENDOR_ID_SIS_TOUCH, USB_DEVICE_ID_SIS10FB_TOUCH,
+ 		I2C_HID_QUIRK_RESEND_REPORT_DESCR },
+ 	{ 0, 0 }
+@@ -1097,7 +1099,9 @@ static int i2c_hid_probe(struct i2c_client *client,
+ 		goto err_mem_free;
+ 	}
+ 
+-	pm_runtime_put(&client->dev);
++	if (!(ihid->quirks & I2C_HID_QUIRK_NO_RUNTIME_PM))
++		pm_runtime_put(&client->dev);
++
+ 	return 0;
+ 
+ err_mem_free:
+@@ -1124,7 +1128,8 @@ static int i2c_hid_remove(struct i2c_client *client)
+ 	struct i2c_hid *ihid = i2c_get_clientdata(client);
+ 	struct hid_device *hid;
+ 
+-	pm_runtime_get_sync(&client->dev);
++	if (!(ihid->quirks & I2C_HID_QUIRK_NO_RUNTIME_PM))
++		pm_runtime_get_sync(&client->dev);
+ 	pm_runtime_disable(&client->dev);
+ 	pm_runtime_set_suspended(&client->dev);
+ 	pm_runtime_put_noidle(&client->dev);
