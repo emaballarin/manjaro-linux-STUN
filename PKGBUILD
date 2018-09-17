@@ -11,12 +11,12 @@ _kernelname=-MANJARO
 _basekernel=4.19
 _basever=419
 _aufs=20180730
-_bfq=v8r12
-_bfqdate=20180531
+_bfq=v9
+_bfqdate=20180915
 _sub=0
-_rc=rc3
-_commit=5e335542de83558e46d28de1008a1c37d5d6679a
-_shortcommit=${_rc}.0912.g5e33554
+_rc=rc4
+_commit=7876320f88802b22d4e2daf7eb027dd14175a0f8
+_shortcommit=${_rc}.0916.g7876320
 pkgver=${_basekernel}${_shortcommit}
 #pkgver=${_basekernel}.${_sub}
 pkgrel=1
@@ -49,8 +49,6 @@ source=(#"https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.
         v2-HID-i2c-hid-disable-runtime-PM-operations-on-hantick-touchpad.patch
         # Reverts for ZFS
         https://github.com/torvalds/linux/commit/59b5771.patch
-        # VBOX Reverts until it is fixed upstream
-        https://github.com/torvalds/linux/commit/1daddbc.patch
         # Bootsplash
         '0001-bootsplash.patch'
         '0002-bootsplash.patch'
@@ -65,8 +63,8 @@ source=(#"https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.
         '0011-bootsplash.patch'
         '0012-bootsplash.patch'
         '0013-bootsplash.patch')
-sha256sums=('768ff21b00de38d33dc7eb4c34227be4f4325900e5fdadaace74b5c380f88a6d'
-            '95e01a4fa17e8cb11f88050516f7f3e4dcb8b66496248599e458ab9e9f8d49c5'
+sha256sums=('457480431bf7dc32e1458bd499cf79bb77d26eb4ac17a6c207bba144d18696ab'
+            '165930c7307c31a7cac8b69939daaa7130681096fe2831d5eb5ab516903dc491'
             '9326bcfcb1d87574ce98f7e543ab22b629474d7af388bd639479198b9d494174'
             '43942683a7ff01b180dff7f3de2db4885d43ab3d4e7bd0e1918c3aaf2ee061f4'
             'ae2e95db94ef7176207c690224169594d49445e04249d2499e9d2fbc117a0b21'
@@ -74,7 +72,6 @@ sha256sums=('768ff21b00de38d33dc7eb4c34227be4f4325900e5fdadaace74b5c380f88a6d'
             '37b86ca3de148a34258e3176dbf41488d9dbd19e93adbd22a062b3c41332ce85'
             '53d39d833c91233ea1bf5a551a5398b0dfcb3fa0d878e08b3ed6dc02214a3c89'
             '18fe47904b940c2612ae5c2d02f4b77a1f1c51f477fe6eafd7a3b645ee2b9663'
-            '104147530d8e11eff5393295dccee1231f73982957c50368567c561b94bb83ac'
             'a504f6cf84094e08eaa3cc5b28440261797bf4f06f04993ee46a20628ff2b53c'
             'e096b127a5208f56d368d2cb938933454d7200d70c86b763aa22c38e0ddb8717'
             '8c1c880f2caa9c7ae43281a35410203887ea8eae750fe8d360d0c8bf80fcc6e0'
@@ -102,9 +99,6 @@ prepare() {
 
   # disable USER_NS for non-root users by default
   patch -Np1 -i ../0001-add-sysctl-to-disallow-unprivileged-CLONE_NEWUSER-by.patch
-
-  # Revert some VBOX patches until it is fixed upstream
-  patch -Rp1 -i "${srcdir}/1daddbc.patch"
 
   # https://github.com/zfsonlinux/zfs/issues/7885
   patch -Rp1 -i "${srcdir}/59b5771.patch"
