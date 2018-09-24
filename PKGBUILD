@@ -14,9 +14,9 @@ _aufs=20180730
 _bfq=v9
 _bfqdate=20180915
 _sub=0
-_rc=rc4
-_commit=7876320f88802b22d4e2daf7eb027dd14175a0f8
-_shortcommit=${_rc}.0916.g7876320
+_rc=rc5
+_commit=6bf4ca7fbc85d80446ac01c0d1d77db4d91a6d84
+_shortcommit=${_rc}.0923.g6bf4ca7
 pkgver=${_basekernel}${_shortcommit}
 #pkgver=${_basekernel}.${_sub}
 pkgrel=1
@@ -27,7 +27,8 @@ makedepends=('xmlto' 'docbook-xsl' 'kmod' 'inetutils' 'bc' 'elfutils' 'git')
 options=('!strip')
 source=(#"https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.xz"
         #"http://www.kernel.org/pub/linux/kernel/v4.x/patch-${pkgver}.xz"
-        "linux-${pkgver}.tar.gz::https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/snapshot/linux-$_commit.tar.gz"
+        https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable-rc.git/snapshot/linux-stable-rc-$_commit.tar.gz
+        #"linux-${pkgver}.tar.gz::https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/snapshot/linux-$_commit.tar.gz"
         # the main kernel config files
         'config.x86_64' 'config' #'config.aufs'
         "${pkgbase}.preset" # standard config files for mkinitcpio ramdisk
@@ -63,8 +64,8 @@ source=(#"https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.
         '0011-bootsplash.patch'
         '0012-bootsplash.patch'
         '0013-bootsplash.patch')
-sha256sums=('457480431bf7dc32e1458bd499cf79bb77d26eb4ac17a6c207bba144d18696ab'
-            '165930c7307c31a7cac8b69939daaa7130681096fe2831d5eb5ab516903dc491'
+sha256sums=('89d26f02ffe7a746a66910c1fe3518287beafd8351031b90face6136ec5d09da'
+            'f37d701d9a7d11b5aa25a56137cd36c847af6eeb5082fb21cd6e4d691367a52a'
             '9326bcfcb1d87574ce98f7e543ab22b629474d7af388bd639479198b9d494174'
             '43942683a7ff01b180dff7f3de2db4885d43ab3d4e7bd0e1918c3aaf2ee061f4'
             'ae2e95db94ef7176207c690224169594d49445e04249d2499e9d2fbc117a0b21'
@@ -86,7 +87,8 @@ sha256sums=('457480431bf7dc32e1458bd499cf79bb77d26eb4ac17a6c207bba144d18696ab'
             '60e295601e4fb33d9bf65f198c54c7eb07c0d1e91e2ad1e0dd6cd6e142cb266d'
             '035ea4b2a7621054f4560471f45336b981538a40172d8f17285910d4e0e0b3ef')
 prepare() {
-  mv "${srcdir}/linux-${_commit}" "${srcdir}/linux-${_basekernel}"
+  mv "${srcdir}/linux-stable-rc-${_commit}" "${srcdir}/linux-${_basekernel}"
+  #mv "${srcdir}/linux-${_commit}" "${srcdir}/linux-${_basekernel}"
   cd "${srcdir}/linux-${_basekernel}"
 
   # add upstream patch
@@ -101,7 +103,7 @@ prepare() {
   patch -Np1 -i ../0001-add-sysctl-to-disallow-unprivileged-CLONE_NEWUSER-by.patch
 
   # https://github.com/zfsonlinux/zfs/issues/7885
-  patch -Rp1 -i "${srcdir}/59b5771.patch"
+  #patch -Rp1 -i "${srcdir}/59b5771.patch"
 
   # [PM-QOS] Kernel #199821 - issue with i2c-designware touchpads
   patch -Np1 -i "${srcdir}/v2-HID-i2c-hid-disable-runtime-PM-operations-on-hantick-touchpad.patch"
