@@ -15,8 +15,8 @@ _bfq=v9
 _bfqdate=20180915
 _sub=0
 _rc=rc5
-_commit=6bf4ca7fbc85d80446ac01c0d1d77db4d91a6d84
-_shortcommit=${_rc}.0923.g6bf4ca7
+_commit=291d0e5d81e101392379217b06251fe8c27f1f80
+_shortcommit=${_rc}.0929.g291d0e5
 pkgver=${_basekernel}${_shortcommit}
 #pkgver=${_basekernel}.${_sub}
 pkgrel=1
@@ -27,8 +27,8 @@ makedepends=('xmlto' 'docbook-xsl' 'kmod' 'inetutils' 'bc' 'elfutils' 'git')
 options=('!strip')
 source=(#"https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.xz"
         #"http://www.kernel.org/pub/linux/kernel/v4.x/patch-${pkgver}.xz"
-        https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable-rc.git/snapshot/linux-stable-rc-$_commit.tar.gz
-        #"linux-${pkgver}.tar.gz::https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/snapshot/linux-$_commit.tar.gz"
+        #https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable-rc.git/snapshot/linux-stable-rc-$_commit.tar.gz
+        "linux-${pkgver}.tar.gz::https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/snapshot/linux-$_commit.tar.gz"
         # the main kernel config files
         'config.x86_64' 'config' #'config.aufs'
         "${pkgbase}.preset" # standard config files for mkinitcpio ramdisk
@@ -64,7 +64,7 @@ source=(#"https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.
         '0011-bootsplash.patch'
         '0012-bootsplash.patch'
         '0013-bootsplash.patch')
-sha256sums=('89d26f02ffe7a746a66910c1fe3518287beafd8351031b90face6136ec5d09da'
+sha256sums=('06274c061c6d9aab57b1d89068519e81ca91b724c02deb3bc0b6bea51f5da54c'
             'f37d701d9a7d11b5aa25a56137cd36c847af6eeb5082fb21cd6e4d691367a52a'
             '9326bcfcb1d87574ce98f7e543ab22b629474d7af388bd639479198b9d494174'
             '43942683a7ff01b180dff7f3de2db4885d43ab3d4e7bd0e1918c3aaf2ee061f4'
@@ -87,8 +87,8 @@ sha256sums=('89d26f02ffe7a746a66910c1fe3518287beafd8351031b90face6136ec5d09da'
             '60e295601e4fb33d9bf65f198c54c7eb07c0d1e91e2ad1e0dd6cd6e142cb266d'
             '035ea4b2a7621054f4560471f45336b981538a40172d8f17285910d4e0e0b3ef')
 prepare() {
-  mv "${srcdir}/linux-stable-rc-${_commit}" "${srcdir}/linux-${_basekernel}"
-  #mv "${srcdir}/linux-${_commit}" "${srcdir}/linux-${_basekernel}"
+  #mv "${srcdir}/linux-stable-rc-${_commit}" "${srcdir}/linux-${_basekernel}"
+  mv "${srcdir}/linux-${_commit}" "${srcdir}/linux-${_basekernel}"
   cd "${srcdir}/linux-${_basekernel}"
 
   # add upstream patch
