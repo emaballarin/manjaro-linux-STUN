@@ -10,13 +10,13 @@ pkgname=('linux419' 'linux419-headers')
 _kernelname=-MANJARO
 _basekernel=4.19
 _basever=419
-_aufs=20180730
+_aufs=20181001
 _bfq=v9
 _bfqdate=20180915
 _sub=0
 _rc=rc6
-_commit=17b57b1883c1285f3d0dc2266e8f79286a7bef38
-_shortcommit=${_rc}.0930.g17b57b1
+_commit=befad944e2312c18d855013ce154ca7d2b110ade
+_shortcommit=${_rc}.1004.gbefad94
 pkgver=${_basekernel}${_shortcommit}
 #pkgver=${_basekernel}.${_sub}
 pkgrel=1
@@ -30,26 +30,23 @@ source=(#"https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.
         #https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable-rc.git/snapshot/linux-stable-rc-$_commit.tar.gz
         "linux-${pkgver}.tar.gz::https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/snapshot/linux-$_commit.tar.gz"
         # the main kernel config files
-        'config.x86_64' 'config' #'config.aufs'
+        'config.x86_64' 'config' 'config.aufs'
         "${pkgbase}.preset" # standard config files for mkinitcpio ramdisk
         '60-linux.hook'     # pacman hook for depmod
         '90-linux.hook'     # pacman hook for initramfs regeneration
-        #"aufs4.x-rcN-${_aufs}.patch.bz2"
-        #'aufs4-base.patch'
-        #'aufs4-kbuild.patch'
-        #'aufs4-loopback.patch'
-        #'aufs4-mmap.patch'
-        #'aufs4-standalone.patch'
-        #'tmpfs-idr.patch'
-        #'vfs-ino.patch'
+        "aufs4.x-rcN-${_aufs}.patch.bz2"
+        'aufs4-base.patch'
+        'aufs4-kbuild.patch'
+        'aufs4-loopback.patch'
+        'aufs4-mmap.patch'
+        'aufs4-standalone.patch'
+        'tmpfs-idr.patch'
+        'vfs-ino.patch'
         #"0001-BFQ-${_bfq}-${_bfqdate}.patch::https://github.com/Algodev-github/bfq-mq/compare/0adb328...698937e.patch"
         #0001-BFQ-${_bfq}-${_bfqdate}.patch
         # ARCH Patches
         0001-add-sysctl-to-disallow-unprivileged-CLONE_NEWUSER-by.patch
         # MANJARO Patches
-        v2-HID-i2c-hid-disable-runtime-PM-operations-on-hantick-touchpad.patch
-        # Reverts for ZFS
-        https://github.com/torvalds/linux/commit/59b5771.patch
         # Bootsplash
         '0001-bootsplash.patch'
         '0002-bootsplash.patch'
@@ -64,15 +61,22 @@ source=(#"https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.
         '0011-bootsplash.patch'
         '0012-bootsplash.patch'
         '0013-bootsplash.patch')
-sha256sums=('783beb201faaf0d22cffead0efcfc490c21479d38929deab678e98fc97e3465d'
-            'f37d701d9a7d11b5aa25a56137cd36c847af6eeb5082fb21cd6e4d691367a52a'
+sha256sums=('38b03af129768fa8f989a098cceaab02080630c682cd9d574f08917ca65494a6'
+            '564ca9a986e5be2ec478f74a5620716be0b8a5e2994488c7c4c5cd36e9518535'
             '19799cb83ffd67e4d1f14e1508833461e4744b7bb8f03654ad76edf92a9dbea5'
+            'b44d81446d8b53d5637287c30ae3eb64cae0078c3fbc45fcf1081dd6699818b5'
             '43942683a7ff01b180dff7f3de2db4885d43ab3d4e7bd0e1918c3aaf2ee061f4'
             'ae2e95db94ef7176207c690224169594d49445e04249d2499e9d2fbc117a0b21'
             '90831589b7ab43d6fab11bfa3ad788db14ba77ea4dc03d10ee29ad07194691e1'
+            '2f120b403e7c8039bc642ac994caf5fb71eef05b6cd07fe2d21f73a2d67b97ec'
+            'c66bcd5ed9d7f9d261a7afb6005cd2406d965e7a3ad47a8507f9e68595fd7bc6'
+            'de7051f531e4f5c3ccb995489f23946c867b4c36c7b464559e43a15f3ad76f6d'
+            'd57df412765b9bf23aff8366e8f6dfb87a822d4fddc5de4fd7e51d236169acc1'
+            '6d10c5a50232db07757097b24e5b5b2fbcf4362d105ca241d5242e5ba08c7691'
+            '473cc8e1d4b94d4689a11136d55e43b1c0b9cb22b88771eb4b2b47165c2137b3'
+            'a50226860ed658251eb74014daad773cb0a8700ed7c5b81548ee4f77e8d6d4de'
+            '7f861935faf7ebd2d528052a363f0356c9b5239e32a68b4ec23dcf95ee91e708'
             '37b86ca3de148a34258e3176dbf41488d9dbd19e93adbd22a062b3c41332ce85'
-            '53d39d833c91233ea1bf5a551a5398b0dfcb3fa0d878e08b3ed6dc02214a3c89'
-            '18fe47904b940c2612ae5c2d02f4b77a1f1c51f477fe6eafd7a3b645ee2b9663'
             'a504f6cf84094e08eaa3cc5b28440261797bf4f06f04993ee46a20628ff2b53c'
             'e096b127a5208f56d368d2cb938933454d7200d70c86b763aa22c38e0ddb8717'
             '8c1c880f2caa9c7ae43281a35410203887ea8eae750fe8d360d0c8bf80fcc6e0'
@@ -102,12 +106,6 @@ prepare() {
   # disable USER_NS for non-root users by default
   patch -Np1 -i ../0001-add-sysctl-to-disallow-unprivileged-CLONE_NEWUSER-by.patch
 
-  # https://github.com/zfsonlinux/zfs/issues/7885
-  #patch -Rp1 -i "${srcdir}/59b5771.patch"
-
-  # [PM-QOS] Kernel #199821 - issue with i2c-designware touchpads
-  patch -Np1 -i "${srcdir}/v2-HID-i2c-hid-disable-runtime-PM-operations-on-hantick-touchpad.patch"
-
   # Add bootsplash - http://lkml.iu.edu/hypermail/linux/kernel/1710.3/01542.html
   patch -Np1 -i "${srcdir}/0001-bootsplash.patch"
   patch -Np1 -i "${srcdir}/0002-bootsplash.patch"
@@ -125,17 +123,14 @@ prepare() {
   git apply -p1 < "${srcdir}/0013-bootsplash.patch"
 
   # add aufs4 support
-
-# fs/aufs/vfsub.c:130:8: error: too many arguments to function 'dir->i_op->atomic_open'
-
-#  patch -Np1 -i "${srcdir}/aufs4.x-rcN-${_aufs}.patch"
-#  patch -Np1 -i "${srcdir}/aufs4-base.patch"
-#  patch -Np1 -i "${srcdir}/aufs4-kbuild.patch"
-#  patch -Np1 -i "${srcdir}/aufs4-loopback.patch"
-#  patch -Np1 -i "${srcdir}/aufs4-mmap.patch"
-#  patch -Np1 -i "${srcdir}/aufs4-standalone.patch"
-#  patch -Np1 -i "${srcdir}/tmpfs-idr.patch"
-#  patch -Np1 -i "${srcdir}/vfs-ino.patch"
+  patch -Np1 -i "${srcdir}/aufs4.x-rcN-${_aufs}.patch"
+  patch -Np1 -i "${srcdir}/aufs4-base.patch"
+  patch -Np1 -i "${srcdir}/aufs4-kbuild.patch"
+  patch -Np1 -i "${srcdir}/aufs4-loopback.patch"
+  patch -Np1 -i "${srcdir}/aufs4-mmap.patch"
+  patch -Np1 -i "${srcdir}/aufs4-standalone.patch"
+  patch -Np1 -i "${srcdir}/tmpfs-idr.patch"
+  patch -Np1 -i "${srcdir}/vfs-ino.patch"
 
   # add BFQ scheduler
   #msg "Fix naming schema in BFQ-MQ patch"
@@ -149,7 +144,7 @@ prepare() {
     cat "${srcdir}/config" > ./.config
   fi
 
-#  cat "${srcdir}/config.aufs" >> ./.config
+  cat "${srcdir}/config.aufs" >> ./.config
 
   if [ "${_kernelname}" != "" ]; then
     sed -i "s|CONFIG_LOCALVERSION=.*|CONFIG_LOCALVERSION=\"${_kernelname}\"|g" ./.config
