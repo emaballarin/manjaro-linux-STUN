@@ -11,8 +11,8 @@ _kernelname=-MANJARO
 _basekernel=4.19
 _basever=419
 _aufs=20181001
-_bfq=v9
-_bfqdate=20180915
+_bfq=v9r1
+_bfqdate=20181012
 _sub=0
 _rc=rc7
 _commit=7ec21823634d7cb7ea20539b877c0d31830c6ad4
@@ -43,7 +43,7 @@ source=(#"https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.
         'tmpfs-idr.patch'
         'vfs-ino.patch'
         #"0001-BFQ-${_bfq}-${_bfqdate}.patch::https://github.com/Algodev-github/bfq-mq/compare/0adb328...698937e.patch"
-        #0001-BFQ-${_bfq}-${_bfqdate}.patch
+        0001-BFQ-${_bfq}-${_bfqdate}.patch::https://github.com/sirlucjan/kernel-patches/raw/master/4.19/bfq-sq-mq/4.19-bfq-sq-mq-v9r1-2K181012-rc1.patch
         # ARCH Patches
         0001-add-sysctl-to-disallow-unprivileged-CLONE_NEWUSER-by.patch
         # MANJARO Patches
@@ -62,7 +62,7 @@ source=(#"https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.
         '0012-bootsplash.patch'
         '0013-bootsplash.patch')
 sha256sums=('8a7d28017d1ed4a01635960de11f987a17201e237b493f6a6a676f6061554658'
-            '564ca9a986e5be2ec478f74a5620716be0b8a5e2994488c7c4c5cd36e9518535'
+            '18b83bfd46260c6fca02476b0dab70460e04a44c953ca29c535adf4454fbe78b'
             'f5903377d29fc538af98077b81982efdc091a8c628cb85566e88e1b5018f12bf'
             'b44d81446d8b53d5637287c30ae3eb64cae0078c3fbc45fcf1081dd6699818b5'
             '43942683a7ff01b180dff7f3de2db4885d43ab3d4e7bd0e1918c3aaf2ee061f4'
@@ -76,6 +76,7 @@ sha256sums=('8a7d28017d1ed4a01635960de11f987a17201e237b493f6a6a676f6061554658'
             '473cc8e1d4b94d4689a11136d55e43b1c0b9cb22b88771eb4b2b47165c2137b3'
             'a50226860ed658251eb74014daad773cb0a8700ed7c5b81548ee4f77e8d6d4de'
             '7f861935faf7ebd2d528052a363f0356c9b5239e32a68b4ec23dcf95ee91e708'
+            'fecfe39fbd05677dcc35b04ecd1ecf91bf080fee82e152c06eb9b1bc6d70d0c5'
             '37b86ca3de148a34258e3176dbf41488d9dbd19e93adbd22a062b3c41332ce85'
             'a504f6cf84094e08eaa3cc5b28440261797bf4f06f04993ee46a20628ff2b53c'
             'e096b127a5208f56d368d2cb938933454d7200d70c86b763aa22c38e0ddb8717'
@@ -133,10 +134,7 @@ prepare() {
   patch -Np1 -i "${srcdir}/vfs-ino.patch"
 
   # add BFQ scheduler
-  #msg "Fix naming schema in BFQ-MQ patch"
-  #sed -i -e "s|Fearless Coyote|Merciless Moray|g" \
-  #    "${srcdir}/0001-BFQ-${_bfq}-${_bfqdate}.patch"
-  #patch -Np1 -i "${srcdir}/0001-BFQ-${_bfq}-${_bfqdate}.patch"
+  patch -Np1 -i "${srcdir}/0001-BFQ-${_bfq}-${_bfqdate}.patch"
 
   if [ "${CARCH}" = "x86_64" ]; then
     cat "${srcdir}/config.x86_64" > ./.config
