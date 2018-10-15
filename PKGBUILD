@@ -14,9 +14,9 @@ _aufs=20181001
 _bfq=v9
 _bfqdate=20181012
 _sub=0
-_rc=rc7
-_commit=7ec21823634d7cb7ea20539b877c0d31830c6ad4
-_shortcommit=${_rc}.1013.g7ec2182
+_rc=rc8
+_commit=f0a7d1883d9f78ae7bf15fc258bf9a2b20f35b76
+_shortcommit=${_rc}.1015.gf0a7d18
 pkgver=${_basekernel}${_shortcommit}
 #pkgver=${_basekernel}.${_sub}
 pkgrel=1
@@ -47,6 +47,7 @@ source=(#"https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.
         # ARCH Patches
         0001-add-sysctl-to-disallow-unprivileged-CLONE_NEWUSER-by.patch
         # MANJARO Patches
+        '0001-i2c-hid-override-HID-descriptors-for-certain-devices.patch'
         # Bootsplash
         '0001-bootsplash.patch'
         '0002-bootsplash.patch'
@@ -61,7 +62,7 @@ source=(#"https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.
         '0011-bootsplash.patch'
         '0012-bootsplash.patch'
         '0013-bootsplash.patch')
-sha256sums=('8a7d28017d1ed4a01635960de11f987a17201e237b493f6a6a676f6061554658'
+sha256sums=('ef7d3bfcf82f1e76d2289e9fbe889dd797330561146cdfc92a600e84f9278d4c'
             '18b83bfd46260c6fca02476b0dab70460e04a44c953ca29c535adf4454fbe78b'
             'f5903377d29fc538af98077b81982efdc091a8c628cb85566e88e1b5018f12bf'
             'b44d81446d8b53d5637287c30ae3eb64cae0078c3fbc45fcf1081dd6699818b5'
@@ -78,6 +79,7 @@ sha256sums=('8a7d28017d1ed4a01635960de11f987a17201e237b493f6a6a676f6061554658'
             '7f861935faf7ebd2d528052a363f0356c9b5239e32a68b4ec23dcf95ee91e708'
             'fecfe39fbd05677dcc35b04ecd1ecf91bf080fee82e152c06eb9b1bc6d70d0c5'
             '37b86ca3de148a34258e3176dbf41488d9dbd19e93adbd22a062b3c41332ce85'
+            'dc62a0795ed99a3f360a012955d49a097e3fffb229bcd3e299835190ca7bb58c'
             'a504f6cf84094e08eaa3cc5b28440261797bf4f06f04993ee46a20628ff2b53c'
             'e096b127a5208f56d368d2cb938933454d7200d70c86b763aa22c38e0ddb8717'
             '8c1c880f2caa9c7ae43281a35410203887ea8eae750fe8d360d0c8bf80fcc6e0'
@@ -106,6 +108,9 @@ prepare() {
 
   # disable USER_NS for non-root users by default
   patch -Np1 -i ../0001-add-sysctl-to-disallow-unprivileged-CLONE_NEWUSER-by.patch
+
+  # https://bugzilla.redhat.com/show_bug.cgi?id=1526312
+  patch -Np1 -i ../0001-i2c-hid-override-HID-descriptors-for-certain-devices.patch
 
   # Add bootsplash - http://lkml.iu.edu/hypermail/linux/kernel/1710.3/01542.html
   patch -Np1 -i "${srcdir}/0001-bootsplash.patch"
