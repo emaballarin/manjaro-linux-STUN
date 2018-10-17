@@ -15,8 +15,8 @@ _bfq=v9
 _bfqdate=20181012
 _sub=0
 _rc=rc8
-_commit=b955a910d7fde877e068f68fada5aac02e3a073d
-_shortcommit=${_rc}.1016.gb955a91
+_commit=c343db455eb3105f11bb5ac290d77ab2006b0209
+_shortcommit=${_rc}.1017.gc343db4
 pkgver=${_basekernel}${_shortcommit}
 #pkgver=${_basekernel}.${_sub}
 pkgrel=1
@@ -47,7 +47,7 @@ source=(#"https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.
         # ARCH Patches
         0001-add-sysctl-to-disallow-unprivileged-CLONE_NEWUSER-by.patch
         # MANJARO Patches
-        '0001-i2c-hid-override-HID-descriptors-for-certain-devices.patch'
+        #'0001-i2c-hid-override-HID-descriptors-for-certain-devices.patch'
         # Bootsplash
         '0001-bootsplash.patch'
         '0002-bootsplash.patch'
@@ -62,7 +62,7 @@ source=(#"https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.
         '0011-bootsplash.patch'
         '0012-bootsplash.patch'
         '0013-bootsplash.patch')
-sha256sums=('1af937d6a0ca40f05fad0421be95c2c7a36b30c46f396ef987f89d311cc3441f'
+sha256sums=('deeccf2638682679454b38c86c6569c9724fdbb468b5eeff5b244973a653428a'
             '18b83bfd46260c6fca02476b0dab70460e04a44c953ca29c535adf4454fbe78b'
             'f5903377d29fc538af98077b81982efdc091a8c628cb85566e88e1b5018f12bf'
             'b44d81446d8b53d5637287c30ae3eb64cae0078c3fbc45fcf1081dd6699818b5'
@@ -79,7 +79,6 @@ sha256sums=('1af937d6a0ca40f05fad0421be95c2c7a36b30c46f396ef987f89d311cc3441f'
             '7f861935faf7ebd2d528052a363f0356c9b5239e32a68b4ec23dcf95ee91e708'
             'fecfe39fbd05677dcc35b04ecd1ecf91bf080fee82e152c06eb9b1bc6d70d0c5'
             '37b86ca3de148a34258e3176dbf41488d9dbd19e93adbd22a062b3c41332ce85'
-            '74293c54658c963c2a9ac757d6d7e53091cfe6c2d3fb7049a396d71a1983621c'
             'a504f6cf84094e08eaa3cc5b28440261797bf4f06f04993ee46a20628ff2b53c'
             'e096b127a5208f56d368d2cb938933454d7200d70c86b763aa22c38e0ddb8717'
             '8c1c880f2caa9c7ae43281a35410203887ea8eae750fe8d360d0c8bf80fcc6e0'
@@ -110,7 +109,11 @@ prepare() {
   patch -Np1 -i ../0001-add-sysctl-to-disallow-unprivileged-CLONE_NEWUSER-by.patch
 
   # https://bugzilla.redhat.com/show_bug.cgi?id=1526312
-  patch -Np1 -i ../0001-i2c-hid-override-HID-descriptors-for-certain-devices.patch
+  # https://forum.manjaro.org/t/36269/78
+  # currently dropped: 
+  # https://forum.manjaro.org/t/61760/5
+  # https://forum.manjaro.org/t/61760/15
+  #patch -Np1 -i ../0001-i2c-hid-override-HID-descriptors-for-certain-devices.patch
 
   # Add bootsplash - http://lkml.iu.edu/hypermail/linux/kernel/1710.3/01542.html
   patch -Np1 -i "${srcdir}/0001-bootsplash.patch"
