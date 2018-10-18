@@ -19,7 +19,7 @@ _commit=fa520c47eaa15b9baa8ad66ac18da4a31679693b
 _shortcommit=${_rc}.1018.gfa520c4
 pkgver=${_basekernel}${_shortcommit}
 #pkgver=${_basekernel}.${_sub}
-pkgrel=2
+pkgrel=3
 arch=('i686' 'x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
@@ -47,7 +47,7 @@ source=(#"https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.
         # ARCH Patches
         0001-add-sysctl-to-disallow-unprivileged-CLONE_NEWUSER-by.patch
         # MANJARO Patches
-        '0001-i2c-hid-override-HID-descriptors-for-certain-devices.patch'
+        #'0001-i2c-hid-override-HID-descriptors-for-certain-devices.patch'
         # Bootsplash
         '0001-bootsplash.patch'
         '0002-bootsplash.patch'
@@ -79,7 +79,6 @@ sha256sums=('0c117b4f80cef0a959e7c1284fda6a2f8ce2c3565697dc17806f0adfb9c933fe'
             '7f861935faf7ebd2d528052a363f0356c9b5239e32a68b4ec23dcf95ee91e708'
             'fecfe39fbd05677dcc35b04ecd1ecf91bf080fee82e152c06eb9b1bc6d70d0c5'
             '37b86ca3de148a34258e3176dbf41488d9dbd19e93adbd22a062b3c41332ce85'
-            '94afbc6a9cb0709f6cd71879bae66454ec26d37c83f49f58e4de28d47678e66b'
             'a504f6cf84094e08eaa3cc5b28440261797bf4f06f04993ee46a20628ff2b53c'
             'e096b127a5208f56d368d2cb938933454d7200d70c86b763aa22c38e0ddb8717'
             '8c1c880f2caa9c7ae43281a35410203887ea8eae750fe8d360d0c8bf80fcc6e0'
@@ -113,7 +112,8 @@ prepare() {
   # https://forum.manjaro.org/t/36269/78
   # https://forum.manjaro.org/t/61760/5
   # https://forum.manjaro.org/t/61760/15
-  patch -Np1 -i ../0001-i2c-hid-override-HID-descriptors-for-certain-devices.patch
+  # currently disabled: https://gitlab.manjaro.org/packages/core/linux419/commit/8734868
+  #patch -Np1 -i ../0001-i2c-hid-override-HID-descriptors-for-certain-devices.patch
 
   # Add bootsplash - http://lkml.iu.edu/hypermail/linux/kernel/1710.3/01542.html
   patch -Np1 -i "${srcdir}/0001-bootsplash.patch"
