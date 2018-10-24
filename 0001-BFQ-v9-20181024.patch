@@ -1615,10 +1615,10 @@ index 000000000000..fb7bb8f08b75
 +}
 diff --git a/block/bfq-mq-iosched.c b/block/bfq-mq-iosched.c
 new file mode 100644
-index 000000000000..f14a04887d5f
+index 000000000000..b904c9b0c654
 --- /dev/null
 +++ b/block/bfq-mq-iosched.c
-@@ -0,0 +1,6468 @@
+@@ -0,0 +1,6475 @@
 +/*
 + * Budget Fair Queueing (BFQ) I/O scheduler.
 + *
@@ -2201,6 +2201,10 @@ index 000000000000..f14a04887d5f
 + */
 +static bool bfq_varied_queue_weights_or_active_groups(struct bfq_data *bfqd)
 +{
++#ifdef BFQ_GROUP_IOSCHED_ENABLED
++	bfq_log(bfqd, "num_active_groups %u", bfqd->num_active_groups);
++#endif
++
 +	/*
 +	 * For queue weights to differ, queue_weights_tree must contain
 +	 * at least two nodes.
@@ -2420,7 +2424,10 @@ index 000000000000..f14a04887d5f
 +			 */
 +			break;
 +		}
++		BUG_ON(!bfqd->num_active_groups);
 +		bfqd->num_active_groups--;
++		bfq_log_bfqq(bfqd, bfqq, "num_active_groups %u",
++			     bfqd->num_active_groups);
 +	}
 +}
 +
@@ -9115,10 +9122,10 @@ index 000000000000..511f251ac5aa
 +#endif /* _BFQ_H */
 diff --git a/block/bfq-sched.c b/block/bfq-sched.c
 new file mode 100644
-index 000000000000..044f1e6d2111
+index 000000000000..285ae9cbc5bb
 --- /dev/null
 +++ b/block/bfq-sched.c
-@@ -0,0 +1,2080 @@
+@@ -0,0 +1,2076 @@
 +/*
 + * BFQ: Hierarchical B-WF2Q+ scheduler.
 + *
@@ -10008,30 +10015,24 @@ index 000000000000..044f1e6d2111
 +		 * queue, remove the entity from its old weight counter (if
 +		 * there is a counter associated with the entity).
 +		 */
-+		if (prev_weight != new_weight) {
-+			if (bfqq) {
-+				bfq_log_bfqq(bfqq->bfqd, bfqq,
-+					     "weight changed %d %d(%d %d)",
-+					     prev_weight, new_weight,
-+					     entity->orig_weight,
-+					     bfqq->wr_coeff);
++		if (prev_weight != new_weight && bfqq) {
++			bfq_log_bfqq(bfqq->bfqd, bfqq,
++				     "weight changed %d %d(%d %d)",
++				     prev_weight, new_weight,
++				     entity->orig_weight,
++				     bfqq->wr_coeff);
 +
-+				root = &bfqd->queue_weights_tree;
-+				__bfq_weights_tree_remove(bfqd, bfqq, root);
-+			} else
-+				bfqd->num_active_groups--;
++			root = &bfqd->queue_weights_tree;
++			__bfq_weights_tree_remove(bfqd, bfqq, root);
 +		}
 +		entity->weight = new_weight;
 +		/*
 +		 * Add the entity, if it is not a weight-raised queue, to the
 +		 * counter associated with its new weight.
 +		 */
-+		if (prev_weight != new_weight) {
-+			if (bfqq && bfqq->wr_coeff == 1) {
-+				/* If we get here, root has been initialized. */
-+				bfq_weights_tree_add(bfqd, bfqq, root);
-+			} else
-+				bfqd->num_active_groups++;
++		if (prev_weight != new_weight && bfqq && bfqq->wr_coeff == 1) {
++			/* If we get here, root has been initialized. */
++			bfq_weights_tree_add(bfqd, bfqq, root);
 +		}
 +
 +		new_st->wsum += entity->weight;
@@ -10323,6 +10324,8 @@ index 000000000000..044f1e6d2111
 +
 +		BUG_ON(!bfqd);
 +		bfqd->num_active_groups++;
++		bfq_log_bfqg(bfqd, bfqg, "num_active_groups %u",
++			     bfqd->num_active_groups);
 +	}
 +#endif
 +
@@ -11201,10 +11204,10 @@ index 000000000000..044f1e6d2111
 +}
 diff --git a/block/bfq-sq-iosched.c b/block/bfq-sq-iosched.c
 new file mode 100644
-index 000000000000..4b5aeb704001
+index 000000000000..5e80468a6c93
 --- /dev/null
 +++ b/block/bfq-sq-iosched.c
-@@ -0,0 +1,5878 @@
+@@ -0,0 +1,5885 @@
 +/*
 + * Budget Fair Queueing (BFQ) I/O scheduler.
 + *
@@ -11727,6 +11730,10 @@ index 000000000000..4b5aeb704001
 + */
 +static bool bfq_varied_queue_weights_or_active_groups(struct bfq_data *bfqd)
 +{
++#ifdef BFQ_GROUP_IOSCHED_ENABLED
++	bfq_log(bfqd, "num_active_groups %u", bfqd->num_active_groups);
++#endif
++
 +	/*
 +	 * For queue weights to differ, queue_weights_tree must contain
 +	 * at least two nodes.
@@ -11946,7 +11953,10 @@ index 000000000000..4b5aeb704001
 +			 */
 +			break;
 +		}
++		BUG_ON(!bfqd->num_active_groups);
 +		bfqd->num_active_groups--;
++		bfq_log_bfqq(bfqd, bfqq, "num_active_groups %u",
++			     bfqd->num_active_groups);
 +	}
 +}
 +
@@ -18109,7 +18119,7 @@ index 000000000000..623aabfe67b1
 diff --git a/include/linux/blkdev.h b/include/linux/blkdev.h
 index 79226ca8f80f..897c63322bd7 100644
 --- a/include/linux/blkdev.h
-+++ b/include/linux/blkdev.h 
++++ b/include/linux/blkdev.h
 @@ -129,6 +129,10 @@ typedef __u32 __bitwise req_flags_t;
  #define RQF_MQ_POLL_SLEPT	((__force req_flags_t)(1 << 20))
  /* ->timeout has been called, don't expire again */
