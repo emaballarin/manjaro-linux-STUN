@@ -16,7 +16,7 @@ _bfqdate=20181024
 _sub=0
 _commit=84df9525b0c27f3ebc2ebb1864fa62a97fdedb7d
 pkgver=${_basekernel}.${_sub}
-pkgrel=2
+pkgrel=3
 arch=('i686' 'x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
@@ -42,9 +42,10 @@ source=(#"https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.
         #"0001-BFQ-${_bfq}-${_bfqdate}.patch::https://github.com/Algodev-github/bfq-mq/compare/0adb328...698937e.patch"
         0001-BFQ-${_bfq}-${_bfqdate}.patch::https://github.com/sirlucjan/kernel-patches/raw/master/4.19/bfq-sq-mq/4.19-bfq-sq-mq-v9r1-2K181024-rc1.patch
         # ARCH Patches
-        0001-add-sysctl-to-disallow-unprivileged-CLONE_NEWUSER-by.patch
+        '0001-add-sysctl-to-disallow-unprivileged-CLONE_NEWUSER-by.patch'
         # MANJARO Patches
-        #'0001-i2c-hid-override-HID-descriptors-for-certain-devices.patch'
+        '0001-i2c-hid-override-HID-descriptors-for-certain-devices.patch'
+        '0002-i2c-hid-properly-terminate-i2c_hid_dmi_desc_override_table_array.patch'
         # Bootsplash
         '0001-bootsplash.patch'
         '0002-bootsplash.patch'
@@ -76,6 +77,8 @@ sha256sums=('791bc6eafb475eac38c3a0a134da3e1436e61285ecda13c09b952bc318a42a17'
             '7f861935faf7ebd2d528052a363f0356c9b5239e32a68b4ec23dcf95ee91e708'
             '133104f0412fd1771e2aabb71a76acf10b992011420666344caae208ffb3e235'
             '37b86ca3de148a34258e3176dbf41488d9dbd19e93adbd22a062b3c41332ce85'
+            '94afbc6a9cb0709f6cd71879bae66454ec26d37c83f49f58e4de28d47678e66b'
+            '8dc7285a797c77e917aab1c05847370b71725389b9718c58b4565b40eed80d85'
             'a504f6cf84094e08eaa3cc5b28440261797bf4f06f04993ee46a20628ff2b53c'
             'e096b127a5208f56d368d2cb938933454d7200d70c86b763aa22c38e0ddb8717'
             '8c1c880f2caa9c7ae43281a35410203887ea8eae750fe8d360d0c8bf80fcc6e0'
@@ -107,10 +110,8 @@ prepare() {
 
   # https://bugzilla.redhat.com/show_bug.cgi?id=1526312
   # https://forum.manjaro.org/t/36269/78
-  # https://forum.manjaro.org/t/61760/5
-  # https://forum.manjaro.org/t/61760/15
-  # currently disabled: https://gitlab.manjaro.org/packages/core/linux419/commit/8734868
-  #patch -Np1 -i ../0001-i2c-hid-override-HID-descriptors-for-certain-devices.patch
+  patch -Np1 -i ../0001-i2c-hid-override-HID-descriptors-for-certain-devices.patch
+  patch -Np1 -i ../0002-i2c-hid-properly-terminate-i2c_hid_dmi_desc_override_table_array.patch
 
   # Add bootsplash - http://lkml.iu.edu/hypermail/linux/kernel/1710.3/01542.html
   patch -Np1 -i "${srcdir}/0001-bootsplash.patch"
