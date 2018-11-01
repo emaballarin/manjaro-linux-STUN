@@ -10,13 +10,13 @@ pkgname=('linux419' 'linux419-headers')
 _kernelname=-MANJARO
 _basekernel=4.19
 _basever=419
-_aufs=20181001
+_aufs=20181029
 _bfq=v9
 _bfqdate=20181024
 _sub=0
 _commit=84df9525b0c27f3ebc2ebb1864fa62a97fdedb7d
 pkgver=${_basekernel}.${_sub}
-pkgrel=3
+pkgrel=4
 arch=('i686' 'x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
@@ -31,7 +31,7 @@ source=(#"https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.
         "${pkgbase}.preset" # standard config files for mkinitcpio ramdisk
         '60-linux.hook'     # pacman hook for depmod
         '90-linux.hook'     # pacman hook for initramfs regeneration
-        "aufs4.x-rcN-${_aufs}.patch.bz2"
+        "aufs4.19-${_aufs}.patch.bz2"
         'aufs4-base.patch'
         'aufs4-kbuild.patch'
         'aufs4-loopback.patch'
@@ -61,18 +61,18 @@ source=(#"https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.
         '0012-bootsplash.patch'
         '0013-bootsplash.patch')
 sha256sums=('791bc6eafb475eac38c3a0a134da3e1436e61285ecda13c09b952bc318a42a17'
-            '555152020c2bd3893896dd60485a4cfec29335e4e4c6f0ee25fbd09b1568c0a1'
+            '56badd2c961af494ab317883cb27a5f49ad514cfc5782d6855ebb2cea9d85b34'
             'f5903377d29fc538af98077b81982efdc091a8c628cb85566e88e1b5018f12bf'
             'b44d81446d8b53d5637287c30ae3eb64cae0078c3fbc45fcf1081dd6699818b5'
             '43942683a7ff01b180dff7f3de2db4885d43ab3d4e7bd0e1918c3aaf2ee061f4'
             'ae2e95db94ef7176207c690224169594d49445e04249d2499e9d2fbc117a0b21'
             '90831589b7ab43d6fab11bfa3ad788db14ba77ea4dc03d10ee29ad07194691e1'
-            '2f120b403e7c8039bc642ac994caf5fb71eef05b6cd07fe2d21f73a2d67b97ec'
-            'c66bcd5ed9d7f9d261a7afb6005cd2406d965e7a3ad47a8507f9e68595fd7bc6'
-            'de7051f531e4f5c3ccb995489f23946c867b4c36c7b464559e43a15f3ad76f6d'
-            'd57df412765b9bf23aff8366e8f6dfb87a822d4fddc5de4fd7e51d236169acc1'
-            '6d10c5a50232db07757097b24e5b5b2fbcf4362d105ca241d5242e5ba08c7691'
-            '473cc8e1d4b94d4689a11136d55e43b1c0b9cb22b88771eb4b2b47165c2137b3'
+            '6562e8cb8d292d32181d7b7a4fe52c20b1db80764e0cdc9df07aff78a3ca9591'
+            'e239321d84448dd7575b9c5fc58bd76bcb5f0fdb7188a0dcad6010b88e67921c'
+            '7e6286cf91aaa68785312a0f6483e3323d8bab4feaaa6f09f2b2b7fc8157e811'
+            'd0cf9baab7a5c130036cbd4532c0bd2819ca504ec78bdbbffe66f9c8410857c9'
+            '179f00f707a0c809cd44fff01bd31991a5dfff5500e2b02321f22925126404f0'
+            '37c07a2dd5249ce9277a370cf60cbebb24dc1e92b845ce419de63453d5e0b685'
             'a50226860ed658251eb74014daad773cb0a8700ed7c5b81548ee4f77e8d6d4de'
             '7f861935faf7ebd2d528052a363f0356c9b5239e32a68b4ec23dcf95ee91e708'
             '133104f0412fd1771e2aabb71a76acf10b992011420666344caae208ffb3e235'
@@ -130,7 +130,7 @@ prepare() {
   git apply -p1 < "${srcdir}/0013-bootsplash.patch"
 
   # add aufs4 support
-  patch -Np1 -i "${srcdir}/aufs4.x-rcN-${_aufs}.patch"
+  patch -Np1 -i "${srcdir}/aufs4.19-${_aufs}.patch"
   patch -Np1 -i "${srcdir}/aufs4-base.patch"
   patch -Np1 -i "${srcdir}/aufs4-kbuild.patch"
   patch -Np1 -i "${srcdir}/aufs4-loopback.patch"
