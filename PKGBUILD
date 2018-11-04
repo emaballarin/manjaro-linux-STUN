@@ -12,11 +12,11 @@ _basekernel=4.19
 _basever=419
 _aufs=20181029
 _bfq=v9
-_bfqdate=20181024
-_sub=0
+_bfqdate=20181101
+_sub=1
 _commit=84df9525b0c27f3ebc2ebb1864fa62a97fdedb7d
 pkgver=${_basekernel}.${_sub}
-pkgrel=4
+pkgrel=1
 arch=('i686' 'x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
@@ -40,7 +40,7 @@ source=(#"https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.
         'tmpfs-idr.patch'
         'vfs-ino.patch'
         #"0001-BFQ-${_bfq}-${_bfqdate}.patch::https://github.com/Algodev-github/bfq-mq/compare/0adb328...698937e.patch"
-        0001-BFQ-${_bfq}-${_bfqdate}.patch::https://github.com/sirlucjan/kernel-patches/raw/master/4.19/bfq-sq-mq/4.19-bfq-sq-mq-v9r1-2K181024-rc1.patch
+        0001-BFQ-${_bfq}-${_bfqdate}.patch::https://github.com/sirlucjan/kernel-patches/raw/master/4.19/bfq-sq-mq/4.19-bfq-sq-mq-v9r1-2K181101-rc1.patch
         # ARCH Patches
         '0001-add-sysctl-to-disallow-unprivileged-CLONE_NEWUSER-by.patch'
         # MANJARO Patches
@@ -61,7 +61,7 @@ source=(#"https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.
         '0012-bootsplash.patch'
         '0013-bootsplash.patch')
 sha256sums=('791bc6eafb475eac38c3a0a134da3e1436e61285ecda13c09b952bc318a42a17'
-            '56badd2c961af494ab317883cb27a5f49ad514cfc5782d6855ebb2cea9d85b34'
+            'cd5ca70b9e814baeee0c119080e4aec7470a087fe513399a386eedab58460125'
             'f5903377d29fc538af98077b81982efdc091a8c628cb85566e88e1b5018f12bf'
             'b44d81446d8b53d5637287c30ae3eb64cae0078c3fbc45fcf1081dd6699818b5'
             '43942683a7ff01b180dff7f3de2db4885d43ab3d4e7bd0e1918c3aaf2ee061f4'
@@ -75,7 +75,7 @@ sha256sums=('791bc6eafb475eac38c3a0a134da3e1436e61285ecda13c09b952bc318a42a17'
             '37c07a2dd5249ce9277a370cf60cbebb24dc1e92b845ce419de63453d5e0b685'
             'a50226860ed658251eb74014daad773cb0a8700ed7c5b81548ee4f77e8d6d4de'
             '7f861935faf7ebd2d528052a363f0356c9b5239e32a68b4ec23dcf95ee91e708'
-            '133104f0412fd1771e2aabb71a76acf10b992011420666344caae208ffb3e235'
+            '3ac265b7be567e628c073d64bd9a9090360c9d98e9c7b9f60ca206a86882932e'
             '37b86ca3de148a34258e3176dbf41488d9dbd19e93adbd22a062b3c41332ce85'
             '94afbc6a9cb0709f6cd71879bae66454ec26d37c83f49f58e4de28d47678e66b'
             '8dc7285a797c77e917aab1c05847370b71725389b9718c58b4565b40eed80d85'

@@ -11204,10 +11204,10 @@ index 000000000000..285ae9cbc5bb
 +}
 diff --git a/block/bfq-sq-iosched.c b/block/bfq-sq-iosched.c
 new file mode 100644
-index 000000000000..5e80468a6c93
+index 000000000000..c1abe12181f9
 --- /dev/null
 +++ b/block/bfq-sq-iosched.c
-@@ -0,0 +1,5885 @@
+@@ -0,0 +1,5889 @@
 +/*
 + * Budget Fair Queueing (BFQ) I/O scheduler.
 + *
@@ -13056,7 +13056,11 @@ index 000000000000..5e80468a6c93
 +	struct bfq_data *bfqd = bfqq->bfqd;
 +	const int sync = rq_is_sync(rq);
 +
-+	BUG_ON(bfqq->entity.service > bfqq->entity.budget);
++	/*
++	 * NOTE:
++	 * (bfqq->entity.service > bfqq->entity.budget) may hold here,
++	 * in case of forced dispatches.
++	 */
 +
 +	if (bfqq->next_rq == rq) {
 +		bfqq->next_rq = bfq_find_next_rq(bfqd, bfqq, rq);
