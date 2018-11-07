@@ -1,0 +1,66 @@
+diff --git a/PKGBUILD b/PKGBUILD
+index 3a380a9..a3c7a69 100644
+--- a/PKGBUILD
++++ b/PKGBUILD
+@@ -84,8 +84,10 @@ source=(#"https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.
+         "https://ballarin.cc/kernel-hacking/manjaro-stun/kernel-patches/000ker2-manjaro-stun-tcpcake.patch"
+         # HHO patches
+         #"https://raw.githubusercontent.com/hhoffstaette/kernel-patches/4.19/4.19/block-20180806-loop-properly-observe-rotational-flag-of-underlying-device.patch"
+         "https://raw.githubusercontent.com/hhoffstaette/kernel-patches/4.19/4.19/net-20180928-up-initial-rmem-to-128KB-and-SYN-rwin-to-around-64KB.patch"
++        # Alfred Chen's PDS Scheduler
++        "https://ballarin.cc/kernel-hacking/ccalpha-PDS/latest-pds.patch"
+         # GraySky patch (GCC optimization)
+         "grayskygcc.patch::https://raw.githubusercontent.com/graysky2/kernel_gcc_patch/master/enable_additional_cpu_optimizations_for_gcc_v8.1%2B_kernel_v4.13%2B.patch")
+ sha256sums=('bc426a43063b0bf5f9bc59be969338e34276e4a0dbbdb50914beae59a28a3fc1'
+             '791bc6eafb475eac38c3a0a134da3e1436e61285ecda13c09b952bc318a42a17'
+@@ -143,8 +145,10 @@ sha256sums=('bc426a43063b0bf5f9bc59be969338e34276e4a0dbbdb50914beae59a28a3fc1'
+             '2d0ba1fabc10195a9edf4f114027eae93ec8c95000fca662a8fd8c0421b6fe21'
+             # HHO patches
+             #'5b104c485a900d1d1facb9174a2adc77ee9be136d2ca7a7fd4ab10d7f7a84c38'
+             'e587c477e3e666985855d75908e0f6a4fee4566ce21886ec2e93a82854a7c170'
++            # PDS Scheduler
++            'cc03f9ca477901716edee1c7aed2646cec3bb279350aea73b51f244a91c7c0ac'
+             # GraySky
+             '9f7177679c8d3f8d699ef0566a51349d828436dba04603bc2223f98c60d2d178')
+ prepare() {
+   #mv "${srcdir}/linux-stable-rc-${_commit}" "${srcdir}/linux-${_basekernel}"
+@@ -252,8 +256,14 @@ prepare() {
+   cd "$_prewg_curdir"
+   echo '--- --- ---'
+   echo ' '
+ 
++  # PDS Scheduler
++  echo 'Patching: PDS Scheduler'
++  patch -Np1 -i "${srcdir}/latest-pds.patch"
++  echo '--- --- ---'
++  echo ' '
++
+   # GraySky
+   echo 'Patching: GraySky'
+   patch -Np1 -i "${srcdir}/grayskygcc.patch"
+   echo '--- --- ---'
+diff --git a/config.x86_64 b/config.x86_64
+index 25cf7ec..ab1988e 100644
+--- a/config.x86_64
++++ b/config.x86_64
+@@ -15,8 +15,10 @@ CONFIG_THREAD_INFO_IN_TASK=y
+ 
+ #
+ # General setup
+ #
++CONFIG_SCHED_PDS=y
++#
+ CONFIG_INIT_ENV_ARG_LIMIT=32
+ # CONFIG_COMPILE_TEST is not set
+ CONFIG_LOCALVERSION="-STUN"
+ # CONFIG_LOCALVERSION_AUTO is not set
+@@ -351,8 +353,9 @@ CONFIG_NR_CPUS_RANGE_BEGIN=2
+ CONFIG_NR_CPUS_RANGE_END=512
+ CONFIG_NR_CPUS_DEFAULT=64
+ CONFIG_NR_CPUS=320
+ CONFIG_SCHED_SMT=y
++CONFIG_SMT_NICE=y
+ CONFIG_SCHED_MC=y
+ CONFIG_SCHED_MC_PRIO=y
+ CONFIG_X86_LOCAL_APIC=y
+ CONFIG_X86_IO_APIC=y

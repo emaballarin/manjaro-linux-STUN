@@ -1,0 +1,131 @@
+diff --git a/90-linux.hook b/90-linux.hook
+index 7c0c0b0..ff6cc28 100644
+--- a/90-linux.hook
++++ b/90-linux.hook
+@@ -1,9 +1,9 @@
+ [Trigger]
+ Type = File
+ Operation = Install
+ Operation = Upgrade
+-Target = boot/vmlinuz-%BASEKERNEL%-%ARCH%
++Target = boot/vmlinuz-%BASEKERNEL%-STUN-%ARCH%
+ Target = usr/lib/initcpio/*
+ 
+ [Action]
+ Description = Updating %PKGBASE% initcpios...
+diff --git a/PKGBUILD b/PKGBUILD
+index 61a0d75..341127f 100644
+--- a/PKGBUILD
++++ b/PKGBUILD
+@@ -4,11 +4,11 @@
+ 
+ # Maintainer: Philip Müller (x86_64) <philm@manjaro.org>
+ # Maintainer: Jonathon Fernyhough (i686) <jonathon@manjaro.org>
+ 
+-pkgbase=linux419
+-pkgname=('linux419' 'linux419-headers')
+-_kernelname=-MANJARO
++pkgbase=linux419-STUN
++pkgname=('linux419-STUN' 'linux419-STUN-headers')
++_kernelname=-STUN
+ _basekernel=4.19
+ _basever=419
+ _aufs=20181029
+ _bfq=v9
+@@ -183,9 +183,9 @@ build() {
+   # build!
+   make ${MAKEFLAGS} LOCALVERSION= bzImage modules
+ }
+ 
+-package_linux419() {
++package_linux419-STUN() {
+   pkgdesc="The ${pkgbase/linux/Linux} kernel and modules"
+   depends=('coreutils' 'linux-firmware' 'kmod' 'mkinitcpio>=0.7')
+   optdepends=('crda: to set the correct wireless channels of your country')
+   provides=("linux=${pkgver}")
+@@ -200,19 +200,19 @@ package_linux419() {
+   _kernver="$(make LOCALVERSION= kernelrelease)"
+ 
+   mkdir -p "${pkgdir}"/{boot,usr/lib/modules}
+   make LOCALVERSION= INSTALL_MOD_PATH="${pkgdir}/usr" modules_install
+-  cp arch/$KARCH/boot/bzImage "${pkgdir}/boot/vmlinuz-${_basekernel}-${CARCH}"
++  cp arch/$KARCH/boot/bzImage "${pkgdir}/boot/vmlinuz-${_basekernel}${_kernelname}-${CARCH}"
+ 
+   # add kernel version
+   if [ "${CARCH}" = "x86_64" ]; then
+-     echo "${pkgver}-${pkgrel}-MANJARO x64" > "${pkgdir}/boot/${pkgbase}-${CARCH}.kver"
++     echo "${pkgver}-${pkgrel}-STUN x64" > "${pkgdir}/boot/${pkgbase}-${CARCH}.kver"
+   else
+-     echo "${pkgver}-${pkgrel}-MANJARO x32" > "${pkgdir}/boot/${pkgbase}-${CARCH}.kver"
++     echo "${pkgver}-${pkgrel}-STUN x32" > "${pkgdir}/boot/${pkgbase}-${CARCH}.kver"
+   fi
+ 
+   # make room for external modules
+-  local _extramodules="extramodules-${_basekernel}${_kernelname:--MANJARO}"
++  local _extramodules="extramodules-${_basekernel}${_kernelname:--STUN}"
+   ln -s "../${_extramodules}" "${pkgdir}/usr/lib/modules/${_kernver}/extramodules"
+ 
+   # add real version for building modules and running depmod from hook
+   echo "${_kernver}" |
+@@ -240,9 +240,9 @@ package_linux419() {
+   sed "${_subst}" "${startdir}/${install}" > "${startdir}/${install}.pkg"
+   true && install=${install}.pkg
+ 
+   # install mkinitcpio preset file
+-  sed "${_subst}" ${srcdir}/linux419.preset |
++  sed "${_subst}" ${srcdir}/${pkgbase}.preset |
+     install -Dm644 /dev/stdin "${pkgdir}/etc/mkinitcpio.d/${pkgbase}.preset"
+ 
+   # install pacman hooks
+   sed "${_subst}" ${srcdir}/60-linux.hook |
+@@ -250,9 +250,9 @@ package_linux419() {
+   sed "${_subst}" ${srcdir}/90-linux.hook |
+     install -Dm644 /dev/stdin "${pkgdir}/usr/share/libalpm/hooks/90-${pkgbase}.hook"
+ }
+ 
+-package_linux419-headers() {
++package_linux419-STUN-headers() {
+   pkgdesc="Header files and scripts for building modules for ${pkgbase/linux/Linux} kernel"
+   provides=("linux-headers=$pkgver")
+ 
+   cd "${srcdir}/linux-${_basekernel}"
+diff --git a/linux419.install b/linux419-STUN.install
+similarity index 82%
+rename from linux419.install
+rename to linux419-STUN.install
+index 5dc7c5d..c5b7bce 100644
+--- a/linux419.install
++++ b/linux419-STUN.install
+@@ -5,6 +5,6 @@ post_upgrade() {
+ }
+ 
+ post_remove() {
+   # also remove the compat symlinks
+-  rm -f boot/initramfs-%BASEKERNEL%-%ARCH%*.img
++  rm -f boot/initramfs-%BASEKERNEL%-STUN-%ARCH%*.img
+ }
+diff --git a/linux419.preset b/linux419-STUN.preset
+similarity index 58%
+rename from linux419.preset
+rename to linux419-STUN.preset
+index 53f249e..0c6cb64 100644
+--- a/linux419.preset
++++ b/linux419-STUN.preset
+@@ -1,14 +1,14 @@
+ # mkinitcpio preset file for the '%PKGBASE%' package
+ 
+ ALL_config="/etc/mkinitcpio.conf"
+-ALL_kver="/boot/vmlinuz-%BASEKERNEL%-%ARCH%"
++ALL_kver="/boot/vmlinuz-%BASEKERNEL%-STUN-%ARCH%"
+ 
+ PRESETS=('default' 'fallback')
+ 
+ #default_config="/etc/mkinitcpio.conf"
+-default_image="/boot/initramfs-%BASEKERNEL%-%ARCH%.img"
++default_image="/boot/initramfs-%BASEKERNEL%-STUN-%ARCH%.img"
+ #default_options=""
+ 
+ #fallback_config="/etc/mkinitcpio.conf"
+-fallback_image="/boot/initramfs-%BASEKERNEL%-%ARCH%-fallback.img"
++fallback_image="/boot/initramfs-%BASEKERNEL%-STUN-%ARCH%-fallback.img"
+ fallback_options="-S autodetect"

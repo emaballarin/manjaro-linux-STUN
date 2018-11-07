@@ -1,0 +1,246 @@
+diff --git a/PKGBUILD b/PKGBUILD
+index 341127f..3a380a9 100644
+--- a/PKGBUILD
++++ b/PKGBUILD
+@@ -1,10 +1,13 @@
+ # Based on the file created for Arch Linux by:
+ # Tobias Powalowski <tpowa@archlinux.org>
+ # Thomas Baechler <thomas@archlinux.org>
+ 
+-# Maintainer: Philip Müller (x86_64) <philm@manjaro.org>
+-# Maintainer: Jonathon Fernyhough (i686) <jonathon@manjaro.org>
++# Based on the file created for Manjaro Linux by:
++# Philip Müller (x86_64) <philm@manjaro.org>
++# Jonathon Fernyhough (i686) <jonathon@manjaro.org>
++
++# Maintainer: Emanuele Ballarin (STUN for x86_64) <emanuele@ballarin.cc>
+ 
+ pkgbase=linux419-STUN
+ pkgname=('linux419-STUN' 'linux419-STUN-headers')
+ _kernelname=-STUN
+@@ -12,8 +15,9 @@ _basekernel=4.19
+ _basever=419
+ _aufs=20181029
+ _bfq=v9
+ _bfqdate=20181101
++_wireguard=0.0.20181018
+ _sub=1
+ _commit=84df9525b0c27f3ebc2ebb1864fa62a97fdedb7d
+ pkgver=${_basekernel}.${_sub}
+ pkgrel=1
+@@ -58,17 +62,43 @@ source=(#"https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.
+         '0009-bootsplash.patch'
+         '0010-bootsplash.patch'
+         '0011-bootsplash.patch'
+         '0012-bootsplash.patch'
+-        '0013-bootsplash.patch')
++        '0013-bootsplash.patch'
++        # Intel Clear Linux Project - Kernel patches
++        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0101-i8042-decrease-debug-message-level-to-info.patch"
++        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0103-silence-rapl.patch"
++        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0107-overload-on-wakeup.patch-"
++        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0109-smpboot-reuse-timer-calibration.patch"
++        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0111-Initialize-ata-before-graphics.patch"
++        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0112-reduce-e1000e-boot-time-by-tightening-sleep-ranges.patch"
++        #"https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0114-ipv4-tcp-allow-the-memory-tuning-for-tcp-to-go-a-lit.patch"
++        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0116-e1000e-increase-pause-and-refresh-time.patch"
++        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0117-kernel-time-reduce-ntp-wakeups.patch"
++        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0123-xattr-allow-setting-user.-attributes-on-symlinks-by-.patch"
++        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0151-mm-Export-do_madvise.patch-"
++        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0501-locking-rwsem-spin-faster.patch"
++        # WireGuard auto-patcher (kernel-independent)
++        "https://git.zx2c4.com/WireGuard/snapshot/WireGuard-${_wireguard}.tar.xz"
++        # STUN specific kernel patches
++        "https://ballarin.cc/kernel-hacking/manjaro-stun/kernel-patches/000ker1-manjaro-stun-tickat600.patch"
++        "https://ballarin.cc/kernel-hacking/manjaro-stun/kernel-patches/000ker2-manjaro-stun-tcpcake.patch"
++        # HHO patches
++        #"https://raw.githubusercontent.com/hhoffstaette/kernel-patches/4.19/4.19/block-20180806-loop-properly-observe-rotational-flag-of-underlying-device.patch"
++        "https://raw.githubusercontent.com/hhoffstaette/kernel-patches/4.19/4.19/net-20180928-up-initial-rmem-to-128KB-and-SYN-rwin-to-around-64KB.patch"
++        # GraySky patch (GCC optimization)
++        "grayskygcc.patch::https://raw.githubusercontent.com/graysky2/kernel_gcc_patch/master/enable_additional_cpu_optimizations_for_gcc_v8.1%2B_kernel_v4.13%2B.patch")
+ sha256sums=('bc426a43063b0bf5f9bc59be969338e34276e4a0dbbdb50914beae59a28a3fc1'
+             '791bc6eafb475eac38c3a0a134da3e1436e61285ecda13c09b952bc318a42a17'
+-            'cd5ca70b9e814baeee0c119080e4aec7470a087fe513399a386eedab58460125'
++
++            ## CONFIGURATION FILE
++            'SKIP'
++
+             'f5903377d29fc538af98077b81982efdc091a8c628cb85566e88e1b5018f12bf'
+             'b44d81446d8b53d5637287c30ae3eb64cae0078c3fbc45fcf1081dd6699818b5'
+-            '43942683a7ff01b180dff7f3de2db4885d43ab3d4e7bd0e1918c3aaf2ee061f4'
++            '8634091ef2d9c59baf3474f1ea6311086baa524cc0ea060bb11143afcb8b1c58'
+             'ae2e95db94ef7176207c690224169594d49445e04249d2499e9d2fbc117a0b21'
+-            '90831589b7ab43d6fab11bfa3ad788db14ba77ea4dc03d10ee29ad07194691e1'
++            'f7fff46bf963f6b1cf53b65b51d77749a59586e429c4c056e01dfdab78a6120b'
+             '6562e8cb8d292d32181d7b7a4fe52c20b1db80764e0cdc9df07aff78a3ca9591'
+             'e239321d84448dd7575b9c5fc58bd76bcb5f0fdb7188a0dcad6010b88e67921c'
+             '7e6286cf91aaa68785312a0f6483e3323d8bab4feaaa6f09f2b2b7fc8157e811'
+             'd0cf9baab7a5c130036cbd4532c0bd2819ca504ec78bdbbffe66f9c8410857c9'
+@@ -91,23 +121,60 @@ sha256sums=('bc426a43063b0bf5f9bc59be969338e34276e4a0dbbdb50914beae59a28a3fc1'
+             'a7aefeacf22c600fafd9e040a985a913643095db7272c296b77a0a651c6a140a'
+             'e9f22cbb542591087d2d66dc6dc912b1434330ba3cd13d2df741d869a2c31e89'
+             '27471eee564ca3149dd271b0817719b5565a9594dc4d884fe3dc51a5f03832bc'
+             '60e295601e4fb33d9bf65f198c54c7eb07c0d1e91e2ad1e0dd6cd6e142cb266d'
+-            '035ea4b2a7621054f4560471f45336b981538a40172d8f17285910d4e0e0b3ef')
++            '035ea4b2a7621054f4560471f45336b981538a40172d8f17285910d4e0e0b3ef'
++            # Clear Linux
++            '94cd3c02a844e842b3488d5c6d0396c5589d2a5841f595a41000a24f71eeb517'
++            '446c54c0b252a7008a822aaf3955898668ac6e948a93c1df53a29b2151ba02bd'
++            'd2a19abb1572c9ff58fb46355ac8e6bf906f9b8362d739bd8089c433515caa83'
++            'f1d71d6236643ac6ea2f8776c836616d3151350c612baed8bb17cd90708bbda4'
++            '320411c2647a8420982382bbeae8e6f71fcbc3afced51f20036d4b39774da557'
++            'f4a6d2ce895a92994674d5a8a2cd934197cbb026601825d19b3fffaefd33177d'
++            #'096b71ceed37682ef05b11f20918b211c432eb28bc4eeca1c4108c62e3a9b729'
++            'd3c75bda014acabd771558d140cd67540c21e0318cf5203745f28724ae6de6f9'
++            'c937188be5e00ff7b2e97285eb904cf140618342752239624ac89aa28d6e3a45'
++            'ed7fd9c7b3175e7ea04c7c221d021b8d03f80a1a3096a48f8abafae599889fbc'
++            '0579ad0960a72941532c93cea7b144f297264c63a051351f62c986689978d9fe'
++            '278d87eb32b3d3680f7c16b9ae9e61ad45520906391a76c98277a40f8febf697'
++            # WireGuard
++            'af05824211b27cbeeea2b8d6b76be29552c0d80bfe716471215e4e43d259e327'
++            # STUN specific
++            '21914b7c9cb341fdea933e6f965208676e21449e65842e8e6bab7f4edd9e45ac'
++            '2d0ba1fabc10195a9edf4f114027eae93ec8c95000fca662a8fd8c0421b6fe21'
++            # HHO patches
++            #'5b104c485a900d1d1facb9174a2adc77ee9be136d2ca7a7fd4ab10d7f7a84c38'
++            'e587c477e3e666985855d75908e0f6a4fee4566ce21886ec2e93a82854a7c170'
++            # GraySky
++            '9f7177679c8d3f8d699ef0566a51349d828436dba04603bc2223f98c60d2d178')
+ prepare() {
+   #mv "${srcdir}/linux-stable-rc-${_commit}" "${srcdir}/linux-${_basekernel}"
+   mv "${srcdir}/linux-${_commit}" "${srcdir}/linux-${_basekernel}"
+   cd "${srcdir}/linux-${_basekernel}"
++  echo ' '
++  echo 'PATCHING...'
++  echo ' '
+ 
+   # add upstream patch
++  echo 'Patching: UPSTREAM'
+   patch -p1 -i "${srcdir}/patch-${pkgver}"
++  echo '--- --- ---'
++  echo ' '
+ 
+   # add latest fixes from stable queue, if needed
+   # http://git.kernel.org/?p=linux/kernel/git/stable/stable-queue.git
+   # enable only if you have "gen-stable-queue-patch.sh" executed before
+   #patch -Np1 -i "${srcdir}/prepatch-${_basekernel}`date +%Y%m%d`"
+ 
++  # add STUN patches
++  echo 'Patching: STUN'
++  patch -Np1 -i "${srcdir}/000ker1-manjaro-stun-tickat600.patch"
++  patch -Np1 -i "${srcdir}/000ker2-manjaro-stun-tcpcake.patch"
++  echo '--- --- ---'
++  echo ' '
++
+   # disable USER_NS for non-root users by default
++  echo 'Patching: MANJARO specific (from the official repo)'
+   patch -Np1 -i ../0001-add-sysctl-to-disallow-unprivileged-CLONE_NEWUSER-by.patch
+ 
+   # https://bugzilla.redhat.com/show_bug.cgi?id=1526312
+   # https://forum.manjaro.org/t/36269/78
+@@ -128,25 +195,81 @@ prepare() {
+   patch -Np1 -i "${srcdir}/0011-bootsplash.patch"
+   patch -Np1 -i "${srcdir}/0012-bootsplash.patch"
+   # use git-apply to add binary files
+   git apply -p1 < "${srcdir}/0013-bootsplash.patch"
++  echo '--- --- ---'
++  echo ' '
+ 
+   # add aufs4 support
++  echo 'Patching: MANJARO - AUFS4'
+   patch -Np1 -i "${srcdir}/aufs4.19-${_aufs}.patch"
+   patch -Np1 -i "${srcdir}/aufs4-base.patch"
+   patch -Np1 -i "${srcdir}/aufs4-kbuild.patch"
+   patch -Np1 -i "${srcdir}/aufs4-loopback.patch"
+   patch -Np1 -i "${srcdir}/aufs4-mmap.patch"
+   patch -Np1 -i "${srcdir}/aufs4-standalone.patch"
+   patch -Np1 -i "${srcdir}/tmpfs-idr.patch"
+   patch -Np1 -i "${srcdir}/vfs-ino.patch"
++  echo '--- --- ---'
++  echo ' '
+ 
+   # add BFQ scheduler
++  echo 'Patching: MANJARO - BFQ-SQ/MQ'
+   patch -Np1 -i "${srcdir}/0001-BFQ-${_bfq}-${_bfqdate}.patch"
++  echo '--- --- ---'
++  echo ' '
++
++  # HHO TCPv4 (Google: rmem)
++  echo 'Patching: HHO - TCPv4'
++  patch -Np1 -i "${srcdir}/net-20180928-up-initial-rmem-to-128KB-and-SYN-rwin-to-around-64KB.patch"
++  echo '--- --- ---'
++  echo ' '
++
++  # Clear Linux
++  echo 'Patching: Clear Linux Project Kernel'
++  patch -Np1 -i "${srcdir}/0101-i8042-decrease-debug-message-level-to-info.patch"
++  patch -Np1 -i "${srcdir}/0103-silence-rapl.patch"
++  patch -Np1 -i "${srcdir}/0107-overload-on-wakeup.patch-"
++  patch -Np1 -i "${srcdir}/0109-smpboot-reuse-timer-calibration.patch"
++  patch -Np1 -i "${srcdir}/0111-Initialize-ata-before-graphics.patch"
++  patch -Np1 -i "${srcdir}/0112-reduce-e1000e-boot-time-by-tightening-sleep-ranges.patch"
++  patch -Np1 -i "${srcdir}/0116-e1000e-increase-pause-and-refresh-time.patch"
++  patch -Np1 -i "${srcdir}/0117-kernel-time-reduce-ntp-wakeups.patch"
++  patch -Np1 -i "${srcdir}/0123-xattr-allow-setting-user.-attributes-on-symlinks-by-.patch"
++  patch -Np1 -i "${srcdir}/0151-mm-Export-do_madvise.patch-"
++  patch -Np1 -i "${srcdir}/0501-locking-rwsem-spin-faster.patch"
++  echo '--- --- ---'
++  echo ' '
++
++  # WireGuard
++  echo 'Patching: WireGuard'
++  _prewg_curdir="$(pwd)"
++  cd "${srcdir}/WireGuard-${_wireguard}/contrib/kernel-tree/"
++  _wg_ker_calldir="$(pwd)"
++  cd "${srcdir}/linux-${_basekernel}/"
++  "$_wg_ker_calldir/create-patch.sh" > ./wgpatch.patch
++  patch -p1 -i ./wgpatch.patch
++  rm ./wgpatch.patch
++  cd "$_prewg_curdir"
++  echo '--- --- ---'
++  echo ' '
++
++  # GraySky
++  echo 'Patching: GraySky'
++  patch -Np1 -i "${srcdir}/grayskygcc.patch"
++  echo '--- --- ---'
++  echo ' '
++
++  echo 'PATCHING DONE!'
++  echo ' '
++  echo ' '
+ 
+   if [ "${CARCH}" = "x86_64" ]; then
+     cat "${srcdir}/config.x86_64" > ./.config
+   else
++    echo "Warning! You are trying to install the i686 version of this package. STUN is not supported on such platforms."
++    echo "The standard MANJARO version of this package will be installed."
++    bash -c "read -p 'Press [ENTER] to continue...'"
+     cat "${srcdir}/config" > ./.config
+   fi
+ 
+   cat "${srcdir}/config.aufs" >> ./.config
+@@ -206,8 +329,11 @@ package_linux419-STUN() {
+   # add kernel version
+   if [ "${CARCH}" = "x86_64" ]; then
+      echo "${pkgver}-${pkgrel}-STUN x64" > "${pkgdir}/boot/${pkgbase}-${CARCH}.kver"
+   else
++     echo "Warning! You are trying to install the i686 version of this package. STUN is not supported on such platforms."
++     echo "The standard MANJARO version of this package will be installed."
++     bash -c "read -p 'Press [ENTER] to continue...'"
+      echo "${pkgver}-${pkgrel}-STUN x32" > "${pkgdir}/boot/${pkgbase}-${CARCH}.kver"
+   fi
+ 
+   # make room for external modules
+@@ -268,8 +394,11 @@ package_linux419-STUN-headers() {
+   install -Dt "${_builddir}/arch/${KARCH}" -m644 "arch/${KARCH}/Makefile"
+   install -Dt "${_builddir}/arch/${KARCH}/kernel" -m644 "arch/${KARCH}/kernel/asm-offsets.s"
+ 
+   if [ "${CARCH}" = "i686" ]; then
++    echo "Warning! You are trying to install the i686 version of this package. STUN is not supported on such platforms."
++    echo "The standard MANJARO version of this package will be installed."
++    bash -c "read -p 'Press [ENTER] to continue...'"
+     install -Dt "${_builddir}/arch/${KARCH}" -m644 "arch/${KARCH}/Makefile_32.cpu"
+   fi
+ 
+   cp -t "${_builddir}/arch/${KARCH}" -a "arch/${KARCH}/include"
