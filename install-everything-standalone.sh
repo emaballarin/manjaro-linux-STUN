@@ -1,8 +1,8 @@
 #!/bin/zsh
 
 ## Install (0) the Manjaro STUN Kernel and the related (1) nvidia, (2) acpi_call,
-## (3) virtualbox_host, (4) SPL/ZFS extramodules.
-## WARNING: This "all in one" script is highly experimental!
+## (3) virtualbox_host, (4) SPL/ZFS, kernel extramodules.
+## WARNING: This "all in one" script is experimental!
 
 ##################
 ## Get packages ##
@@ -61,8 +61,8 @@ sed -i "s/install=virtualbox-host-modules\.install.*/install=virtualbox-host-mod
 sed -i "s/install=virtualbox-guest-modules\.install.*/install=virtualbox-guest-modules-STUN\.install/g" ./PKGBUILD
 sed -i "s/virtualbox-host-modules\.install\"/virtualbox-host-modules-STUN\.install\"/g" ./PKGBUILD
 sed -i "s/virtualbox-guest-modules\.install\"/virtualbox-guest-modules-STUN\.install\"/g" ./PKGBUILD
-sed -i "s/package_linux419-virtualbox-host-modules/package_linux-STUN-virtualbox-host-modules/g" ./PKGBUILD
-sed -i "s/package_linux419-virtualbox-guest-modules/package_linux-STUN-virtualbox-guest-modules/g" ./PKGBUILD
+sed -i "s/package_linux419-virtualbox-host-modules/package_linux419-STUN-virtualbox-host-modules/g" ./PKGBUILD
+sed -i "s/package_linux419-virtualbox-guest-modules/package_linux419-STUN-virtualbox-guest-modules/g" ./PKGBUILD
 
 ####################
 ## Build packages ##
@@ -129,5 +129,5 @@ echo ' '
 bash -c "read -p 'If the installation was successful, press [ENTER] to perform a file cleanup. Hit [CTRL]+[C] to exit without cleanup.'"
 echo ' '
 
-rm -R -f "./$MANJAROSTUN_TMPDIR"
-rm -R -f "./$MANJAROSTUN_PKGS"
+rm -R -f "$MANJAROSTUN_TMPDIR"
+rm -R -f "$MANJAROSTUN_PKGS"
