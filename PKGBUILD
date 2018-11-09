@@ -10,7 +10,7 @@
 # Philip Müller (x86_64) <philm@manjaro.org>
 # Jonathon Fernyhough (i686) <jonathon@manjaro.org>
 
-# Maintainer: Emanuele Ballarin (x86_64) <emanuele@ballarin.cc>
+# Maintainer: Emanuele Ballarin (STUN x86_64) <emanuele@ballarin.cc>
 
 pkgbase=linux419-STUN
 pkgname=('linux419-STUN' 'linux419-STUN-headers')
@@ -85,13 +85,17 @@ source=(## LINUX KERNEL (upstream patches)
         ## STUN PATCHES (Intel Clear Linux Project - Kernel)
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0101-i8042-decrease-debug-message-level-to-info.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0103-silence-rapl.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0105-ksm-wakeups.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0107-overload-on-wakeup.patch-"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0109-smpboot-reuse-timer-calibration.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0110-raid6-add-Kconfig-option-to-skip-raid6-benchmarking.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0111-Initialize-ata-before-graphics.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0112-reduce-e1000e-boot-time-by-tightening-sleep-ranges.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0113-give-rdrand-some-credit.patch"
         #"https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0114-ipv4-tcp-allow-the-memory-tuning-for-tcp-to-go-a-lit.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0116-e1000e-increase-pause-and-refresh-time.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0117-kernel-time-reduce-ntp-wakeups.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0121-Enable-stateless-firmware-loading.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0123-xattr-allow-setting-user.-attributes-on-symlinks-by-.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0151-mm-Export-do_madvise.patch-"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0501-locking-rwsem-spin-faster.patch"
@@ -153,13 +157,17 @@ sha256sums=('bc426a43063b0bf5f9bc59be969338e34276e4a0dbbdb50914beae59a28a3fc1'
             # Clear Linux
             '94cd3c02a844e842b3488d5c6d0396c5589d2a5841f595a41000a24f71eeb517'
             '446c54c0b252a7008a822aaf3955898668ac6e948a93c1df53a29b2151ba02bd'
+            '80be4f4b40ab161029dec3d11de5772131d9a090289cf3cc2cee3148d4b1843a'
             'd2a19abb1572c9ff58fb46355ac8e6bf906f9b8362d739bd8089c433515caa83'
             'f1d71d6236643ac6ea2f8776c836616d3151350c612baed8bb17cd90708bbda4'
+            '521e33c3a5d6e7a6dab71f88e3c2724b2ff9d97ce616ec2f8d1d0183edc17ce8'
             '320411c2647a8420982382bbeae8e6f71fcbc3afced51f20036d4b39774da557'
             'f4a6d2ce895a92994674d5a8a2cd934197cbb026601825d19b3fffaefd33177d'
+            '5207a1047066cc0d0ad896cea5d97daa7701aebb91be53ff3d558439d93deb2f'
             #'096b71ceed37682ef05b11f20918b211c432eb28bc4eeca1c4108c62e3a9b729'
             'd3c75bda014acabd771558d140cd67540c21e0318cf5203745f28724ae6de6f9'
             'c937188be5e00ff7b2e97285eb904cf140618342752239624ac89aa28d6e3a45'
+            'd427b8fc9ec53d637ace7c8a0007db8ddd427784863e12fc118a0cd30b6c9d63'
             'ed7fd9c7b3175e7ea04c7c221d021b8d03f80a1a3096a48f8abafae599889fbc'
             '0579ad0960a72941532c93cea7b144f297264c63a051351f62c986689978d9fe'
             '278d87eb32b3d3680f7c16b9ae9e61ad45520906391a76c98277a40f8febf697'
