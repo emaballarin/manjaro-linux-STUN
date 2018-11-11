@@ -22,10 +22,10 @@ url="http://www.kernel.org/"
 license=('GPL2')
 makedepends=('xmlto' 'docbook-xsl' 'kmod' 'inetutils' 'bc' 'elfutils' 'git')
 options=('!strip')
-source=(#"https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.xz"
+source=("https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.xz"
         "http://www.kernel.org/pub/linux/kernel/v4.x/patch-${pkgver}.xz"
         #https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable-rc.git/snapshot/linux-stable-rc-$_commit.tar.gz
-        "linux-${pkgver}.tar.gz::https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/snapshot/linux-$_commit.tar.gz"
+        #"linux-${pkgver}.tar.gz::https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/snapshot/linux-$_commit.tar.gz"
         # the main kernel config files
         'config.x86_64' 'config' 'config.aufs'
         "${pkgbase}.preset" # standard config files for mkinitcpio ramdisk
@@ -60,8 +60,8 @@ source=(#"https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.
         '0011-bootsplash.patch'
         '0012-bootsplash.patch'
         '0013-bootsplash.patch')
-sha256sums=('bc426a43063b0bf5f9bc59be969338e34276e4a0dbbdb50914beae59a28a3fc1'
-            '791bc6eafb475eac38c3a0a134da3e1436e61285ecda13c09b952bc318a42a17'
+sha256sums=('0c68f5655528aed4f99dae71a5b259edc93239fa899e2df79c055275c21749a1'
+            'bc426a43063b0bf5f9bc59be969338e34276e4a0dbbdb50914beae59a28a3fc1'
             'cd5ca70b9e814baeee0c119080e4aec7470a087fe513399a386eedab58460125'
             'f5903377d29fc538af98077b81982efdc091a8c628cb85566e88e1b5018f12bf'
             'b44d81446d8b53d5637287c30ae3eb64cae0078c3fbc45fcf1081dd6699818b5'
@@ -95,7 +95,7 @@ sha256sums=('bc426a43063b0bf5f9bc59be969338e34276e4a0dbbdb50914beae59a28a3fc1'
             '035ea4b2a7621054f4560471f45336b981538a40172d8f17285910d4e0e0b3ef')
 prepare() {
   #mv "${srcdir}/linux-stable-rc-${_commit}" "${srcdir}/linux-${_basekernel}"
-  mv "${srcdir}/linux-${_commit}" "${srcdir}/linux-${_basekernel}"
+  #mv "${srcdir}/linux-${_commit}" "${srcdir}/linux-${_basekernel}"
   cd "${srcdir}/linux-${_basekernel}"
 
   # add upstream patch
