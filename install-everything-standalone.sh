@@ -69,7 +69,7 @@ sed -i "s/package_linux419-virtualbox-guest-modules/package_linux419-STUN-virtua
 ####################
 
 cd "$MANJAROSTUN_TMPDIR/manjaro-linux-stun"
-makepkg -Csfi
+makepkg -Csfi --noconfirm
 
 cd "$MANJAROSTUN_TMPDIR/manjaro-linux-stun-nvidia"
 makepkg -Csf
@@ -84,11 +84,11 @@ makepkg -Csf
 
 # Build package
 cd "$MANJAROSTUN_TMPDIR/virtualbox-modules"
-makepkg -Csf
+makepkg -Csf --noconfirm
 
 # Remove (now useless) MAKE-dependencies previously installed
-sudo pacman -R virtualbox-guest-dkms virtualbox-host-dkms
-sudo pacman -R virtualbox-guest-dkms virtualbox-host-dkms
+sudo pacman -R virtualbox-guest-dkms virtualbox-host-dkms --noconfirm
+sudo pacman -R virtualbox-guest-dkms virtualbox-host-dkms --noconfirm
 
 #####################
 ## Deploy packages ##
@@ -96,7 +96,7 @@ sudo pacman -R virtualbox-guest-dkms virtualbox-host-dkms
 
 # Ask if deployment/install is really wanted
 echo ' '
-bash -c "read -p 'Was the whole build process successful? Press [ENTER] to deploy and install Manjaro STUN!'"
+#bash -c "read -p 'Was the whole build process successful? Press [ENTER] to deploy and install Manjaro STUN!'"
 echo ' '
 
 # Remove (eventually) previously built packages
@@ -122,11 +122,11 @@ cp ./*host*.pkg.tar.xz "$MANJAROSTUN_PKGS"
 ## Install packages ##
 ######################
 cd "$MANJAROSTUN_PKGS"
-sudo pacman -U ./*
+sudo pacman -U ./* --noconfirm
 
 # Ask for file cleanup
 echo ' '
-bash -c "read -p 'If the installation was successful, press [ENTER] to perform a file cleanup. Hit [CTRL]+[C] to exit without cleanup.'"
+#bash -c "read -p 'If the installation was successful, press [ENTER] to perform a file cleanup. Hit [CTRL]+[C] to exit without cleanup.'"
 echo ' '
 
 rm -R -f "$MANJAROSTUN_TMPDIR"
