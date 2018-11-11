@@ -30,14 +30,15 @@ url="http://www.kernel.org/"
 license=('GPL2')
 makedepends=('xmlto' 'docbook-xsl' 'kmod' 'inetutils' 'bc' 'elfutils' 'git')
 options=('!strip')
-source=(## LINUX KERNEL (upstream patches)
-        #"https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.xz"
+source=(## LINUX KERNEL (base, before the patches)
+        "https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.xz"
+        
+        ## LINUX KERNEL (upstream patches)
         "http://www.kernel.org/pub/linux/kernel/v4.x/patch-${pkgver}.xz"
 
         ## LINUX KERNEL (base, before the patches)
         #https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable-rc.git/snapshot/linux-stable-rc-$_commit.tar.gz
-        "linux-${pkgver}.tar.gz::https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/snapshot/linux-$_commit.tar.gz"
-
+        #"linux-${pkgver}.tar.gz::https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/snapshot/linux-$_commit.tar.gz"
         ## KERNEL and AUFS4 CONFIG FILES (STUNned, where applicable - x86_64)
         'config.x86_64' 'config' 'config.aufs'
 
@@ -115,8 +116,8 @@ source=(## LINUX KERNEL (upstream patches)
         ## STUN PATCHES (GraySky patch - GCC optimizations)
         "grayskygcc.patch::https://raw.githubusercontent.com/graysky2/kernel_gcc_patch/master/enable_additional_cpu_optimizations_for_gcc_v8.1%2B_kernel_v4.13%2B.patch")
 
-sha256sums=('bc426a43063b0bf5f9bc59be969338e34276e4a0dbbdb50914beae59a28a3fc1'
-            '791bc6eafb475eac38c3a0a134da3e1436e61285ecda13c09b952bc318a42a17'
+sha256sums=('0c68f5655528aed4f99dae71a5b259edc93239fa899e2df79c055275c21749a1'
+            'bc426a43063b0bf5f9bc59be969338e34276e4a0dbbdb50914beae59a28a3fc1'
 
             ## CONFIGURATION FILE (due to frequent updates, for now)
             'SKIP'
@@ -187,7 +188,7 @@ sha256sums=('bc426a43063b0bf5f9bc59be969338e34276e4a0dbbdb50914beae59a28a3fc1'
 
 prepare() {
   #mv "${srcdir}/linux-stable-rc-${_commit}" "${srcdir}/linux-${_basekernel}"
-  mv "${srcdir}/linux-${_commit}" "${srcdir}/linux-${_basekernel}"
+  #mv "${srcdir}/linux-${_commit}" "${srcdir}/linux-${_basekernel}"
   cd "${srcdir}/linux-${_basekernel}"
   echo ' '
   echo 'PATCHING...'
