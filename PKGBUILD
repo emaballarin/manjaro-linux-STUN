@@ -86,19 +86,17 @@ source=(## LINUX KERNEL (upstream patches)
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0101-i8042-decrease-debug-message-level-to-info.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0103-silence-rapl.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0105-ksm-wakeups.patch"
-        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0107-overload-on-wakeup.patch-"
-        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0109-smpboot-reuse-timer-calibration.patch"
-        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0110-raid6-add-Kconfig-option-to-skip-raid6-benchmarking.patch"
-        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0111-Initialize-ata-before-graphics.patch"
-        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0112-reduce-e1000e-boot-time-by-tightening-sleep-ranges.patch"
-        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0113-give-rdrand-some-credit.patch"
-        #"https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0114-ipv4-tcp-allow-the-memory-tuning-for-tcp-to-go-a-lit.patch"
-        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0116-e1000e-increase-pause-and-refresh-time.patch"
-        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0117-kernel-time-reduce-ntp-wakeups.patch"
-        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0121-Enable-stateless-firmware-loading.patch"
-        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0123-xattr-allow-setting-user.-attributes-on-symlinks-by-.patch"
-        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0151-mm-Export-do_madvise.patch-"
-        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0501-locking-rwsem-spin-faster.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0106-intel_idle-tweak-cpuidle-cstates.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0108-smpboot-reuse-timer-calibration.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0109-raid6-add-Kconfig-option-to-skip-raid6-benchmarking.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0110-Initialize-ata-before-graphics.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0111-reduce-e1000e-boot-time-by-tightening-sleep-ranges.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0112-give-rdrand-some-credit.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0115-e1000e-increase-pause-and-refresh-time.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0116-kernel-time-reduce-ntp-wakeups.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0120-Enable-stateless-firmware-loading.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0122-xattr-allow-setting-user.-attributes-on-symlinks-by-.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0502-locking-rwsem-spin-faster.patch"
 
         ## STUN PATCHES (Wireguard - Kernel autopatcher)
         "https://git.zx2c4.com/WireGuard/snapshot/WireGuard-${_wireguard}.tar.xz"
@@ -155,22 +153,20 @@ sha256sums=('bc426a43063b0bf5f9bc59be969338e34276e4a0dbbdb50914beae59a28a3fc1'
             '035ea4b2a7621054f4560471f45336b981538a40172d8f17285910d4e0e0b3ef'
 
             # Clear Linux
-            '94cd3c02a844e842b3488d5c6d0396c5589d2a5841f595a41000a24f71eeb517'
-            '446c54c0b252a7008a822aaf3955898668ac6e948a93c1df53a29b2151ba02bd'
-            '80be4f4b40ab161029dec3d11de5772131d9a090289cf3cc2cee3148d4b1843a'
-            'd2a19abb1572c9ff58fb46355ac8e6bf906f9b8362d739bd8089c433515caa83'
-            'f1d71d6236643ac6ea2f8776c836616d3151350c612baed8bb17cd90708bbda4'
-            '521e33c3a5d6e7a6dab71f88e3c2724b2ff9d97ce616ec2f8d1d0183edc17ce8'
-            '320411c2647a8420982382bbeae8e6f71fcbc3afced51f20036d4b39774da557'
-            'f4a6d2ce895a92994674d5a8a2cd934197cbb026601825d19b3fffaefd33177d'
-            '5207a1047066cc0d0ad896cea5d97daa7701aebb91be53ff3d558439d93deb2f'
-            #'096b71ceed37682ef05b11f20918b211c432eb28bc4eeca1c4108c62e3a9b729'
-            'd3c75bda014acabd771558d140cd67540c21e0318cf5203745f28724ae6de6f9'
-            'c937188be5e00ff7b2e97285eb904cf140618342752239624ac89aa28d6e3a45'
-            'd427b8fc9ec53d637ace7c8a0007db8ddd427784863e12fc118a0cd30b6c9d63'
-            'ed7fd9c7b3175e7ea04c7c221d021b8d03f80a1a3096a48f8abafae599889fbc'
-            '0579ad0960a72941532c93cea7b144f297264c63a051351f62c986689978d9fe'
-            '278d87eb32b3d3680f7c16b9ae9e61ad45520906391a76c98277a40f8febf697'
+            '672646f867f94e206e36ded0c11552a31c90823d8f978cf95ecbc96e45dc9cb1'
+            '742074f41787d9596e9ebf0dee347979032095bdc4ca87f4af79f0c1596b9310'
+            'f10a1d266ac272028683805d0f87f48efaaa283565263776ed812000146f4fc3'
+            'a8bd3192b295b1eeb31e70bcd65abeff2db7c8457f428e4720298fd9e10d6960'
+            'b97d4bb24dd34a6a67afdbdfda3930ec1503405ac0cf98b168e72cd1da1d5c2b'
+            'f293fb065a92aa9d823d47628501ec76c8f7c8a85d488bf25d08456499eae504'
+            '7fbd514701aadd869bb634a1c734b830fda8d65240003f48f22e99ea3848d7b0'
+            '410a66cd9d7f964b3b43743c927346850b2bb054102ad7403d1f92e6ec6fab75'
+            '16d2ed058a378b23e17dcfe7ab8c9fe532b0f324480c5eeb2a860351ac718aec'
+            '44512886edccfb9896dee733b6acde564e8ef85612354ab31ef954294cff5ca0'
+            'cce373a7b21052e3e448d409fb9dcde737155c5322d4bc42fb729c1350aece75'
+            '4ab024df99d69063fdcd5de27138ff48c5f1304d4333709fd66514009837bcb3'
+            '0b1d7371d230b08cdedb73dc1e38040d19a94fafde26bba86a9f807868123dc6'
+            'b7f84870dd0c9bba4bae2e177c57485e428a4097d28b1765afad6796694296ca'
 
             # WireGuard
             'af05824211b27cbeeea2b8d6b76be29552c0d80bfe716471215e4e43d259e327'
