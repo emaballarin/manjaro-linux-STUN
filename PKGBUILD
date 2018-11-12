@@ -107,7 +107,7 @@ source=(## LINUX KERNEL (base, before the patches)
         "000ker1-manjaro-stun-tickat600.patch"
         "000ker2-manjaro-stun-tcpcake.patch"
 
-        ## H. Hhoffstaette patches (cherry-picked)
+        ## H. Hoffstaette patches (cherry-picked)
         #"https://raw.githubusercontent.com/hhoffstaette/kernel-patches/4.19/4.19/block-20180806-loop-properly-observe-rotational-flag-of-underlying-device.patch"
         "https://raw.githubusercontent.com/hhoffstaette/kernel-patches/4.19/4.19/net-20180928-up-initial-rmem-to-128KB-and-SYN-rwin-to-around-64KB.patch"
 
@@ -270,7 +270,7 @@ prepare() {
   echo 'Patching: CLEAR LINUX PROJECT - Kernel'
   patch -Np1 -i "${srcdir}/0101-i8042-decrease-debug-message-level-to-info.patch"
   patch -Np1 -i "${srcdir}/0103-silence-rapl.patch"
-  #patch -Np1 -i "${srcdir}/0104-pci-pme-wakeups.patch"
+  patch -Np1 -i "${srcdir}/0104-pci-pme-wakeups.patch"
   patch -Np1 -i "${srcdir}/0105-ksm-wakeups.patch"
   patch -Np1 -i "${srcdir}/0106-intel_idle-tweak-cpuidle-cstates.patch"
   patch -Np1 -i "${srcdir}/0108-smpboot-reuse-timer-calibration.patch"
