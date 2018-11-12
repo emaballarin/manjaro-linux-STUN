@@ -270,7 +270,7 @@ prepare() {
   echo 'Patching: CLEAR LINUX PROJECT - Kernel'
   patch -Np1 -i "${srcdir}/0101-i8042-decrease-debug-message-level-to-info.patch"
   patch -Np1 -i "${srcdir}/0103-silence-rapl.patch"
-  patch -Np1 -i "${srcdir}/0104-pci-pme-wakeups.patch"
+  #patch -Np1 -i "${srcdir}/0104-pci-pme-wakeups.patch"
   patch -Np1 -i "${srcdir}/0105-ksm-wakeups.patch"
   patch -Np1 -i "${srcdir}/0106-intel_idle-tweak-cpuidle-cstates.patch"
   patch -Np1 -i "${srcdir}/0108-smpboot-reuse-timer-calibration.patch"
