@@ -123,6 +123,7 @@ cp ./*host*.pkg.tar.xz "$MANJAROSTUN_PKGS"
 ######################
 cd "$MANJAROSTUN_PKGS"
 sudo pacman -U ./* --noconfirm
+trizen -S wireguard-tools --noconfirm
 
 # Ask for file cleanup
 echo ' '
