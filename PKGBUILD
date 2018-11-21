@@ -10,10 +10,10 @@ pkgname=('linux419' 'linux419-headers')
 _kernelname=-MANJARO
 _basekernel=4.19
 _basever=419
-_aufs=20181029
+_aufs=20181119
 _bfq=v9
 _bfqdate=20181101
-_sub=2
+_sub=3
 _commit=84df9525b0c27f3ebc2ebb1864fa62a97fdedb7d
 pkgver=${_basekernel}.${_sub}
 pkgrel=1
@@ -61,14 +61,14 @@ source=("https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.x
         '0012-bootsplash.patch'
         '0013-bootsplash.patch')
 sha256sums=('0c68f5655528aed4f99dae71a5b259edc93239fa899e2df79c055275c21749a1'
-            '51603f6bd4549f97d99a8c8f7e898f6f2b53b2347cb37ed404bf210e2f83f81d'
+            '26e4dc58f4943a95fd95ba7bbe5bcc9204e8fdc8209e2e44bba26821394992e8'
             'cd5ca70b9e814baeee0c119080e4aec7470a087fe513399a386eedab58460125'
             'cf9f1917c4570d52b0b88c41c26da42fe65ffca3cb7c562413f2d85c4fb84853'
             'b44d81446d8b53d5637287c30ae3eb64cae0078c3fbc45fcf1081dd6699818b5'
             '43942683a7ff01b180dff7f3de2db4885d43ab3d4e7bd0e1918c3aaf2ee061f4'
             'ae2e95db94ef7176207c690224169594d49445e04249d2499e9d2fbc117a0b21'
             '90831589b7ab43d6fab11bfa3ad788db14ba77ea4dc03d10ee29ad07194691e1'
-            '6562e8cb8d292d32181d7b7a4fe52c20b1db80764e0cdc9df07aff78a3ca9591'
+            '781de68bb42313fc248366f9f50e4d4621add729bede78dce9a31e4375943610'
             'e239321d84448dd7575b9c5fc58bd76bcb5f0fdb7188a0dcad6010b88e67921c'
             '7e6286cf91aaa68785312a0f6483e3323d8bab4feaaa6f09f2b2b7fc8157e811'
             'd0cf9baab7a5c130036cbd4532c0bd2819ca504ec78bdbbffe66f9c8410857c9'
