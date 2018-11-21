@@ -114,6 +114,9 @@ source=(## LINUX KERNEL (base, before the patches)
         ## STUN PATCHES (Alfred Chen's PDS Scheduler - downloaded locally)
         "v4.19_pds099c.patch"
 
+        # PSI metrics patches
+        "psimetrics.patch"
+
         ## STUN PATCHES (GraySky patch - GCC optimizations)
         "grayskygcc.patch::https://raw.githubusercontent.com/graysky2/kernel_gcc_patch/master/enable_additional_cpu_optimizations_for_gcc_v8.1%2B_kernel_v4.13%2B.patch")
 
@@ -184,6 +187,9 @@ sha256sums=('0c68f5655528aed4f99dae71a5b259edc93239fa899e2df79c055275c21749a1'
 
             # PDS Scheduler
             'cc03f9ca477901716edee1c7aed2646cec3bb279350aea73b51f244a91c7c0ac'
+
+            # PSI
+            '2eaca8e69f70a3d0c71acd281827460217b4c41088a052bc403113d8bd0abb39'
 
             # GraySky
             '9f7177679c8d3f8d699ef0566a51349d828436dba04603bc2223f98c60d2d178')
@@ -265,6 +271,12 @@ prepare() {
   patch -Np1 -i "${srcdir}/net-20180928-up-initial-rmem-to-128KB-and-SYN-rwin-to-around-64KB.patch"
   echo '--- --- ---'
   echo ' '
+
+  ## PSI Metrics
+  #echo 'Patching: PSI Metrics'
+  #patch -Np1 -i "${srcdir}/psimetrics.patch"
+  #echo '--- --- ---'
+  #echo ' '
 
   # Clear Linux
   echo 'Patching: CLEAR LINUX PROJECT - Kernel'
