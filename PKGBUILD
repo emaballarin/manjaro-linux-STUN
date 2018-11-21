@@ -268,11 +268,11 @@ prepare() {
   echo '--- --- ---'
   echo ' '
 
-  # HHO TCPv4 (Google: rmem)
-  echo 'Patching: H.H. - TCPv4'
-  patch -Np1 -i "${srcdir}/net-20180928-up-initial-rmem-to-128KB-and-SYN-rwin-to-around-64KB.patch"
-  echo '--- --- ---'
-  echo ' '
+  # # HHO TCPv4 (Google: rmem)
+  # echo 'Patching: H.H. - TCPv4'
+  # patch -Np1 -i "${srcdir}/net-20180928-up-initial-rmem-to-128KB-and-SYN-rwin-to-around-64KB.patch"
+  # echo '--- --- ---'
+  # echo ' '
 
   ## PSI Metrics
   #echo 'Patching: PSI Metrics'
