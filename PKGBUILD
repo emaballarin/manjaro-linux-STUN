@@ -20,7 +20,7 @@ _basever=419
 _aufs=20181029
 _bfq=v9
 _bfqdate=20181101
-_wireguard=0.0.20181119
+_wireguard=0.0.20181018
 _sub=2
 _commit=84df9525b0c27f3ebc2ebb1864fa62a97fdedb7d
 pkgver=${_basekernel}.${_sub}
@@ -177,7 +177,7 @@ sha256sums=('0c68f5655528aed4f99dae71a5b259edc93239fa899e2df79c055275c21749a1'
             'b7f84870dd0c9bba4bae2e177c57485e428a4097d28b1765afad6796694296ca'
 
             # WireGuard
-            '7d47f7996dd291069de4efb3097c42f769f60dc3ac6f850a4d5705f321e4406b'
+            'af05824211b27cbeeea2b8d6b76be29552c0d80bfe716471215e4e43d259e327'
 
             # STUN custom
             '21914b7c9cb341fdea933e6f965208676e21449e65842e8e6bab7f4edd9e45ac'
