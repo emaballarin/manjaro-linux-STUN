@@ -20,7 +20,7 @@ _basever=419
 _aufs=20181029
 _bfq=v9
 _bfqdate=20181101
-_wireguard=0.0.20181018
+_wireguard=0.0.20181119
 _sub=2
 _commit=84df9525b0c27f3ebc2ebb1864fa62a97fdedb7d
 pkgver=${_basekernel}.${_sub}
@@ -94,6 +94,7 @@ source=(## LINUX KERNEL (base, before the patches)
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0110-Initialize-ata-before-graphics.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0111-reduce-e1000e-boot-time-by-tightening-sleep-ranges.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0112-give-rdrand-some-credit.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0113-ipv4-tcp-allow-the-memory-tuning-for-tcp-to-go-a-lit.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0115-e1000e-increase-pause-and-refresh-time.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0116-kernel-time-reduce-ntp-wakeups.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0120-Enable-stateless-firmware-loading.patch"
@@ -109,10 +110,10 @@ source=(## LINUX KERNEL (base, before the patches)
 
         ## H. Hoffstaette patches (cherry-picked)
         #"https://raw.githubusercontent.com/hhoffstaette/kernel-patches/4.19/4.19/block-20180806-loop-properly-observe-rotational-flag-of-underlying-device.patch"
-        "https://raw.githubusercontent.com/hhoffstaette/kernel-patches/4.19/4.19/net-20180928-up-initial-rmem-to-128KB-and-SYN-rwin-to-around-64KB.patch"
+        #"https://raw.githubusercontent.com/hhoffstaette/kernel-patches/4.19/4.19/net-20180928-up-initial-rmem-to-128KB-and-SYN-rwin-to-around-64KB.patch"
 
         ## STUN PATCHES (Alfred Chen's PDS Scheduler - downloaded locally)
-        "v4.19_pds099c.patch"
+        "v4.19_pds099d.patch"
 
         # PSI metrics patches
         "psimetrics.patch"
@@ -168,6 +169,7 @@ sha256sums=('0c68f5655528aed4f99dae71a5b259edc93239fa899e2df79c055275c21749a1'
             '7fbd514701aadd869bb634a1c734b830fda8d65240003f48f22e99ea3848d7b0'
             '410a66cd9d7f964b3b43743c927346850b2bb054102ad7403d1f92e6ec6fab75'
             '16d2ed058a378b23e17dcfe7ab8c9fe532b0f324480c5eeb2a860351ac718aec'
+            '4e4a7e88cb717437ee4241a2ad5604dfd15e125e04805b6769a872602f4dc778'
             '44512886edccfb9896dee733b6acde564e8ef85612354ab31ef954294cff5ca0'
             'cce373a7b21052e3e448d409fb9dcde737155c5322d4bc42fb729c1350aece75'
             '4ab024df99d69063fdcd5de27138ff48c5f1304d4333709fd66514009837bcb3'
@@ -186,7 +188,7 @@ sha256sums=('0c68f5655528aed4f99dae71a5b259edc93239fa899e2df79c055275c21749a1'
             'e587c477e3e666985855d75908e0f6a4fee4566ce21886ec2e93a82854a7c170'
 
             # PDS Scheduler
-            'cc03f9ca477901716edee1c7aed2646cec3bb279350aea73b51f244a91c7c0ac'
+            '71ef0aa0dc0a0bdda677c1f2f708bc7a9834bcb7bbfe590fee5cebf52be6420a'
 
             # PSI
             '2eaca8e69f70a3d0c71acd281827460217b4c41088a052bc403113d8bd0abb39'
@@ -290,6 +292,7 @@ prepare() {
   patch -Np1 -i "${srcdir}/0110-Initialize-ata-before-graphics.patch"
   patch -Np1 -i "${srcdir}/0111-reduce-e1000e-boot-time-by-tightening-sleep-ranges.patch"
   patch -Np1 -i "${srcdir}/0112-give-rdrand-some-credit.patch"
+  patch -Np1 -i "${srcdir}/0113-ipv4-tcp-allow-the-memory-tuning-for-tcp-to-go-a-lit.patch"
   patch -Np1 -i "${srcdir}/0115-e1000e-increase-pause-and-refresh-time.patch"
   patch -Np1 -i "${srcdir}/0116-kernel-time-reduce-ntp-wakeups.patch"
   patch -Np1 -i "${srcdir}/0120-Enable-stateless-firmware-loading.patch"
@@ -313,7 +316,7 @@ prepare() {
 
   # PDS Scheduler
   echo 'Patching: PDS Scheduler'
-  patch -Np1 -i "${srcdir}/v4.19_pds099c.patch"
+  patch -Np1 -i "${srcdir}/v4.19_pds099d.patch"
   echo '--- --- ---'
   echo ' '
 
