@@ -17,11 +17,11 @@ pkgname=('linux419-STUN' 'linux419-STUN-headers')
 _kernelname=-STUN
 _basekernel=4.19
 _basever=419
-_aufs=20181029
+_aufs=20181119
 _bfq=v9
 _bfqdate=20181101
 _wireguard=0.0.20181018
-_sub=2
+_sub=3
 _commit=84df9525b0c27f3ebc2ebb1864fa62a97fdedb7d
 pkgver=${_basekernel}.${_sub}
 pkgrel=1
@@ -122,7 +122,7 @@ source=(## LINUX KERNEL (base, before the patches)
         "grayskygcc.patch::https://raw.githubusercontent.com/graysky2/kernel_gcc_patch/master/enable_additional_cpu_optimizations_for_gcc_v8.1%2B_kernel_v4.13%2B.patch")
 
 sha256sums=('0c68f5655528aed4f99dae71a5b259edc93239fa899e2df79c055275c21749a1'
-            '51603f6bd4549f97d99a8c8f7e898f6f2b53b2347cb37ed404bf210e2f83f81d'
+            '26e4dc58f4943a95fd95ba7bbe5bcc9204e8fdc8209e2e44bba26821394992e8'
 
             ## CONFIGURATION FILE (due to frequent updates, for now)
             'SKIP'
@@ -132,7 +132,7 @@ sha256sums=('0c68f5655528aed4f99dae71a5b259edc93239fa899e2df79c055275c21749a1'
             '8634091ef2d9c59baf3474f1ea6311086baa524cc0ea060bb11143afcb8b1c58'
             'ae2e95db94ef7176207c690224169594d49445e04249d2499e9d2fbc117a0b21'
             'f7fff46bf963f6b1cf53b65b51d77749a59586e429c4c056e01dfdab78a6120b'
-            '6562e8cb8d292d32181d7b7a4fe52c20b1db80764e0cdc9df07aff78a3ca9591'
+            '781de68bb42313fc248366f9f50e4d4621add729bede78dce9a31e4375943610'
             'e239321d84448dd7575b9c5fc58bd76bcb5f0fdb7188a0dcad6010b88e67921c'
             '7e6286cf91aaa68785312a0f6483e3323d8bab4feaaa6f09f2b2b7fc8157e811'
             'd0cf9baab7a5c130036cbd4532c0bd2819ca504ec78bdbbffe66f9c8410857c9'
