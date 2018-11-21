@@ -185,7 +185,7 @@ sha256sums=('0c68f5655528aed4f99dae71a5b259edc93239fa899e2df79c055275c21749a1'
 
             # H.H. patches
             #'5b104c485a900d1d1facb9174a2adc77ee9be136d2ca7a7fd4ab10d7f7a84c38'
-            'e587c477e3e666985855d75908e0f6a4fee4566ce21886ec2e93a82854a7c170'
+            #'e587c477e3e666985855d75908e0f6a4fee4566ce21886ec2e93a82854a7c170'
 
             # PDS Scheduler
             '71ef0aa0dc0a0bdda677c1f2f708bc7a9834bcb7bbfe590fee5cebf52be6420a'
