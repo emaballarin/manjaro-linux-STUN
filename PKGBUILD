@@ -21,7 +21,7 @@ _aufs=20181119
 _bfq=v9
 _bfqdate=20181101
 _wireguard=0.0.20181018
-_sub=3
+_sub=4
 _commit=84df9525b0c27f3ebc2ebb1864fa62a97fdedb7d
 pkgver=${_basekernel}.${_sub}
 pkgrel=1
@@ -122,7 +122,7 @@ source=(## LINUX KERNEL (base, before the patches)
         "grayskygcc.patch::https://raw.githubusercontent.com/graysky2/kernel_gcc_patch/master/enable_additional_cpu_optimizations_for_gcc_v8.1%2B_kernel_v4.13%2B.patch")
 
 sha256sums=('0c68f5655528aed4f99dae71a5b259edc93239fa899e2df79c055275c21749a1'
-            '26e4dc58f4943a95fd95ba7bbe5bcc9204e8fdc8209e2e44bba26821394992e8'
+            'c1f2c29e3a5b9cd0ec7184a5820cd8a4568e67b791373efa12bd28c29616de9b'
 
             ## CONFIGURATION FILE (due to frequent updates, for now)
             'SKIP'
