@@ -100,6 +100,7 @@ source=(## LINUX KERNEL (base, before the patches)
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0120-Enable-stateless-firmware-loading.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0122-xattr-allow-setting-user.-attributes-on-symlinks-by-.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0502-locking-rwsem-spin-faster.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/turbo3-scheduler.patch"
 
         ## STUN PATCHES (Wireguard - Kernel autopatcher)
         "https://git.zx2c4.com/WireGuard/snapshot/WireGuard-${_wireguard}.tar.xz"
@@ -175,6 +176,7 @@ sha256sums=('0c68f5655528aed4f99dae71a5b259edc93239fa899e2df79c055275c21749a1'
             '4ab024df99d69063fdcd5de27138ff48c5f1304d4333709fd66514009837bcb3'
             '0b1d7371d230b08cdedb73dc1e38040d19a94fafde26bba86a9f807868123dc6'
             'b7f84870dd0c9bba4bae2e177c57485e428a4097d28b1765afad6796694296ca'
+            'c85a83259f8965c1a9bb745774711892907d9ad40cbad3a3b4606f4e539b1b26'
 
             # WireGuard
             'af05824211b27cbeeea2b8d6b76be29552c0d80bfe716471215e4e43d259e327'
@@ -298,6 +300,7 @@ prepare() {
   patch -Np1 -i "${srcdir}/0120-Enable-stateless-firmware-loading.patch"
   patch -Np1 -i "${srcdir}/0122-xattr-allow-setting-user.-attributes-on-symlinks-by-.patch"
   patch -Np1 -i "${srcdir}/0502-locking-rwsem-spin-faster.patch"
+  patch -Np1 -i "${srcdir}/turbo3-scheduler.patch"
   echo '--- --- ---'
   echo ' '
 
