@@ -113,7 +113,7 @@ source=(## LINUX KERNEL (base, before the patches)
         #"https://raw.githubusercontent.com/hhoffstaette/kernel-patches/4.19/4.19/net-20180928-up-initial-rmem-to-128KB-and-SYN-rwin-to-around-64KB.patch"
 
         ## STUN PATCHES (Alfred Chen's PDS Scheduler - downloaded locally)
-        "v4.19_pds099d.patch"
+        "v4.19_pds099e.patch"
 
         # PSI metrics patches
         "psimetrics.patch"
@@ -188,7 +188,7 @@ sha256sums=('0c68f5655528aed4f99dae71a5b259edc93239fa899e2df79c055275c21749a1'
             #'e587c477e3e666985855d75908e0f6a4fee4566ce21886ec2e93a82854a7c170'
 
             # PDS Scheduler
-            '71ef0aa0dc0a0bdda677c1f2f708bc7a9834bcb7bbfe590fee5cebf52be6420a'
+            '648711f29f5dbeb7586e32de0831c445a7cf441245aa3a5a187d20e5a0587bc9'
 
             # PSI
             '2eaca8e69f70a3d0c71acd281827460217b4c41088a052bc403113d8bd0abb39'
@@ -316,7 +316,7 @@ prepare() {
 
   # PDS Scheduler
   echo 'Patching: PDS Scheduler'
-  patch -Np1 -i "${srcdir}/v4.19_pds099d.patch"
+  patch -Np1 -i "${srcdir}/v4.19_pds099e.patch"
   echo '--- --- ---'
   echo ' '
 
