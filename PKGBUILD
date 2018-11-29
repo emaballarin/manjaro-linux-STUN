@@ -20,7 +20,7 @@ _basever=419
 _aufs=20181119
 _bfq=v9
 _bfqdate=20181101
-_wireguard=0.0.20181018
+_wireguard=0.0.20181119
 _sub=5
 _commit=
 pkgver=${_basekernel}.${_sub}
@@ -103,6 +103,10 @@ source=(## LINUX KERNEL (base, before the patches)
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0502-locking-rwsem-spin-faster.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/turbo3-scheduler.patch"
 
+        ## STUN PATCHES (Intel Clear Linux Project - CVE Fixes)
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2018-19406.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2018-19407.patch"
+
         ## STUN PATCHES (Wireguard - Kernel autopatcher)
         "https://git.zx2c4.com/WireGuard/snapshot/WireGuard-${_wireguard}.tar.xz"
 
@@ -180,8 +184,12 @@ sha256sums=('0c68f5655528aed4f99dae71a5b259edc93239fa899e2df79c055275c21749a1'
             'b7f84870dd0c9bba4bae2e177c57485e428a4097d28b1765afad6796694296ca'
             'c85a83259f8965c1a9bb745774711892907d9ad40cbad3a3b4606f4e539b1b26'
 
+            # Clear Linux - CVE Fixes
+            '41a7873c9a100e329350762f7bdbb2ea1ad26b520b6f53ff6fff30ec79bcf051'
+            'd75b07b44bec1f6dab3217a3b472490e295356f1afba33c1b42ad9ff9c1557f5'
+
             # WireGuard
-            'af05824211b27cbeeea2b8d6b76be29552c0d80bfe716471215e4e43d259e327'
+            'SKIP'
 
             # STUN custom
             '21914b7c9cb341fdea933e6f965208676e21449e65842e8e6bab7f4edd9e45ac'
