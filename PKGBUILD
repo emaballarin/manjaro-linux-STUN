@@ -13,19 +13,17 @@ _basever=419
 _aufs=20181119
 _bfq=v9
 _bfqdate=20181101
-_sub=6
+_sub=7
 _commit=
-_pkgver=${_basekernel}.${_sub}
-pkgver=${_basekernel}.7rc1
-pkgrel=2
+pkgver=${_basekernel}.${_sub}
+pkgrel=1
 arch=('i686' 'x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
 makedepends=('xmlto' 'docbook-xsl' 'kmod' 'inetutils' 'bc' 'elfutils' 'git')
 options=('!strip')
 source=("https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.xz"
-        "https://www.kernel.org/pub/linux/kernel/v4.x/patch-${_pkgver}.xz"
-        "https://www.kernel.org/pub/linux/kernel/v4.x/stable-review/patch-4.19.7-rc1.gz"
+        "https://www.kernel.org/pub/linux/kernel/v4.x/patch-${pkgver}.xz"
         #https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable-rc.git/snapshot/linux-stable-rc-$_commit.tar.gz
         #"linux-${pkgver}.tar.gz::https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/snapshot/linux-$_commit.tar.gz"
         # the main kernel config files
@@ -64,8 +62,7 @@ source=("https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.x
         '0012-bootsplash.patch'
         '0013-bootsplash.patch')
 sha256sums=('0c68f5655528aed4f99dae71a5b259edc93239fa899e2df79c055275c21749a1'
-            'ee9d269d924fe798d481f122287a93e63b012ae3ffcf44c1f4ae672fc6d0bbfb'
-            '579be8a0fc59d5055bcdb0c63339d2cfb3cd880144e3aed4a54c46688e9fdc50'
+            'ff91e002f37497c12d788c26377a5f788e6160d4aea62136374df9d188b027ba'
             '0fa3e9dcb6fca35b8081352e64dce1a8c8f30078272eea246eb276a9f85677c8'
             'cf9f1917c4570d52b0b88c41c26da42fe65ffca3cb7c562413f2d85c4fb84853'
             'b44d81446d8b53d5637287c30ae3eb64cae0078c3fbc45fcf1081dd6699818b5'
@@ -105,7 +102,6 @@ prepare() {
 
   # add upstream patch
   patch -p1 -i "${srcdir}/patch-${_pkgver}"
-  patch -p1 -i "${srcdir}/patch-4.19.7-rc1"
 
   # add latest fixes from stable queue, if needed
   # http://git.kernel.org/?p=linux/kernel/git/stable/stable-queue.git
