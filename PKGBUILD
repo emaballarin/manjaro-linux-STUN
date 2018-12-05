@@ -107,6 +107,7 @@ source=(## LINUX KERNEL (base, before the patches)
         ## STUN PATCHES (Intel Clear Linux Project - CVE Fixes)
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2018-19406.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2018-19407.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2018-19824.patch"
 
         ## STUN PATCHES (Wireguard - Kernel autopatcher)
         "https://git.zx2c4.com/WireGuard/snapshot/WireGuard-${_wireguard}.tar.xz"
@@ -188,6 +189,7 @@ sha256sums=('0c68f5655528aed4f99dae71a5b259edc93239fa899e2df79c055275c21749a1'
             # Clear Linux - CVE Fixes
             '41a7873c9a100e329350762f7bdbb2ea1ad26b520b6f53ff6fff30ec79bcf051'
             'd75b07b44bec1f6dab3217a3b472490e295356f1afba33c1b42ad9ff9c1557f5'
+            '205cf218cecd2c3d7b8620c93e56bf361895d296d2cf17559a480949560ce4d3'
 
             # WireGuard
             'SKIP'
