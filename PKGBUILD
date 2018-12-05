@@ -21,7 +21,7 @@ _aufs=20181119
 _bfq=v9
 _bfqdate=20181101
 _wireguard=0.0.20181018
-_sub=6
+_sub=7
 _commit=
 pkgver=${_basekernel}.${_sub}
 pkgrel=1
@@ -31,14 +31,15 @@ license=('GPL2')
 makedepends=('xmlto' 'docbook-xsl' 'kmod' 'inetutils' 'bc' 'elfutils' 'git')
 options=('!strip')
 source=(## LINUX KERNEL (base, before the patches)
-        "https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.xz"
+        https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.xz"
 
         ## LINUX KERNEL (upstream patches)
-        "http://www.kernel.org/pub/linux/kernel/v4.x/patch-${pkgver}.xz"
+        "https://www.kernel.org/pub/linux/kernel/v4.x/patch-${pkgver}.xz"
 
         ## LINUX KERNEL (base, before the patches)
         #https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable-rc.git/snapshot/linux-stable-rc-$_commit.tar.gz
         #"linux-${pkgver}.tar.gz::https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/snapshot/linux-$_commit.tar.gz"
+        
         ## KERNEL and AUFS4 CONFIG FILES (STUNned, where applicable - x86_64)
         'config.x86_64' 'config' 'config.aufs'
 
@@ -67,7 +68,7 @@ source=(## LINUX KERNEL (base, before the patches)
         ## MANJARO VANILLA (HID Patches)
         '0001-i2c-hid-override-HID-descriptors-for-certain-devices.patch'
         '0002-i2c-hid-properly-terminate-i2c_hid_dmi_desc_override_table_array.patch'
-        '0001-AMD-raven-ridge-fix-boot.patch'
+        'fix-kernel-bug-201685.patch'
 
         ## MANJARO VANILLA (Bootsplash)
         '0001-bootsplash.patch'
@@ -128,7 +129,7 @@ source=(## LINUX KERNEL (base, before the patches)
         "grayskygcc.patch::https://raw.githubusercontent.com/graysky2/kernel_gcc_patch/master/enable_additional_cpu_optimizations_for_gcc_v8.1%2B_kernel_v4.13%2B.patch")
 
 sha256sums=('0c68f5655528aed4f99dae71a5b259edc93239fa899e2df79c055275c21749a1'
-            'ee9d269d924fe798d481f122287a93e63b012ae3ffcf44c1f4ae672fc6d0bbfb'
+            'ff91e002f37497c12d788c26377a5f788e6160d4aea62136374df9d188b027ba'
 
             ## CONFIGURATION FILE (due to frequent updates, for now)
             'SKIP'
@@ -150,7 +151,7 @@ sha256sums=('0c68f5655528aed4f99dae71a5b259edc93239fa899e2df79c055275c21749a1'
             '37b86ca3de148a34258e3176dbf41488d9dbd19e93adbd22a062b3c41332ce85'
             '94afbc6a9cb0709f6cd71879bae66454ec26d37c83f49f58e4de28d47678e66b'
             '8dc7285a797c77e917aab1c05847370b71725389b9718c58b4565b40eed80d85'
-            'c8a5f2001ef87b4d230c24dcd519d5f8be6636a26147ae75d89e50c51bc13337'
+            'd182453163bb16b231457ae54fd7d4b69497d65e3c48bbf7e1e265724cc94a34'
             'a504f6cf84094e08eaa3cc5b28440261797bf4f06f04993ee46a20628ff2b53c'
             'e096b127a5208f56d368d2cb938933454d7200d70c86b763aa22c38e0ddb8717'
             '8c1c880f2caa9c7ae43281a35410203887ea8eae750fe8d360d0c8bf80fcc6e0'
@@ -238,13 +239,13 @@ prepare() {
   echo 'Patching: MANJARO CUSTOM'
   patch -Np1 -i ../0001-add-sysctl-to-disallow-unprivileged-CLONE_NEWUSER-by.patch
 
+  # https://bugzilla.kernel.org/show_bug.cgi?id=201685
+  patch -Np1 -i ../fix-kernel-bug-201685.patch
+
   # https://bugzilla.redhat.com/show_bug.cgi?id=1526312
   # https://forum.manjaro.org/t/36269/78
   patch -Np1 -i ../0001-i2c-hid-override-HID-descriptors-for-certain-devices.patch
   patch -Np1 -i ../0002-i2c-hid-properly-terminate-i2c_hid_dmi_desc_override_table_array.patch
-
-  # https://bugzilla.kernel.org/show_bug.cgi?id=201291
-  patch -Np1 -i ../0001-AMD-raven-ridge-fix-boot.patch
 
   # Add bootsplash - http://lkml.iu.edu/hypermail/linux/kernel/1710.3/01542.html
   patch -Np1 -i "${srcdir}/0001-bootsplash.patch"
