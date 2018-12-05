@@ -31,7 +31,7 @@ license=('GPL2')
 makedepends=('xmlto' 'docbook-xsl' 'kmod' 'inetutils' 'bc' 'elfutils' 'git')
 options=('!strip')
 source=(## LINUX KERNEL (base, before the patches)
-        https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.xz"
+        "https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.xz"
 
         ## LINUX KERNEL (upstream patches)
         "https://www.kernel.org/pub/linux/kernel/v4.x/patch-${pkgver}.xz"
@@ -39,7 +39,7 @@ source=(## LINUX KERNEL (base, before the patches)
         ## LINUX KERNEL (base, before the patches)
         #https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable-rc.git/snapshot/linux-stable-rc-$_commit.tar.gz
         #"linux-${pkgver}.tar.gz::https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/snapshot/linux-$_commit.tar.gz"
-        
+
         ## KERNEL and AUFS4 CONFIG FILES (STUNned, where applicable - x86_64)
         'config.x86_64' 'config' 'config.aufs'
 
