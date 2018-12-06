@@ -24,7 +24,7 @@ _wireguard=0.0.20181018
 _sub=7
 _commit=
 pkgver=${_basekernel}.${_sub}
-pkgrel=1
+pkgrel=2
 arch=('i686' 'x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
@@ -68,7 +68,8 @@ source=(## LINUX KERNEL (base, before the patches)
         ## MANJARO VANILLA (HID Patches)
         '0001-i2c-hid-override-HID-descriptors-for-certain-devices.patch'
         '0002-i2c-hid-properly-terminate-i2c_hid_dmi_desc_override_table_array.patch'
-        'fix-kernel-bug-201685.patch'
+        '0001-test_hexdump-use-memcpy-instead-of-strncpy.patch'
+        '0001-blk-mq-fix-corruption-with-direct-issue.patch'
 
         ## MANJARO VANILLA (Bootsplash)
         '0001-bootsplash.patch'
@@ -152,7 +153,8 @@ sha256sums=('0c68f5655528aed4f99dae71a5b259edc93239fa899e2df79c055275c21749a1'
             '37b86ca3de148a34258e3176dbf41488d9dbd19e93adbd22a062b3c41332ce85'
             '94afbc6a9cb0709f6cd71879bae66454ec26d37c83f49f58e4de28d47678e66b'
             '8dc7285a797c77e917aab1c05847370b71725389b9718c58b4565b40eed80d85'
-            'd182453163bb16b231457ae54fd7d4b69497d65e3c48bbf7e1e265724cc94a34'
+            'bac2bc8b12c82f3b9ef10c3f1ef95168b0530c24c4c78f7ebfcb91c85a3a9e01'
+            '445e1886c48735ef7dd3b4e37924564e426622f94c20b469fad35be9d86811e6'
             'a504f6cf84094e08eaa3cc5b28440261797bf4f06f04993ee46a20628ff2b53c'
             'e096b127a5208f56d368d2cb938933454d7200d70c86b763aa22c38e0ddb8717'
             '8c1c880f2caa9c7ae43281a35410203887ea8eae750fe8d360d0c8bf80fcc6e0'
@@ -241,8 +243,11 @@ prepare() {
   echo 'Patching: MANJARO CUSTOM'
   patch -Np1 -i ../0001-add-sysctl-to-disallow-unprivileged-CLONE_NEWUSER-by.patch
 
+  # commit b1286ed upstream
+  patch -Np1 -i ../0001-test_hexdump-use-memcpy-instead-of-strncpy.patch
+
   # https://bugzilla.kernel.org/show_bug.cgi?id=201685
-  patch -Np1 -i ../fix-kernel-bug-201685.patch
+  patch -Np1 -i ../0001-blk-mq-fix-corruption-with-direct-issue.patch
 
   # https://bugzilla.redhat.com/show_bug.cgi?id=1526312
   # https://forum.manjaro.org/t/36269/78
