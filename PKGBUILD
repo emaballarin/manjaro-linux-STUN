@@ -48,6 +48,9 @@ source=("https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.x
         '0002-i2c-hid-properly-terminate-i2c_hid_dmi_desc_override_table_array.patch'
         '0001-test_hexdump-use-memcpy-instead-of-strncpy.patch'
         '0001-blk-mq-fix-corruption-with-direct-issue.patch'
+        '0001-ALC294-quirk.patch'
+        '0002-ALC294-quirk.patch'
+        '0003-ALC294-quirk.patch'
         # Bootsplash
         '0001-bootsplash.patch'
         '0002-bootsplash.patch'
@@ -84,6 +87,9 @@ sha256sums=('0c68f5655528aed4f99dae71a5b259edc93239fa899e2df79c055275c21749a1'
             '8dc7285a797c77e917aab1c05847370b71725389b9718c58b4565b40eed80d85'
             'bac2bc8b12c82f3b9ef10c3f1ef95168b0530c24c4c78f7ebfcb91c85a3a9e01'
             '445e1886c48735ef7dd3b4e37924564e426622f94c20b469fad35be9d86811e6'
+            '427bfa929db01bf6039e0a559298f2739e22e9b1d4f7d1be7d4b630054b5b289'
+            '7eb24a0c6a4807593507832809134c7b036ceff1c7b7782c008c3a4334b8fcd9'
+            'e19b82b8ebdf38312b1726a1ccaeccb8aeb90542a349eca2dd4bb65e8d512563'
             'a504f6cf84094e08eaa3cc5b28440261797bf4f06f04993ee46a20628ff2b53c'
             'e096b127a5208f56d368d2cb938933454d7200d70c86b763aa22c38e0ddb8717'
             '8c1c880f2caa9c7ae43281a35410203887ea8eae750fe8d360d0c8bf80fcc6e0'
@@ -115,6 +121,11 @@ prepare() {
 
   # commit b1286ed upstream
   patch -Np1 -i ../0001-test_hexdump-use-memcpy-instead-of-strncpy.patch
+
+  # http://mailman.alsa-project.org/pipermail/alsa-devel/2018-December/142569.html
+  patch -Np1 -i ../0001-ALC294-quirk.patch
+  patch -Np1 -i ../0002-ALC294-quirk.patch
+  patch -Np1 -i ../0003-ALC294-quirk.patch
 
   # https://bugzilla.kernel.org/show_bug.cgi?id=201685
   patch -Np1 -i ../0001-blk-mq-fix-corruption-with-direct-issue.patch
