@@ -336,6 +336,14 @@ prepare() {
   echo '--- --- ---'
   echo ' '
 
+  # Clear Linux
+  echo 'Patching: CLEAR LINUX PROJECT - CVE Fixes'
+  patch -Np1 -i "${srcdir}/CVE-2018-19406.patch"
+  patch -Np1 -i "${srcdir}/CVE-2018-19407.patch"
+  patch -Np1 -i "${srcdir}/CVE-2018-19824.patch"
+  echo '--- --- ---'
+  echo ' '
+
   # WireGuard
   echo 'Patching: WireGuard'
   _prewg_curdir="$(pwd)"
