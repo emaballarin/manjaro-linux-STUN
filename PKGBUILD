@@ -90,6 +90,7 @@ source=(## LINUX KERNEL (base, before the patches)
         '0013-bootsplash.patch'
 
         ## STUN PATCHES (Intel Clear Linux Project - Kernel)
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0010-drm-i915-cfl-Add-a-new-CFL-PCI-ID.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0101-i8042-decrease-debug-message-level-to-info.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0103-silence-rapl.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0104-pci-pme-wakeups.patch"
@@ -120,12 +121,12 @@ source=(## LINUX KERNEL (base, before the patches)
         "000ker1-manjaro-stun-tickat600.patch"
         "000ker2-manjaro-stun-tcpcake.patch"
 
-        ## H. Hoffstaette patches (cherry-picked)
-        #"https://raw.githubusercontent.com/hhoffstaette/kernel-patches/4.19/4.19/block-20180806-loop-properly-observe-rotational-flag-of-underlying-device.patch"
-        #"https://raw.githubusercontent.com/hhoffstaette/kernel-patches/4.19/4.19/net-20180928-up-initial-rmem-to-128KB-and-SYN-rwin-to-around-64KB.patch"
-
         ## STUN PATCHES (Alfred Chen's PDS Scheduler - downloaded locally)
         "v4.19_pds099f.patch"
+
+        ## Holger Hoffstaette patches (cherry-picked)
+        "https://raw.githubusercontent.com/hhoffstaette/kernel-patches/4.19/4.19/pds-20181130-pds-099f.patch"
+        "https://raw.githubusercontent.com/hhoffstaette/kernel-patches/4.19/4.19/pds-20181206-make-sched_smt_present-track-topology.patch"
 
         # PSI metrics patches
         "psimetrics.patch"
@@ -176,6 +177,7 @@ sha256sums=('0c68f5655528aed4f99dae71a5b259edc93239fa899e2df79c055275c21749a1'
             '035ea4b2a7621054f4560471f45336b981538a40172d8f17285910d4e0e0b3ef'
 
             # Clear Linux
+            'd8d1df4485ba663d024361550047d06bc72390df51604bf6f3cb9e26ebf8ce58'
             '672646f867f94e206e36ded0c11552a31c90823d8f978cf95ecbc96e45dc9cb1'
             '742074f41787d9596e9ebf0dee347979032095bdc4ca87f4af79f0c1596b9310'
             'aeb92407b464e5701beca366292e1baa1b352d946331e41ad0b3d0002c579fec'
@@ -206,12 +208,12 @@ sha256sums=('0c68f5655528aed4f99dae71a5b259edc93239fa899e2df79c055275c21749a1'
             '21914b7c9cb341fdea933e6f965208676e21449e65842e8e6bab7f4edd9e45ac'
             '2d0ba1fabc10195a9edf4f114027eae93ec8c95000fca662a8fd8c0421b6fe21'
 
-            # H.H. patches
-            #'5b104c485a900d1d1facb9174a2adc77ee9be136d2ca7a7fd4ab10d7f7a84c38'
-            #'e587c477e3e666985855d75908e0f6a4fee4566ce21886ec2e93a82854a7c170'
-
             # PDS Scheduler
             '4092b02faf07da8dca3c135512d2424113ead125ac49450b8ad3a763b280c0d2'
+
+            # H.H. patches
+            'e3d6b665a33a2d22a68968f197888f4a7a833c6f272c6f1e7a7988897a7092ae'
+            'ce4b858984d7b2f973283d19a3c7a2dea7abecbb2479fe6e416222876227d185'
 
             # PSI
             '2eaca8e69f70a3d0c71acd281827460217b4c41088a052bc403113d8bd0abb39'
@@ -316,6 +318,7 @@ prepare() {
 
   # Clear Linux
   echo 'Patching: CLEAR LINUX PROJECT - Kernel'
+  patch -Np1 -i "${srcdir}/0010-drm-i915-cfl-Add-a-new-CFL-PCI-ID.patch"
   patch -Np1 -i "${srcdir}/0101-i8042-decrease-debug-message-level-to-info.patch"
   patch -Np1 -i "${srcdir}/0103-silence-rapl.patch"
   patch -Np1 -i "${srcdir}/0104-pci-pme-wakeups.patch"
@@ -357,9 +360,16 @@ prepare() {
   echo '--- --- ---'
   echo ' '
 
-  # PDS Scheduler
-  echo 'Patching: PDS Scheduler'
-  patch -Np1 -i "${srcdir}/v4.19_pds099f.patch"
+  ## # PDS Scheduler
+  ## echo 'Patching: PDS Scheduler'
+  ## patch -Np1 -i "${srcdir}/v4.19_pds099f.patch"
+  ## echo '--- --- ---'
+  ## echo ' '
+
+  # PDS Scheduler - Fixed by Holger Hoffstaette
+  echo 'Patching: PDS Scheduler - Fixed by Holger Hoffstaette'
+  patch -Np1 -i "${srcdir}/pds-20181130-pds-099f.patch"
+  patch -Np1 -i "${srcdir}/pds-20181206-make-sched_smt_present-track-topology.patch"
   echo '--- --- ---'
   echo ' '
 
