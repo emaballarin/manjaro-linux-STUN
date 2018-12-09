@@ -119,8 +119,10 @@ source=(## LINUX KERNEL (base, before the patches)
         "000ker1-manjaro-stun-tickat600.patch"
         "000ker2-manjaro-stun-tcpcake.patch"
 
-        ## STUN PATCHES (Alfred Chen's PDS Scheduler - downloaded locally)
+        ## STUN PATCHES (Alfred Chen's PDS Scheduler - downloaded locally, with patches)
         "v4.19_pds099f.patch"
+        "v4.19_pds099f.zp01.patch"
+        "v4.19_pds099f.zp02.patch"
 
         ## Holger Hoffstaette patches (cherry-picked)
         "https://raw.githubusercontent.com/hhoffstaette/kernel-patches/4.19/4.19/pds-20181130-pds-099f.patch"
@@ -206,6 +208,8 @@ sha256sums=('0c68f5655528aed4f99dae71a5b259edc93239fa899e2df79c055275c21749a1'
 
             # PDS Scheduler
             '4092b02faf07da8dca3c135512d2424113ead125ac49450b8ad3a763b280c0d2'
+            'ce4b858984d7b2f973283d19a3c7a2dea7abecbb2479fe6e416222876227d185'
+            '29ac315e945f0a1d2b3c9e465f0c2db52650cdccee4a1aae7943ecc8b7db919d'
 
             # H.H. patches
             'e3d6b665a33a2d22a68968f197888f4a7a833c6f272c6f1e7a7988897a7092ae'
@@ -350,18 +354,20 @@ prepare() {
   echo '--- --- ---'
   echo ' '
 
-  ## # PDS Scheduler
-  ## echo 'Patching: PDS Scheduler'
-  ## patch -Np1 -i "${srcdir}/v4.19_pds099f.patch"
-  ## echo '--- --- ---'
-  ## echo ' '
-
-  # PDS Scheduler - Fixed by Holger Hoffstaette
-  echo 'Patching: PDS Scheduler - Fixed by Holger Hoffstaette'
-  patch -Np1 -i "${srcdir}/pds-20181130-pds-099f.patch"
-  patch -Np1 -i "${srcdir}/pds-20181206-make-sched_smt_present-track-topology.patch"
+  # PDS Scheduler - With patches
+  echo 'Patching: PDS Scheduler - With patches'
+  patch -Np1 -i "${srcdir}/v4.19_pds099f.patch"
+  patch -Np1 -i "${srcdir}/v4.19_pds099f.zp01.patch"
+  patch -Np1 -i "${srcdir}/v4.19_pds099f.zp02.patch"
   echo '--- --- ---'
   echo ' '
+
+  ## # PDS Scheduler - Fixed by Holger Hoffstaette
+  ## echo 'Patching: PDS Scheduler - Fixed by Holger Hoffstaette'
+  ## patch -Np1 -i "${srcdir}/pds-20181130-pds-099f.patch"
+  ## patch -Np1 -i "${srcdir}/pds-20181206-make-sched_smt_present-track-topology.patch"
+  ## echo '--- --- ---'
+  ## echo ' '
 
   # GraySky
   echo 'Patching: GraySky'
