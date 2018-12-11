@@ -120,13 +120,11 @@ source=(## LINUX KERNEL (base, before the patches)
         "000ker2-manjaro-stun-tcpcake.patch"
 
         ## STUN PATCHES (Alfred Chen's PDS Scheduler - downloaded locally, with patches)
-        "v4.19_pds099f.patch"
-        "v4.19_pds099f.zp01.patch"
-        "v4.19_pds099f.zp02.patch"
+        "v4.19_pds099g.patch"
 
         ## Holger Hoffstaette patches (cherry-picked)
-        "https://raw.githubusercontent.com/hhoffstaette/kernel-patches/4.19/4.19/pds-20181130-pds-099f.patch"
-        "https://raw.githubusercontent.com/hhoffstaette/kernel-patches/4.19/4.19/pds-20181206-make-sched_smt_present-track-topology.patch"
+        #"https://raw.githubusercontent.com/hhoffstaette/kernel-patches/4.19/4.19/pds-20181130-pds-099f.patch"
+        #"https://raw.githubusercontent.com/hhoffstaette/kernel-patches/4.19/4.19/pds-20181206-make-sched_smt_present-track-topology.patch"
 
         # PSI metrics patches
         "psimetrics.patch"
@@ -207,13 +205,11 @@ sha256sums=('0c68f5655528aed4f99dae71a5b259edc93239fa899e2df79c055275c21749a1'
             '2d0ba1fabc10195a9edf4f114027eae93ec8c95000fca662a8fd8c0421b6fe21'
 
             # PDS Scheduler
-            '4092b02faf07da8dca3c135512d2424113ead125ac49450b8ad3a763b280c0d2'
-            'ce4b858984d7b2f973283d19a3c7a2dea7abecbb2479fe6e416222876227d185'
-            '29ac315e945f0a1d2b3c9e465f0c2db52650cdccee4a1aae7943ecc8b7db919d'
+            'dd8c0e92836099a373a7fe82280c731dce7685067ce8a8dfb5a77542286a51f9'
 
             # H.H. patches
-            'e3d6b665a33a2d22a68968f197888f4a7a833c6f272c6f1e7a7988897a7092ae'
-            'ce4b858984d7b2f973283d19a3c7a2dea7abecbb2479fe6e416222876227d185'
+            #'e3d6b665a33a2d22a68968f197888f4a7a833c6f272c6f1e7a7988897a7092ae'
+            #'ce4b858984d7b2f973283d19a3c7a2dea7abecbb2479fe6e416222876227d185'
 
             # PSI
             '2eaca8e69f70a3d0c71acd281827460217b4c41088a052bc403113d8bd0abb39'
@@ -356,18 +352,9 @@ prepare() {
 
   # PDS Scheduler - With patches
   echo 'Patching: PDS Scheduler - With patches'
-  patch -Np1 -i "${srcdir}/v4.19_pds099f.patch"
-  patch -Np1 -i "${srcdir}/v4.19_pds099f.zp01.patch"
-  patch -Np1 -i "${srcdir}/v4.19_pds099f.zp02.patch"
+  patch -Np1 -i "${srcdir}/v4.19_pds099g.patch"
   echo '--- --- ---'
   echo ' '
-
-  ## # PDS Scheduler - Fixed by Holger Hoffstaette
-  ## echo 'Patching: PDS Scheduler - Fixed by Holger Hoffstaette'
-  ## patch -Np1 -i "${srcdir}/pds-20181130-pds-099f.patch"
-  ## patch -Np1 -i "${srcdir}/pds-20181206-make-sched_smt_present-track-topology.patch"
-  ## echo '--- --- ---'
-  ## echo ' '
 
   # GraySky
   echo 'Patching: GraySky'
