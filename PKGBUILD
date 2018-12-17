@@ -106,10 +106,12 @@ source=(## LINUX KERNEL (base, before the patches)
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0122-xattr-allow-setting-user.-attributes-on-symlinks-by-.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0502-locking-rwsem-spin-faster.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/turbo3-scheduler.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/lifo-accept.patch"
 
         ## STUN PATCHES (Intel Clear Linux Project - CVE Fixes)
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2018-19406.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2018-19407.patch"
+        # Remove the following after 4.19.9
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2018-19824.patch"
 
         ## STUN PATCHES (Wireguard - Kernel autopatcher)
@@ -191,6 +193,7 @@ sha256sums=('0c68f5655528aed4f99dae71a5b259edc93239fa899e2df79c055275c21749a1'
             '0b1d7371d230b08cdedb73dc1e38040d19a94fafde26bba86a9f807868123dc6'
             'b7f84870dd0c9bba4bae2e177c57485e428a4097d28b1765afad6796694296ca'
             'c85a83259f8965c1a9bb745774711892907d9ad40cbad3a3b4606f4e539b1b26'
+            'c9c06d9d7476b6faa917ed4c910dc058628048730a4fc14da1ce569199fdcaee'
 
             # Clear Linux - CVE Fixes
             '41a7873c9a100e329350762f7bdbb2ea1ad26b520b6f53ff6fff30ec79bcf051'
@@ -326,6 +329,7 @@ prepare() {
   patch -Np1 -i "${srcdir}/0122-xattr-allow-setting-user.-attributes-on-symlinks-by-.patch"
   patch -Np1 -i "${srcdir}/0502-locking-rwsem-spin-faster.patch"
   patch -Np1 -i "${srcdir}/turbo3-scheduler.patch"
+  patch -Np1 -i "${srcdir}/lifo-accept.patch"
   echo '--- --- ---'
   echo ' '
 
@@ -333,6 +337,8 @@ prepare() {
   echo 'Patching: CLEAR LINUX PROJECT - CVE Fixes'
   #patch -Np1 -i "${srcdir}/CVE-2018-19406.patch"
   #patch -Np1 -i "${srcdir}/CVE-2018-19407.patch"
+  #
+  # Remove the following after 4.19.9
   patch -Np1 -i "${srcdir}/CVE-2018-19824.patch"
   echo '--- --- ---'
   echo ' '
