@@ -104,13 +104,13 @@ source=(## LINUX KERNEL (base, before the patches)
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0122-xattr-allow-setting-user.-attributes-on-symlinks-by-.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0502-locking-rwsem-spin-faster.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/turbo3-scheduler.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/lfence.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/lifo-accept.patch"
 
         ## STUN PATCHES (Intel Clear Linux Project - CVE Fixes)
-        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2018-19406.patch"
-        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2018-19407.patch"
-        # Remove the following after 4.19.9
-        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2018-19824.patch"
+        #"https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2018-19406.patch"
+        #"https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2018-19407.patch"
+        #"https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2018-19824.patch"
 
         ## STUN PATCHES (Wireguard - Kernel autopatcher)
         "https://git.zx2c4.com/WireGuard/snapshot/WireGuard-${_wireguard}.tar.xz"
@@ -189,12 +189,13 @@ sha256sums=('0c68f5655528aed4f99dae71a5b259edc93239fa899e2df79c055275c21749a1'
             '0b1d7371d230b08cdedb73dc1e38040d19a94fafde26bba86a9f807868123dc6'
             'b7f84870dd0c9bba4bae2e177c57485e428a4097d28b1765afad6796694296ca'
             'c85a83259f8965c1a9bb745774711892907d9ad40cbad3a3b4606f4e539b1b26'
+            '96560bb27c5d30e9e92ac1621abeb725e6ac58e48d0f40ce0368e4eba3b4ee8e'
             'c9c06d9d7476b6faa917ed4c910dc058628048730a4fc14da1ce569199fdcaee'
 
             # Clear Linux - CVE Fixes
-            '41a7873c9a100e329350762f7bdbb2ea1ad26b520b6f53ff6fff30ec79bcf051'
-            'd75b07b44bec1f6dab3217a3b472490e295356f1afba33c1b42ad9ff9c1557f5'
-            '205cf218cecd2c3d7b8620c93e56bf361895d296d2cf17559a480949560ce4d3'
+            #'41a7873c9a100e329350762f7bdbb2ea1ad26b520b6f53ff6fff30ec79bcf051'
+            #'d75b07b44bec1f6dab3217a3b472490e295356f1afba33c1b42ad9ff9c1557f5'
+            #'205cf218cecd2c3d7b8620c93e56bf361895d296d2cf17559a480949560ce4d3'
 
             # WireGuard
             'SKIP'
@@ -227,8 +228,6 @@ prepare() {
   # add upstream patch
   echo 'Patching: UPSTREAM'
   patch -p1 -i "${srcdir}/patch-${pkgver}"
-  echo '--- --- ---'
-  echo ' '
 
   # add latest fixes from stable queue, if needed
   # http://git.kernel.org/?p=linux/kernel/git/stable/stable-queue.git
@@ -238,6 +237,9 @@ prepare() {
   # https://forum.manjaro.org/t/67555
   # https://lkml.org/lkml/2018/12/13/342
   patch -Np1 -i ../0001-fix-regresssion-of-2f31a67.patch
+
+  echo '--- --- ---'
+  echo ' '
 
   # add STUN patches
   echo 'Patching: STUN CUSTOM'
@@ -324,17 +326,17 @@ prepare() {
   patch -Np1 -i "${srcdir}/0122-xattr-allow-setting-user.-attributes-on-symlinks-by-.patch"
   patch -Np1 -i "${srcdir}/0502-locking-rwsem-spin-faster.patch"
   patch -Np1 -i "${srcdir}/turbo3-scheduler.patch"
+  patch -Np1 -i "${srcdir}/lfence.patch"
   patch -Np1 -i "${srcdir}/lifo-accept.patch"
   echo '--- --- ---'
   echo ' '
 
   # Clear Linux
   echo 'Patching: CLEAR LINUX PROJECT - CVE Fixes'
+  echo 'None.'
   #patch -Np1 -i "${srcdir}/CVE-2018-19406.patch"
   #patch -Np1 -i "${srcdir}/CVE-2018-19407.patch"
-  #
-  # Remove the following after 4.19.9
-  patch -Np1 -i "${srcdir}/CVE-2018-19824.patch"
+  #patch -Np1 -i "${srcdir}/CVE-2018-19824.patch"
   echo '--- --- ---'
   echo ' '
 
