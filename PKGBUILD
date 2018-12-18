@@ -13,10 +13,10 @@ _basever=419
 _aufs=20181119
 _bfq=v9
 _bfqdate=20181206
-_sub=8
+_sub=10
 _commit=
 pkgver=${_basekernel}.${_sub}
-pkgrel=2
+pkgrel=1
 arch=('i686' 'x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
@@ -46,9 +46,7 @@ source=("https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.x
         # MANJARO Patches
         '0001-i2c-hid-override-HID-descriptors-for-certain-devices.patch'
         '0002-i2c-hid-properly-terminate-i2c_hid_dmi_desc_override_table_array.patch'
-        '0001-ALC294-quirk.patch'
-        '0002-ALC294-quirk.patch'
-        '0003-ALC294-quirk.patch'
+        '0001-fix-regresssion-of-2f31a67.patch'
         # Bootsplash
         '0001-bootsplash.patch'
         '0002-bootsplash.patch'
@@ -64,7 +62,7 @@ source=("https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.x
         '0012-bootsplash.patch'
         '0013-bootsplash.patch')
 sha256sums=('0c68f5655528aed4f99dae71a5b259edc93239fa899e2df79c055275c21749a1'
-            '03628355b0ac320421af20a3f09274214c078d3b6075ba5fd8024f1f178d0e7a'
+            '3562906b7356d17c7ec6f4e9e4babcbdfa6fcb95e46765aaaac4a233d07eb8d4'
             '0fa3e9dcb6fca35b8081352e64dce1a8c8f30078272eea246eb276a9f85677c8'
             'cf9f1917c4570d52b0b88c41c26da42fe65ffca3cb7c562413f2d85c4fb84853'
             'b44d81446d8b53d5637287c30ae3eb64cae0078c3fbc45fcf1081dd6699818b5'
@@ -83,9 +81,7 @@ sha256sums=('0c68f5655528aed4f99dae71a5b259edc93239fa899e2df79c055275c21749a1'
             '37b86ca3de148a34258e3176dbf41488d9dbd19e93adbd22a062b3c41332ce85'
             '94afbc6a9cb0709f6cd71879bae66454ec26d37c83f49f58e4de28d47678e66b'
             '8dc7285a797c77e917aab1c05847370b71725389b9718c58b4565b40eed80d85'
-            '427bfa929db01bf6039e0a559298f2739e22e9b1d4f7d1be7d4b630054b5b289'
-            '7eb24a0c6a4807593507832809134c7b036ceff1c7b7782c008c3a4334b8fcd9'
-            'e19b82b8ebdf38312b1726a1ccaeccb8aeb90542a349eca2dd4bb65e8d512563'
+            'e6d23ea8798f96d08a9306e088acae7544182d90d4ccb5cb52c3dbbd8f45a0d0'
             'a504f6cf84094e08eaa3cc5b28440261797bf4f06f04993ee46a20628ff2b53c'
             'e096b127a5208f56d368d2cb938933454d7200d70c86b763aa22c38e0ddb8717'
             '8c1c880f2caa9c7ae43281a35410203887ea8eae750fe8d360d0c8bf80fcc6e0'
@@ -112,13 +108,12 @@ prepare() {
   # enable only if you have "gen-stable-queue-patch.sh" executed before
   #patch -Np1 -i "${srcdir}/prepatch-${_basekernel}`date +%Y%m%d`"
 
+  # https://forum.manjaro.org/t/67555
+  # https://lkml.org/lkml/2018/12/13/342
+  patch -Np1 -i ../0001-fix-regresssion-of-2f31a67.patch
+
   # disable USER_NS for non-root users by default
   patch -Np1 -i ../0001-add-sysctl-to-disallow-unprivileged-CLONE_NEWUSER-by.patch
-
-  # http://mailman.alsa-project.org/pipermail/alsa-devel/2018-December/142569.html
-  patch -Np1 -i ../0001-ALC294-quirk.patch
-  patch -Np1 -i ../0002-ALC294-quirk.patch
-  patch -Np1 -i ../0003-ALC294-quirk.patch
 
   # https://bugzilla.redhat.com/show_bug.cgi?id=1526312
   # https://forum.manjaro.org/t/36269/78
