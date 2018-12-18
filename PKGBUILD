@@ -13,17 +13,20 @@ _basever=419
 _aufs=20181119
 _bfq=v9
 _bfqdate=20181206
-_sub=10
+_sub=11
 _commit=
+_patch=4.19.11-rc1
 pkgver=${_basekernel}.${_sub}
-pkgrel=1
+pkgrel=0
 arch=('i686' 'x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
 makedepends=('xmlto' 'docbook-xsl' 'kmod' 'inetutils' 'bc' 'elfutils' 'git')
 options=('!strip')
 source=("https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.xz"
-        "https://www.kernel.org/pub/linux/kernel/v4.x/patch-${pkgver}.xz"
+        #"https://www.kernel.org/pub/linux/kernel/v4.x/patch-${pkgver}.xz"
+        "https://www.kernel.org/pub/linux/kernel/v4.x/patch-4.19.10.xz"
+        "https://www.kernel.org/pub/linux/kernel/v4.x/stable-review/patch-${_patch}.xz"
         #https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable-rc.git/snapshot/linux-stable-rc-$_commit.tar.gz
         #"linux-${pkgver}.tar.gz::https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/snapshot/linux-$_commit.tar.gz"
         # the main kernel config files
@@ -63,6 +66,7 @@ source=("https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.x
         '0013-bootsplash.patch')
 sha256sums=('0c68f5655528aed4f99dae71a5b259edc93239fa899e2df79c055275c21749a1'
             '3562906b7356d17c7ec6f4e9e4babcbdfa6fcb95e46765aaaac4a233d07eb8d4'
+            '9875fa836d14409a167f820f24df8c6a19a68ea9814e3e0e18f4f537a477658e'
             '0fa3e9dcb6fca35b8081352e64dce1a8c8f30078272eea246eb276a9f85677c8'
             'cf9f1917c4570d52b0b88c41c26da42fe65ffca3cb7c562413f2d85c4fb84853'
             'b44d81446d8b53d5637287c30ae3eb64cae0078c3fbc45fcf1081dd6699818b5'
@@ -101,7 +105,9 @@ prepare() {
   cd "${srcdir}/linux-${_basekernel}"
 
   # add upstream patch
-  patch -p1 -i "${srcdir}/patch-${pkgver}"
+  #patch -p1 -i "${srcdir}/patch-${pkgver}"
+  patch -p1 -i "${srcdir}/patch-4.19.10"
+  patch -p1 -i "${srcdir}/patch-${_patch}"
 
   # add latest fixes from stable queue, if needed
   # http://git.kernel.org/?p=linux/kernel/git/stable/stable-queue.git
