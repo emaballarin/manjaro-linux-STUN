@@ -21,20 +21,23 @@ _aufs=20181119
 _bfq=v9
 _bfqdate=20181206
 _wireguard=0.0.20181018
-_sub=10
+_sub=11
 _commit=
+_patch=4.19.11-rc1
 pkgver=${_basekernel}.${_sub}
-pkgrel=1
+pkgrel=0
 arch=('i686' 'x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
 makedepends=('xmlto' 'docbook-xsl' 'kmod' 'inetutils' 'bc' 'elfutils' 'git')
 options=('!strip')
 source=(## LINUX KERNEL (base, before the patches)
-        "https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.xz"
+        https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.xz"
 
         ## LINUX KERNEL (upstream patches)
-        "https://www.kernel.org/pub/linux/kernel/v4.x/patch-${pkgver}.xz"
+        #"https://www.kernel.org/pub/linux/kernel/v4.x/patch-${pkgver}.xz"
+        "https://www.kernel.org/pub/linux/kernel/v4.x/patch-4.19.10.xz"
+        "https://www.kernel.org/pub/linux/kernel/v4.x/stable-review/patch-${_patch}.xz"
 
         ## LINUX KERNEL (base, before the patches)
         #https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable-rc.git/snapshot/linux-stable-rc-$_commit.tar.gz
@@ -137,6 +140,7 @@ sha256sums=('0c68f5655528aed4f99dae71a5b259edc93239fa899e2df79c055275c21749a1'
 
             ## CONFIGURATION FILE (due to frequent updates, for now)
             'SKIP'
+            'SKIP'
 
             'cf9f1917c4570d52b0b88c41c26da42fe65ffca3cb7c562413f2d85c4fb84853'
             'b44d81446d8b53d5637287c30ae3eb64cae0078c3fbc45fcf1081dd6699818b5'
@@ -227,7 +231,9 @@ prepare() {
 
   # add upstream patch
   echo 'Patching: UPSTREAM'
-  patch -p1 -i "${srcdir}/patch-${pkgver}"
+  #patch -p1 -i "${srcdir}/patch-${pkgver}"
+  patch -p1 -i "${srcdir}/patch-4.19.10"
+  patch -p1 -i "${srcdir}/patch-${_patch}"
 
   # add latest fixes from stable queue, if needed
   # http://git.kernel.org/?p=linux/kernel/git/stable/stable-queue.git
