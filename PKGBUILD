@@ -40,7 +40,7 @@ source=("https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.x
         'tmpfs-idr.patch'
         'vfs-ino.patch'
         #"0001-BFQ-${_bfq}-${_bfqdate}.patch::https://github.com/Algodev-github/bfq-mq/compare/0adb328...698937e.patch"
-        0001-BFQ-${_bfq}-${_bfqdate}.patch::https://github.com/sirlucjan/kernel-patches/blob/master/4.19/bfq-sq-mq/4.19-bfq-sq-mq-v9r1-2K181212-rc1.patch
+        0001-BFQ-${_bfq}-${_bfqdate}.patch::https://github.com/sirlucjan/kernel-patches/raw/master/4.19/bfq-sq-mq/4.19-bfq-sq-mq-v9r1-2K181212-rc1.patch
         # ARCH Patches
         '0001-add-sysctl-to-disallow-unprivileged-CLONE_NEWUSER-by.patch'
         # MANJARO Patches
@@ -77,7 +77,7 @@ sha256sums=('0c68f5655528aed4f99dae71a5b259edc93239fa899e2df79c055275c21749a1'
             '37c07a2dd5249ce9277a370cf60cbebb24dc1e92b845ce419de63453d5e0b685'
             'a50226860ed658251eb74014daad773cb0a8700ed7c5b81548ee4f77e8d6d4de'
             '7f861935faf7ebd2d528052a363f0356c9b5239e32a68b4ec23dcf95ee91e708'
-            '717f06e86dcf706d0a826d950c163f14ac1a0c3e40e6a95605ca48cb76062ed8'
+            '8761152216a204b0bbf2bd581abc3f5cdf851cec8b807316528b72a7b552ef12'
             '37b86ca3de148a34258e3176dbf41488d9dbd19e93adbd22a062b3c41332ce85'
             '94afbc6a9cb0709f6cd71879bae66454ec26d37c83f49f58e4de28d47678e66b'
             '8dc7285a797c77e917aab1c05847370b71725389b9718c58b4565b40eed80d85'
