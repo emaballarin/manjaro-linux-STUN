@@ -32,7 +32,7 @@ license=('GPL2')
 makedepends=('xmlto' 'docbook-xsl' 'kmod' 'inetutils' 'bc' 'elfutils' 'git')
 options=('!strip')
 source=(## LINUX KERNEL (base, before the patches)
-        https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.xz"
+        "https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.xz"
 
         ## LINUX KERNEL (upstream patches)
         #"https://www.kernel.org/pub/linux/kernel/v4.x/patch-${pkgver}.xz"
@@ -123,7 +123,8 @@ source=(## LINUX KERNEL (base, before the patches)
         "000ker2-manjaro-stun-tcpcake.patch"
 
         ## STUN PATCHES (Alfred Chen's PDS Scheduler - downloaded locally, with patches)
-        "v4.19_pds099g.patch"
+        "v4.19_pds099h.patch"
+        "fae1a3c0fbe60b7edf6d8aac6b838520da68f9e4.patch"
 
         ## Holger Hoffstaette patches (cherry-picked)
         #"https://raw.githubusercontent.com/hhoffstaette/kernel-patches/4.19/4.19/pds-20181130-pds-099f.patch"
@@ -209,7 +210,8 @@ sha256sums=('0c68f5655528aed4f99dae71a5b259edc93239fa899e2df79c055275c21749a1'
             '2d0ba1fabc10195a9edf4f114027eae93ec8c95000fca662a8fd8c0421b6fe21'
 
             # PDS Scheduler
-            'dd8c0e92836099a373a7fe82280c731dce7685067ce8a8dfb5a77542286a51f9'
+            '24bf449a1945f0c64ad0c9b923568d05d0e341c45578735be26c819c913b4890'
+            '1ed477ea8e777a191a42319ceb7120e737090850ac7f681c6c1e9b5987ccf7c4'
 
             # H.H. patches
             #'e3d6b665a33a2d22a68968f197888f4a7a833c6f272c6f1e7a7988897a7092ae'
@@ -361,7 +363,8 @@ prepare() {
 
   # PDS Scheduler - With patches
   echo 'Patching: PDS Scheduler - With patches'
-  patch -Np1 -i "${srcdir}/v4.19_pds099g.patch"
+  patch -Np1 -i "${srcdir}/v4.19_pds099h.patch"
+  patch -Np1 -i "${srcdir}/fae1a3c0fbe60b7edf6d8aac6b838520da68f9e4.patch"
   echo '--- --- ---'
   echo ' '
 
