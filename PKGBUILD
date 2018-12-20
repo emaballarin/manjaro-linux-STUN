@@ -17,27 +17,24 @@ pkgname=('linux419-STUN' 'linux419-STUN-headers')
 _kernelname=-STUN
 _basekernel=4.19
 _basever=419
-_aufs=20181119
+_aufs=20181217
 _bfq=v9
-_bfqdate=20181206
+_bfqdate=20181212
 _wireguard=0.0.20181018
 _sub=11
 _commit=
-_patch=4.19.11-rc1
 pkgver=${_basekernel}.${_sub}
-pkgrel=0
+pkgrel=1
 arch=('i686' 'x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
 makedepends=('xmlto' 'docbook-xsl' 'kmod' 'inetutils' 'bc' 'elfutils' 'git')
 options=('!strip')
 source=(## LINUX KERNEL (base, before the patches)
-        "https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.xz"
+        https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.xz"
 
         ## LINUX KERNEL (upstream patches)
-        #"https://www.kernel.org/pub/linux/kernel/v4.x/patch-${pkgver}.xz"
-        "https://www.kernel.org/pub/linux/kernel/v4.x/patch-4.19.10.xz"
-        "https://www.kernel.org/pub/linux/kernel/v4.x/stable-review/patch-${_patch}.xz"
+        "https://www.kernel.org/pub/linux/kernel/v4.x/patch-${pkgver}.xz"
 
         ## LINUX KERNEL (base, before the patches)
         #https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable-rc.git/snapshot/linux-stable-rc-$_commit.tar.gz
@@ -63,7 +60,7 @@ source=(## LINUX KERNEL (base, before the patches)
 
         ## MANJARO VANILLA (BFQ upstream support)
         #"0001-BFQ-${_bfq}-${_bfqdate}.patch::https://github.com/Algodev-github/bfq-mq/compare/0adb328...698937e.patch"
-        0001-BFQ-${_bfq}-${_bfqdate}.patch::https://github.com/sirlucjan/kernel-patches/raw/master/4.19/bfq-sq-mq/4.19-bfq-sq-mq-v9r1-2K181206-rc2.patch
+        0001-BFQ-${_bfq}-${_bfqdate}.patch::https://github.com/sirlucjan/kernel-patches/blob/master/4.19/bfq-sq-mq/4.19-bfq-sq-mq-v9r1-2K181212-rc1.patch
 
         ## MANJARO VANILLA (ARCH Patches)
         '0001-add-sysctl-to-disallow-unprivileged-CLONE_NEWUSER-by.patch'
@@ -137,26 +134,25 @@ source=(## LINUX KERNEL (base, before the patches)
         "grayskygcc.patch::https://raw.githubusercontent.com/graysky2/kernel_gcc_patch/master/enable_additional_cpu_optimizations_for_gcc_v8.1%2B_kernel_v4.13%2B.patch")
 
 sha256sums=('0c68f5655528aed4f99dae71a5b259edc93239fa899e2df79c055275c21749a1'
-            '3562906b7356d17c7ec6f4e9e4babcbdfa6fcb95e46765aaaac4a233d07eb8d4'
+            'bd42aabbdf0f004daa2b8386cdd2799109e7d54fec83c3d5d7771c022963b9e7'
 
             ## CONFIGURATION FILE (due to frequent updates, for now)
-            'SKIP'
             'SKIP'
 
             'cf9f1917c4570d52b0b88c41c26da42fe65ffca3cb7c562413f2d85c4fb84853'
             'b44d81446d8b53d5637287c30ae3eb64cae0078c3fbc45fcf1081dd6699818b5'
             '8634091ef2d9c59baf3474f1ea6311086baa524cc0ea060bb11143afcb8b1c58'
             'ae2e95db94ef7176207c690224169594d49445e04249d2499e9d2fbc117a0b21'
-            'f7fff46bf963f6b1cf53b65b51d77749a59586e429c4c056e01dfdab78a6120b'
-            '781de68bb42313fc248366f9f50e4d4621add729bede78dce9a31e4375943610'
+            '90831589b7ab43d6fab11bfa3ad788db14ba77ea4dc03d10ee29ad07194691e1'
+            '1c4d51dad01b9f474d55f93b659c955049b8823b611732157a7fa0cc7394144e'
             'e239321d84448dd7575b9c5fc58bd76bcb5f0fdb7188a0dcad6010b88e67921c'
             '7e6286cf91aaa68785312a0f6483e3323d8bab4feaaa6f09f2b2b7fc8157e811'
-            'd0cf9baab7a5c130036cbd4532c0bd2819ca504ec78bdbbffe66f9c8410857c9'
+            '1ba71b2474e8e26642cea6949fed2e03c219f54bca472ea82be0abd52976cca7'
             '179f00f707a0c809cd44fff01bd31991a5dfff5500e2b02321f22925126404f0'
             '37c07a2dd5249ce9277a370cf60cbebb24dc1e92b845ce419de63453d5e0b685'
             'a50226860ed658251eb74014daad773cb0a8700ed7c5b81548ee4f77e8d6d4de'
             '7f861935faf7ebd2d528052a363f0356c9b5239e32a68b4ec23dcf95ee91e708'
-            'bd5fa32445dcd1127ddaca3d3189436557e195090998d5c9b6d1d1a801b56978'
+            '717f06e86dcf706d0a826d950c163f14ac1a0c3e40e6a95605ca48cb76062ed8'
             '37b86ca3de148a34258e3176dbf41488d9dbd19e93adbd22a062b3c41332ce85'
             '94afbc6a9cb0709f6cd71879bae66454ec26d37c83f49f58e4de28d47678e66b'
             '8dc7285a797c77e917aab1c05847370b71725389b9718c58b4565b40eed80d85'
@@ -233,9 +229,7 @@ prepare() {
 
   # add upstream patch
   echo 'Patching: UPSTREAM'
-  #patch -p1 -i "${srcdir}/patch-${pkgver}"
-  patch -p1 -i "${srcdir}/patch-4.19.10"
-  patch -p1 -i "${srcdir}/patch-${_patch}"
+  patch -p1 -i "${srcdir}/patch-${pkgver}"
 
   # add latest fixes from stable queue, if needed
   # http://git.kernel.org/?p=linux/kernel/git/stable/stable-queue.git
