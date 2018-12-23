@@ -21,7 +21,7 @@ _aufs=20181217
 _bfq=v9
 _bfqdate=20181212
 _wireguard=0.0.20181018
-_sub=11
+_sub=12
 _commit=
 pkgver=${_basekernel}.${_sub}
 pkgrel=1
@@ -60,7 +60,7 @@ source=(## LINUX KERNEL (base, before the patches)
 
         ## MANJARO VANILLA (BFQ upstream support)
         #"0001-BFQ-${_bfq}-${_bfqdate}.patch::https://github.com/Algodev-github/bfq-mq/compare/0adb328...698937e.patch"
-        0001-BFQ-${_bfq}-${_bfqdate}.patch::https://github.com/sirlucjan/kernel-patches/blob/master/4.19/bfq-sq-mq/4.19-bfq-sq-mq-v9r1-2K181212-rc1.patch
+        0001-BFQ-${_bfq}-${_bfqdate}.patch::https://github.com/sirlucjan/kernel-patches/raw/master/4.19/bfq-sq-mq/4.19-bfq-sq-mq-v9r1-2K181212-rc1.patch
 
         ## MANJARO VANILLA (ARCH Patches)
         '0001-add-sysctl-to-disallow-unprivileged-CLONE_NEWUSER-by.patch'
@@ -134,7 +134,7 @@ source=(## LINUX KERNEL (base, before the patches)
         "grayskygcc.patch::https://raw.githubusercontent.com/graysky2/kernel_gcc_patch/master/enable_additional_cpu_optimizations_for_gcc_v8.1%2B_kernel_v4.13%2B.patch")
 
 sha256sums=('0c68f5655528aed4f99dae71a5b259edc93239fa899e2df79c055275c21749a1'
-            'bd42aabbdf0f004daa2b8386cdd2799109e7d54fec83c3d5d7771c022963b9e7'
+            '4b2bab90b752a2cf2d2d2157e360ff4e37a5413620fdac624033a469d86518e0'
 
             ## CONFIGURATION FILE (due to frequent updates, for now)
             'SKIP'
@@ -152,7 +152,7 @@ sha256sums=('0c68f5655528aed4f99dae71a5b259edc93239fa899e2df79c055275c21749a1'
             '37c07a2dd5249ce9277a370cf60cbebb24dc1e92b845ce419de63453d5e0b685'
             'a50226860ed658251eb74014daad773cb0a8700ed7c5b81548ee4f77e8d6d4de'
             '7f861935faf7ebd2d528052a363f0356c9b5239e32a68b4ec23dcf95ee91e708'
-            '717f06e86dcf706d0a826d950c163f14ac1a0c3e40e6a95605ca48cb76062ed8'
+            '8761152216a204b0bbf2bd581abc3f5cdf851cec8b807316528b72a7b552ef12'
             '37b86ca3de148a34258e3176dbf41488d9dbd19e93adbd22a062b3c41332ce85'
             '94afbc6a9cb0709f6cd71879bae66454ec26d37c83f49f58e4de28d47678e66b'
             '8dc7285a797c77e917aab1c05847370b71725389b9718c58b4565b40eed80d85'
