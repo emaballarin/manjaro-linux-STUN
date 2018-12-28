@@ -87,7 +87,7 @@ source=(## LINUX KERNEL (base, before the patches)
         #"https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0010-drm-i915-cfl-Add-a-new-CFL-PCI-ID.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0101-i8042-decrease-debug-message-level-to-info.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0103-silence-rapl.patch"
-        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0104-pci-pme-wakeups.patch"
+        #"https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0104-pci-pme-wakeups.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0105-ksm-wakeups.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0106-intel_idle-tweak-cpuidle-cstates.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0108-smpboot-reuse-timer-calibration.patch"
@@ -167,7 +167,7 @@ sha256sums=('ad0823183522e743972382df0aa08fb5ae3077f662b125f1e599b0b2aaa12438'
             #'d8d1df4485ba663d024361550047d06bc72390df51604bf6f3cb9e26ebf8ce58'
             '672646f867f94e206e36ded0c11552a31c90823d8f978cf95ecbc96e45dc9cb1'
             '742074f41787d9596e9ebf0dee347979032095bdc4ca87f4af79f0c1596b9310'
-            'aeb92407b464e5701beca366292e1baa1b352d946331e41ad0b3d0002c579fec'
+            #'aeb92407b464e5701beca366292e1baa1b352d946331e41ad0b3d0002c579fec'
             'f10a1d266ac272028683805d0f87f48efaaa283565263776ed812000146f4fc3'
             'a8bd3192b295b1eeb31e70bcd65abeff2db7c8457f428e4720298fd9e10d6960'
             'b97d4bb24dd34a6a67afdbdfda3930ec1503405ac0cf98b168e72cd1da1d5c2b'
@@ -299,7 +299,7 @@ prepare() {
   #patch -Np1 -i "${srcdir}/0010-drm-i915-cfl-Add-a-new-CFL-PCI-ID.patch"
   patch -Np1 -i "${srcdir}/0101-i8042-decrease-debug-message-level-to-info.patch"
   patch -Np1 -i "${srcdir}/0103-silence-rapl.patch"
-  patch -Np1 -i "${srcdir}/0104-pci-pme-wakeups.patch"
+  #patch -Np1 -i "${srcdir}/0104-pci-pme-wakeups.patch"
   patch -Np1 -i "${srcdir}/0105-ksm-wakeups.patch"
   patch -Np1 -i "${srcdir}/0106-intel_idle-tweak-cpuidle-cstates.patch"
   patch -Np1 -i "${srcdir}/0108-smpboot-reuse-timer-calibration.patch"
