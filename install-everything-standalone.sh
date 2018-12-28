@@ -37,7 +37,7 @@ git clone --recursive https://gitlab.manjaro.org/packages/extra/linux420-extramo
 cd "$MANJAROSTUN_TMPDIR/acpi_call"
 mv ./acpi_call.install ./acpi_call-STUN.install
 sed -i "s/_linuxprefix=.*/_linuxprefix=linux420-STUN/g" ./PKGBUILD
-sed -i "s/_extramodules=.*/_extramodules=extramodules-4.19-STUN/g" ./PKGBUILD
+sed -i "s/_extramodules=.*/_extramodules=extramodules-4.20-STUN/g" ./PKGBUILD
 sed -i "s/install=\$_pkgname\.install.*/install=acpi_call-STUN\.install/g" ./PKGBUILD
 sed -i "s/acpi_call\.install\"/acpi_call-STUN\.install\"/g" ./PKGBUILD
 
@@ -45,7 +45,7 @@ sed -i "s/acpi_call\.install\"/acpi_call-STUN\.install\"/g" ./PKGBUILD
 cd "$MANJAROSTUN_TMPDIR/spl_zfs"
 mv ./install ./spl_zfs-STUN.install
 sed -i "s/_linuxprefix=.*/_linuxprefix=linux420-STUN/g" ./PKGBUILD
-sed -i "s/_extramodules=.*/_extramodules=extramodules-4.19-STUN/g" ./PKGBUILD
+sed -i "s/_extramodules=.*/_extramodules=extramodules-4.20-STUN/g" ./PKGBUILD
 sed -i "s/install=install.*/install=spl_zfs-STUN\.install/g" ./PKGBUILD
 sed -i "s/install\"/spl_zfs-STUN\.install\"/g" ./PKGBUILD
 sed -i "s/package_linux420-spl/package_linux420-STUN-spl/g" ./PKGBUILD
@@ -56,7 +56,7 @@ cd "$MANJAROSTUN_TMPDIR/virtualbox-modules"
 mv ./virtualbox-host-modules.install ./virtualbox-host-modules-STUN.install
 mv ./virtualbox-guest-modules.install ./virtualbox-guest-modules-STUN.install
 sed -i "s/_linuxprefix=.*/_linuxprefix=linux420-STUN/g" ./PKGBUILD
-sed -i "s/_extramodules=.*/_extramodules=extramodules-4.19-STUN/g" ./PKGBUILD
+sed -i "s/_extramodules=.*/_extramodules=extramodules-4.20-STUN/g" ./PKGBUILD
 sed -i "s/install=virtualbox-host-modules\.install.*/install=virtualbox-host-modules-STUN\.install/g" ./PKGBUILD
 sed -i "s/install=virtualbox-guest-modules\.install.*/install=virtualbox-guest-modules-STUN\.install/g" ./PKGBUILD
 sed -i "s/virtualbox-host-modules\.install\"/virtualbox-host-modules-STUN\.install\"/g" ./PKGBUILD
