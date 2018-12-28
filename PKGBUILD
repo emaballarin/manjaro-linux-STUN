@@ -104,6 +104,7 @@ source=(## LINUX KERNEL (base, before the patches)
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/turbo3-scheduler.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/lfence.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/lifo-accept.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0501-zero-extra-registers.patch"
 
         ## STUN PATCHES (Intel Clear Linux Project - CVE Fixes)
         #"https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2018-19406.patch"
@@ -118,8 +119,8 @@ source=(## LINUX KERNEL (base, before the patches)
         "000ker2-manjaro-stun-tcpcake.patch"
 
         ## STUN PATCHES (Alfred Chen's PDS Scheduler - downloaded locally, with patches)
-        "v4.19_pds099h.patch"
-        "fae1a3c0fbe60b7edf6d8aac6b838520da68f9e4.patch"
+        "v4.20_pds099i.patch"
+        "b065cb11f1c039edcc2bbd10a82fcaf18b20d87d.patch"
 
         ## Holger Hoffstaette patches (cherry-picked)
         #"https://raw.githubusercontent.com/hhoffstaette/kernel-patches/4.19/4.19/pds-20181130-pds-099f.patch"
@@ -183,6 +184,7 @@ sha256sums=('ad0823183522e743972382df0aa08fb5ae3077f662b125f1e599b0b2aaa12438'
             'c85a83259f8965c1a9bb745774711892907d9ad40cbad3a3b4606f4e539b1b26'
             '96560bb27c5d30e9e92ac1621abeb725e6ac58e48d0f40ce0368e4eba3b4ee8e'
             'c9c06d9d7476b6faa917ed4c910dc058628048730a4fc14da1ce569199fdcaee'
+            'ae46064c455f32357c93f9966b0f1d0bd9fb8e504b19f83aa638604098ea10c8'
 
             # Clear Linux - CVE Fixes
             #'41a7873c9a100e329350762f7bdbb2ea1ad26b520b6f53ff6fff30ec79bcf051'
@@ -197,8 +199,8 @@ sha256sums=('ad0823183522e743972382df0aa08fb5ae3077f662b125f1e599b0b2aaa12438'
             '2d0ba1fabc10195a9edf4f114027eae93ec8c95000fca662a8fd8c0421b6fe21'
 
             # PDS Scheduler
-            '24bf449a1945f0c64ad0c9b923568d05d0e341c45578735be26c819c913b4890'
-            '1ed477ea8e777a191a42319ceb7120e737090850ac7f681c6c1e9b5987ccf7c4'
+            'ea3bb3f97297ac6c5d2feefc428873004e18013333478656a0521d53055b8980'
+            '2cb9d199d339863b0fd0d2e9ce3b21a4d2c31835d28cc25e6007782ea5c6aa42'
 
             # H.H. patches
             #'e3d6b665a33a2d22a68968f197888f4a7a833c6f272c6f1e7a7988897a7092ae'
@@ -309,6 +311,8 @@ prepare() {
   patch -Np1 -i "${srcdir}/0116-kernel-time-reduce-ntp-wakeups.patch"
   patch -Np1 -i "${srcdir}/0120-Enable-stateless-firmware-loading.patch"
   patch -Np1 -i "${srcdir}/0122-xattr-allow-setting-user.-attributes-on-symlinks-by-.patch"
+  # Requires specially-built compiler. Safe to comment if needed! (one patch, below!)
+  patch -Np1 -i "${srcdir}/0501-zero-extra-registers.patch"
   patch -Np1 -i "${srcdir}/0502-locking-rwsem-spin-faster.patch"
   patch -Np1 -i "${srcdir}/turbo3-scheduler.patch"
   patch -Np1 -i "${srcdir}/lfence.patch"
@@ -340,8 +344,8 @@ prepare() {
 
   # PDS Scheduler - With patches
   echo 'Patching: PDS Scheduler - With patches'
-  patch -Np1 -i "${srcdir}/v4.19_pds099h.patch"
-  patch -Np1 -i "${srcdir}/fae1a3c0fbe60b7edf6d8aac6b838520da68f9e4.patch"
+  patch -Np1 -i "${srcdir}/v4.20_pds099i.patch"
+  patch -Np1 -i "${srcdir}/b065cb11f1c039edcc2bbd10a82fcaf18b20d87d.patch"
   echo '--- --- ---'
   echo ' '
 
