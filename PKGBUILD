@@ -20,7 +20,7 @@ _basekernel=4.20
 _basever=420
 _bfq=v9
 _bfqdate=20181212
-_wireguard=0.0.20181018
+_wireguard=0.0.20181218
 _sub=0
 _commit=
 pkgver=${_basekernel}.${_sub}
@@ -222,6 +222,7 @@ prepare() {
 
   # add upstream patch
   echo 'Patching: UPSTREAM'
+  echo 'None.'
   #patch -p1 -i "${srcdir}/patch-${pkgver}"
 
   # add latest fixes from stable queue, if needed
