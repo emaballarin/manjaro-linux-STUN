@@ -84,7 +84,7 @@ source=(## LINUX KERNEL (base, before the patches)
         '0013-bootsplash.patch'
 
         ## STUN PATCHES (Intel Clear Linux Project - Kernel)
-        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0010-drm-i915-cfl-Add-a-new-CFL-PCI-ID.patch"
+        #"https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0010-drm-i915-cfl-Add-a-new-CFL-PCI-ID.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0101-i8042-decrease-debug-message-level-to-info.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0103-silence-rapl.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0104-pci-pme-wakeups.patch"
@@ -164,7 +164,7 @@ sha256sums=('ad0823183522e743972382df0aa08fb5ae3077f662b125f1e599b0b2aaa12438'
             '035ea4b2a7621054f4560471f45336b981538a40172d8f17285910d4e0e0b3ef'
 
             # Clear Linux
-            'd8d1df4485ba663d024361550047d06bc72390df51604bf6f3cb9e26ebf8ce58'
+            #'d8d1df4485ba663d024361550047d06bc72390df51604bf6f3cb9e26ebf8ce58'
             '672646f867f94e206e36ded0c11552a31c90823d8f978cf95ecbc96e45dc9cb1'
             '742074f41787d9596e9ebf0dee347979032095bdc4ca87f4af79f0c1596b9310'
             'aeb92407b464e5701beca366292e1baa1b352d946331e41ad0b3d0002c579fec'
@@ -296,7 +296,7 @@ prepare() {
 
   # Clear Linux
   echo 'Patching: CLEAR LINUX PROJECT - Kernel'
-  patch -Np1 -i "${srcdir}/0010-drm-i915-cfl-Add-a-new-CFL-PCI-ID.patch"
+  #patch -Np1 -i "${srcdir}/0010-drm-i915-cfl-Add-a-new-CFL-PCI-ID.patch"
   patch -Np1 -i "${srcdir}/0101-i8042-decrease-debug-message-level-to-info.patch"
   patch -Np1 -i "${srcdir}/0103-silence-rapl.patch"
   patch -Np1 -i "${srcdir}/0104-pci-pme-wakeups.patch"
