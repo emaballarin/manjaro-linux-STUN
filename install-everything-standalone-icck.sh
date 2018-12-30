@@ -36,13 +36,13 @@ git clone --recursive https://gitlab.manjaro.org/packages/extra/linux420-extramo
 
 # manjaro-linux-stun (Intel tweaks)
 cd "$MANJAROSTUN_TMPDIR/manjaro-linux-stun"
-sed -i "s/+make clean/+CC=icc CXX=icpc FC=ifort HOSTCC=icc HOSTCXX=icpc HOSTFC=ifort CFLAGS=\"-fast -pipe -gcc -xHost -O3\" CXXFLAGS=\"-fast -pipe -gcc -xHost -O3\" make clean/g" ./0013-bootsplash.patch
-sed -i "s/+make bootsplash-packer/+CC=icc CXX=icpc FC=ifort HOSTCC=icc HOSTCXX=icpc HOSTFC=ifort CFLAGS=\"-fast -pipe -gcc -xHost -O3\" CXXFLAGS=\"-fast -pipe -gcc -xHost -O3\" make bootsplash-packer/g" ./0013-bootsplash.patch
-sed -i "s/  make prepare/  CC=icc CXX=icpc FC=ifort HOSTCC=icc HOSTCXX=icpc HOSTFC=ifort CFLAGS=\"-fast -pipe -gcc -xHost -O3\" CXXFLAGS=\"-fast -pipe -gcc -xHost -O3\" make prepare/g" ./PKGBUILD
-sed -i "s/  yes \"\" | make config >\/dev\/null/  yes \"\" | CC=icc CXX=icpc FC=ifort HOSTCC=icc HOSTCXX=icpc HOSTFC=ifort CFLAGS=\"-fast -pipe -gcc -xHost -O3\" CXXFLAGS=\"-fast -pipe -gcc -xHost -O3\" make config >\/dev\/null/g" ./PKGBUILD
-sed -i "s/  make \${MAKEFLAGS} LOCALVERSION= bzImage modules/  CC=icc CXX=icpc FC=ifort HOSTCC=icc HOSTCXX=icpc HOSTFC=ifort CFLAGS=\"-fast -pipe -gcc -xHost -O3\" CXXFLAGS=\"-fast -pipe -gcc -xHost -O3\" make \${MAKEFLAGS} LOCALVERSION= bzImage modules/g" ./PKGBUILD
-sed -i "s/  _kernver=\"\$(make LOCALVERSION= kernelrelease)\"/  _kernver=\"\$(CC=icc CXX=icpc FC=ifort HOSTCC=icc HOSTCXX=icpc HOSTFC=ifort CFLAGS=\"-fast -pipe -gcc -xHost -O3\" CXXFLAGS=\"-fast -pipe -gcc -xHost -O3\" make LOCALVERSION= kernelrelease)\"/g" ./PKGBUILD
-sed -i "s/  make LOCALVERSION= INSTALL_MOD_PATH=\"\${pkgdir}\/usr\" modules_install/  CC=icc CXX=icpc FC=ifort HOSTCC=icc HOSTCXX=icpc HOSTFC=ifort CFLAGS=\"-fast -pipe -gcc -xHost -O3\" CXXFLAGS=\"-fast -pipe -gcc -xHost -O3\" make LOCALVERSION= INSTALL_MOD_PATH=\"\${pkgdir}\/usr\" modules_install/g" ./PKGBUILD
+sed -i "s/+make clean/+CC=icc CXX=icpc FC=ifort HOSTCC=icc HOSTCXX=icpc HOSTFC=ifort CFLAGS=\"-Ofast -pipe -gcc -xHost -O3\" CXXFLAGS=\"-Ofast -pipe -gcc -xHost -O3\" make clean/g" ./0013-bootsplash.patch
+sed -i "s/+make bootsplash-packer/+CC=icc CXX=icpc FC=ifort HOSTCC=icc HOSTCXX=icpc HOSTFC=ifort CFLAGS=\"-Ofast -pipe -gcc -xHost -O3\" CXXFLAGS=\"-Ofast -pipe -gcc -xHost -O3\" make bootsplash-packer/g" ./0013-bootsplash.patch
+sed -i "s/  make prepare/  CC=icc CXX=icpc FC=ifort HOSTCC=icc HOSTCXX=icpc HOSTFC=ifort CFLAGS=\"-Ofast -pipe -gcc -xHost -O3\" CXXFLAGS=\"-Ofast -pipe -gcc -xHost -O3\" make prepare/g" ./PKGBUILD
+sed -i "s/  yes \"\" | make config >\/dev\/null/  yes \"\" | CC=icc CXX=icpc FC=ifort HOSTCC=icc HOSTCXX=icpc HOSTFC=ifort CFLAGS=\"-Ofast -pipe -gcc -xHost -O3\" CXXFLAGS=\"-Ofast -pipe -gcc -xHost -O3\" make config >\/dev\/null/g" ./PKGBUILD
+sed -i "s/  make \${MAKEFLAGS} LOCALVERSION= bzImage modules/  CC=icc CXX=icpc FC=ifort HOSTCC=icc HOSTCXX=icpc HOSTFC=ifort CFLAGS=\"-Ofast -pipe -gcc -xHost -O3\" CXXFLAGS=\"-Ofast -pipe -gcc -xHost -O3\" make \${MAKEFLAGS} LOCALVERSION= bzImage modules/g" ./PKGBUILD
+sed -i "s/  _kernver=\"\$(make LOCALVERSION= kernelrelease)\"/  _kernver=\"\$(CC=icc CXX=icpc FC=ifort HOSTCC=icc HOSTCXX=icpc HOSTFC=ifort CFLAGS=\"-Ofast -pipe -gcc -xHost -O3\" CXXFLAGS=\"-Ofast -pipe -gcc -xHost -O3\" make LOCALVERSION= kernelrelease)\"/g" ./PKGBUILD
+sed -i "s/  make LOCALVERSION= INSTALL_MOD_PATH=\"\${pkgdir}\/usr\" modules_install/  CC=icc CXX=icpc FC=ifort HOSTCC=icc HOSTCXX=icpc HOSTFC=ifort CFLAGS=\"-Ofast -pipe -gcc -xHost -O3\" CXXFLAGS=\"-Ofast -pipe -gcc -xHost -O3\" make LOCALVERSION= INSTALL_MOD_PATH=\"\${pkgdir}\/usr\" modules_install/g" ./PKGBUILD
 
 # acpi_call
 cd "$MANJAROSTUN_TMPDIR/acpi_call"
@@ -93,8 +93,8 @@ export FC=ifort
 export HOSTCC=icc
 export HOSTCXX=icpc
 export HOSTFC=ifort
-export CFLAGS="-fast -pipe -gcc -xHost -O3"
-export CXXFLAGS="-fast -pipe -gcc -xHost -O3"
+export CFLAGS="-Ofast -pipe -gcc -xHost -O3"
+export CXXFLAGS="-Ofast -pipe -gcc -xHost -O3"
 
 
 cd "$MANJAROSTUN_TMPDIR/manjaro-linux-stun"
