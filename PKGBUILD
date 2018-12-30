@@ -382,6 +382,16 @@ prepare() {
   # don't run depmod on 'make install'. We'll do this ourselves in packaging
   sed -i '2iexit 0' scripts/depmod.sh
 
+  # Print as a diagnostic measure the compiler flags used for preparation
+  echo "$CC"
+  echo "$HOSTCC"
+  echo "$CXX"
+  echo "$HOSTCXX"
+  echo "$FC"
+  echo "$HOSTFC"
+  echo "$CFLAGS"
+  echo "$CXXFLAGS"
+
   # get kernel version
   make prepare
 
@@ -393,12 +403,32 @@ prepare() {
   #make oldconfig # using old config from previous kernel version
   # ... or manually edit .config
 
+  # Print as a diagnostic measure the compiler flags used for config
+  echo "$CC"
+  echo "$HOSTCC"
+  echo "$CXX"
+  echo "$HOSTCXX"
+  echo "$FC"
+  echo "$HOSTFC"
+  echo "$CFLAGS"
+  echo "$CXXFLAGS"
+
   # rewrite configuration
   yes "" | make config >/dev/null
 }
 
 build() {
   cd "${srcdir}/linux-${_basekernel}"
+
+  # Print as a diagnostic measure the compiler flags used for build
+  echo "$CC"
+  echo "$HOSTCC"
+  echo "$CXX"
+  echo "$HOSTCXX"
+  echo "$FC"
+  echo "$HOSTFC"
+  echo "$CFLAGS"
+  echo "$CXXFLAGS"
 
   # build!
   make ${MAKEFLAGS} LOCALVERSION= bzImage modules
@@ -415,6 +445,16 @@ package_linux420-STUN() {
   cd "${srcdir}/linux-${_basekernel}"
 
   KARCH=x86
+
+  # Print as a diagnostic measure the compiler flags used for build (in-package)
+  echo "$CC"
+  echo "$HOSTCC"
+  echo "$CXX"
+  echo "$HOSTCXX"
+  echo "$FC"
+  echo "$HOSTFC"
+  echo "$CFLAGS"
+  echo "$CXXFLAGS"
 
   # get kernel version
   _kernver="$(make LOCALVERSION= kernelrelease)"
