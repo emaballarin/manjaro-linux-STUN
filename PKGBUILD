@@ -119,8 +119,7 @@ source=(## LINUX KERNEL (base, before the patches)
         "000ker2-manjaro-stun-tcpcake.patch"
 
         ## STUN PATCHES (Alfred Chen's PDS Scheduler - downloaded locally, with patches)
-        "v4.20_pds099i.patch"
-        "b065cb11f1c039edcc2bbd10a82fcaf18b20d87d.patch"
+        "v4.20_pds099j.patch"
 
         ## Holger Hoffstaette patches (cherry-picked)
         #"https://raw.githubusercontent.com/hhoffstaette/kernel-patches/4.19/4.19/pds-20181130-pds-099f.patch"
@@ -181,7 +180,7 @@ sha256sums=('ad0823183522e743972382df0aa08fb5ae3077f662b125f1e599b0b2aaa12438'
             '4ab024df99d69063fdcd5de27138ff48c5f1304d4333709fd66514009837bcb3'
             '0b1d7371d230b08cdedb73dc1e38040d19a94fafde26bba86a9f807868123dc6'
             'b7f84870dd0c9bba4bae2e177c57485e428a4097d28b1765afad6796694296ca'
-            'c85a83259f8965c1a9bb745774711892907d9ad40cbad3a3b4606f4e539b1b26'
+            'fca95d3cd1e759301437cb29793cd31b3eb897432803ca8697e09f8ad54a04e1'
             '96560bb27c5d30e9e92ac1621abeb725e6ac58e48d0f40ce0368e4eba3b4ee8e'
             'cbc3954d99f086d060ab272f8bd4b9850646ace82728fdedee667114c2247189'
             'ae46064c455f32357c93f9966b0f1d0bd9fb8e504b19f83aa638604098ea10c8'
@@ -199,8 +198,7 @@ sha256sums=('ad0823183522e743972382df0aa08fb5ae3077f662b125f1e599b0b2aaa12438'
             '2d0ba1fabc10195a9edf4f114027eae93ec8c95000fca662a8fd8c0421b6fe21'
 
             # PDS Scheduler
-            'ea3bb3f97297ac6c5d2feefc428873004e18013333478656a0521d53055b8980'
-            '2cb9d199d339863b0fd0d2e9ce3b21a4d2c31835d28cc25e6007782ea5c6aa42'
+            '7af2125e2f08369b611298d2fddbd58817d321ca47704c9390f1e66e8ba910c0'
 
             # H.H. patches
             #'e3d6b665a33a2d22a68968f197888f4a7a833c6f272c6f1e7a7988897a7092ae'
@@ -345,8 +343,7 @@ prepare() {
 
   # PDS Scheduler - With patches
   echo 'Patching: PDS Scheduler - With patches'
-  patch -Np1 -i "${srcdir}/v4.20_pds099i.patch"
-  patch -Np1 -i "${srcdir}/b065cb11f1c039edcc2bbd10a82fcaf18b20d87d.patch"
+  patch -Np1 -i "${srcdir}/v4.20_pds099j.patch"
   echo '--- --- ---'
   echo ' '
 
