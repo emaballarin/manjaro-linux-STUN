@@ -313,7 +313,7 @@ prepare() {
   # Requires specially-built compiler. Safe to comment if needed! (one patch, below!)
   patch -Np1 -i "${srcdir}/0501-zero-extra-registers.patch"
   patch -Np1 -i "${srcdir}/0502-locking-rwsem-spin-faster.patch"
-  patch -Np1 -i "${srcdir}/turbo3-scheduler.patch"
+  #patch -Np1 -i "${srcdir}/turbo3-scheduler.patch" # FIXME: Causes errors on Linux 4.20.x
   patch -Np1 -i "${srcdir}/lfence.patch"
   patch -Np1 -i "${srcdir}/lifo-accept.patch"
   echo '--- --- ---'
@@ -323,8 +323,6 @@ prepare() {
   echo 'Patching: CLEAR LINUX PROJECT - CVE Fixes'
   echo 'None.'
   #patch -Np1 -i "${srcdir}/CVE-2018-19406.patch"
-  #patch -Np1 -i "${srcdir}/CVE-2018-19407.patch"
-  #patch -Np1 -i "${srcdir}/CVE-2018-19824.patch"
   echo '--- --- ---'
   echo ' '
 
@@ -379,16 +377,6 @@ prepare() {
   # don't run depmod on 'make install'. We'll do this ourselves in packaging
   sed -i '2iexit 0' scripts/depmod.sh
 
-  # Print as a diagnostic measure the compiler flags used for preparation
-  echo "$CC"
-  echo "$HOSTCC"
-  echo "$CXX"
-  echo "$HOSTCXX"
-  echo "$FC"
-  echo "$HOSTFC"
-  echo "$CFLAGS"
-  echo "$CXXFLAGS"
-
   # get kernel version
   make prepare
 
@@ -400,32 +388,12 @@ prepare() {
   #make oldconfig # using old config from previous kernel version
   # ... or manually edit .config
 
-  # Print as a diagnostic measure the compiler flags used for config
-  echo "$CC"
-  echo "$HOSTCC"
-  echo "$CXX"
-  echo "$HOSTCXX"
-  echo "$FC"
-  echo "$HOSTFC"
-  echo "$CFLAGS"
-  echo "$CXXFLAGS"
-
   # rewrite configuration
   yes "" | make config >/dev/null
 }
 
 build() {
   cd "${srcdir}/linux-${_basekernel}"
-
-  # Print as a diagnostic measure the compiler flags used for build
-  echo "$CC"
-  echo "$HOSTCC"
-  echo "$CXX"
-  echo "$HOSTCXX"
-  echo "$FC"
-  echo "$HOSTFC"
-  echo "$CFLAGS"
-  echo "$CXXFLAGS"
 
   # build!
   make ${MAKEFLAGS} LOCALVERSION= bzImage modules
@@ -442,16 +410,6 @@ package_linux420-STUN() {
   cd "${srcdir}/linux-${_basekernel}"
 
   KARCH=x86
-
-  # Print as a diagnostic measure the compiler flags used for build (in-package)
-  echo "$CC"
-  echo "$HOSTCC"
-  echo "$CXX"
-  echo "$HOSTCXX"
-  echo "$FC"
-  echo "$HOSTFC"
-  echo "$CFLAGS"
-  echo "$CXXFLAGS"
 
   # get kernel version
   _kernver="$(make LOCALVERSION= kernelrelease)"
