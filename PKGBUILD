@@ -21,20 +21,20 @@ _basever=420
 _bfq=v9
 _bfqdate=20181212
 _wireguard=0.0.20181218
-_sub=0
+_sub=1
 _commit=
 pkgver=${_basekernel}.${_sub}
-pkgrel=2
+pkgrel=1
 arch=('i686' 'x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
 makedepends=('xmlto' 'docbook-xsl' 'kmod' 'inetutils' 'bc' 'elfutils' 'git')
 options=('!strip')
 source=(## LINUX KERNEL (base, before the patches)
-        "https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.xz"
+        https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.xz"
 
         ## LINUX KERNEL (upstream patches)
-        #"https://www.kernel.org/pub/linux/kernel/v4.x/patch-${pkgver}.xz"
+        "https://www.kernel.org/pub/linux/kernel/v4.x/patch-${pkgver}.xz"
 
         ## LINUX KERNEL (base, before the patches)
         #https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable-rc.git/snapshot/linux-stable-rc-$_commit.tar.gz
@@ -129,6 +129,7 @@ source=(## LINUX KERNEL (base, before the patches)
         "grayskygcc.patch::https://raw.githubusercontent.com/graysky2/kernel_gcc_patch/master/enable_additional_cpu_optimizations_for_gcc_v8.1%2B_kernel_v4.13%2B.patch")
 
 sha256sums=('ad0823183522e743972382df0aa08fb5ae3077f662b125f1e599b0b2aaa12438'
+            '14a9eb9b899ada7ce203957aa760a185b746fde3120d67d483fa1be96b477489'
 
             ## CONFIGURATION FILE (due to frequent updates, for now)
             'SKIP'
@@ -220,8 +221,7 @@ prepare() {
 
   # add upstream patch
   echo 'Patching: UPSTREAM'
-  echo 'None.'
-  #patch -p1 -i "${srcdir}/patch-${pkgver}"
+  patch -p1 -i "${srcdir}/patch-${pkgver}"
 
   # add latest fixes from stable queue, if needed
   # http://git.kernel.org/?p=linux/kernel/git/stable/stable-queue.git
