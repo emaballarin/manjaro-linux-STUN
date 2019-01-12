@@ -106,7 +106,7 @@ source=(## LINUX KERNEL (base, before the patches)
 
         ## STUN PATCHES (Intel Clear Linux Project - CVE Fixes)
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-3701.patch"
-        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-5489.patch"
+        #"https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-5489.patch"
         #"https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2018-19824.patch"
 
         ## STUN PATCHES (Wireguard - Kernel autopatcher)
@@ -183,7 +183,7 @@ sha256sums=('ad0823183522e743972382df0aa08fb5ae3077f662b125f1e599b0b2aaa12438'
 
             # Clear Linux - CVE Fixes
             '26def6ede2278159032e9743b37842208348d4aaefc0575b9d1c573392216d55'
-            '42654d82714855e1137d8842e37edef79187444878a39669f18d34606bdf3a1d'
+            #'42654d82714855e1137d8842e37edef79187444878a39669f18d34606bdf3a1d'
 
             # WireGuard
             'SKIP'
@@ -306,7 +306,7 @@ prepare() {
   # Clear Linux
   echo 'Patching: CLEAR LINUX PROJECT - CVE Fixes'
   patch -Np1 -i "${srcdir}/CVE-2019-3701.patch"
-  patch -Np1 -i "${srcdir}/CVE-2019-5489.patch"
+  #patch -Np1 -i "${srcdir}/CVE-2019-5489.patch"
   echo '--- --- ---'
   echo ' '
 
