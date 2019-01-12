@@ -31,7 +31,7 @@ license=('GPL2')
 makedepends=('xmlto' 'docbook-xsl' 'kmod' 'inetutils' 'bc' 'elfutils' 'git')
 options=('!strip')
 source=(## LINUX KERNEL (base, before the patches)
-        https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.xz"
+        "https://www.kernel.org/pub/linux/kernel/v4.x/linux-${_basekernel}.tar.xz"
 
         ## LINUX KERNEL (upstream patches)
         "https://www.kernel.org/pub/linux/kernel/v4.x/patch-${pkgver}.xz"
@@ -84,10 +84,8 @@ source=(## LINUX KERNEL (base, before the patches)
         '0013-bootsplash.patch'
 
         ## STUN PATCHES (Intel Clear Linux Project - Kernel)
-        #"https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0010-drm-i915-cfl-Add-a-new-CFL-PCI-ID.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0101-i8042-decrease-debug-message-level-to-info.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0103-silence-rapl.patch"
-        #"https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0104-pci-pme-wakeups.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0105-ksm-wakeups.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0106-intel_idle-tweak-cpuidle-cstates.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0108-smpboot-reuse-timer-calibration.patch"
@@ -107,8 +105,8 @@ source=(## LINUX KERNEL (base, before the patches)
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0501-zero-extra-registers.patch"
 
         ## STUN PATCHES (Intel Clear Linux Project - CVE Fixes)
-        #"https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2018-19406.patch"
-        #"https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2018-19407.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-3701.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-5489.patch"
         #"https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2018-19824.patch"
 
         ## STUN PATCHES (Wireguard - Kernel autopatcher)
@@ -119,11 +117,10 @@ source=(## LINUX KERNEL (base, before the patches)
         "000ker2-manjaro-stun-tcpcake.patch"
 
         ## STUN PATCHES (Alfred Chen's PDS Scheduler - downloaded locally, with patches)
-        "v4.20_pds099j.patch"
+        "v4.20_pds099k.patch"
 
         ## Holger Hoffstaette patches (cherry-picked)
-        #"https://raw.githubusercontent.com/hhoffstaette/kernel-patches/4.19/4.19/pds-20181130-pds-099f.patch"
-        #"https://raw.githubusercontent.com/hhoffstaette/kernel-patches/4.19/4.19/pds-20181206-make-sched_smt_present-track-topology.patch"
+        # None.
 
         ## STUN PATCHES (GraySky patch - GCC optimizations)
         "grayskygcc.patch::https://raw.githubusercontent.com/graysky2/kernel_gcc_patch/master/enable_additional_cpu_optimizations_for_gcc_v8.1%2B_kernel_v4.13%2B.patch")
@@ -164,10 +161,8 @@ sha256sums=('ad0823183522e743972382df0aa08fb5ae3077f662b125f1e599b0b2aaa12438'
             'SKIP'
 
             # Clear Linux
-            #'d8d1df4485ba663d024361550047d06bc72390df51604bf6f3cb9e26ebf8ce58'
             '672646f867f94e206e36ded0c11552a31c90823d8f978cf95ecbc96e45dc9cb1'
             '742074f41787d9596e9ebf0dee347979032095bdc4ca87f4af79f0c1596b9310'
-            #'aeb92407b464e5701beca366292e1baa1b352d946331e41ad0b3d0002c579fec'
             'f10a1d266ac272028683805d0f87f48efaaa283565263776ed812000146f4fc3'
             'a8bd3192b295b1eeb31e70bcd65abeff2db7c8457f428e4720298fd9e10d6960'
             'b97d4bb24dd34a6a67afdbdfda3930ec1503405ac0cf98b168e72cd1da1d5c2b'
@@ -187,9 +182,8 @@ sha256sums=('ad0823183522e743972382df0aa08fb5ae3077f662b125f1e599b0b2aaa12438'
             'ae46064c455f32357c93f9966b0f1d0bd9fb8e504b19f83aa638604098ea10c8'
 
             # Clear Linux - CVE Fixes
-            #'41a7873c9a100e329350762f7bdbb2ea1ad26b520b6f53ff6fff30ec79bcf051'
-            #'d75b07b44bec1f6dab3217a3b472490e295356f1afba33c1b42ad9ff9c1557f5'
-            #'205cf218cecd2c3d7b8620c93e56bf361895d296d2cf17559a480949560ce4d3'
+            '26def6ede2278159032e9743b37842208348d4aaefc0575b9d1c573392216d55'
+            '42654d82714855e1137d8842e37edef79187444878a39669f18d34606bdf3a1d'
 
             # WireGuard
             'SKIP'
@@ -199,14 +193,10 @@ sha256sums=('ad0823183522e743972382df0aa08fb5ae3077f662b125f1e599b0b2aaa12438'
             '2d0ba1fabc10195a9edf4f114027eae93ec8c95000fca662a8fd8c0421b6fe21'
 
             # PDS Scheduler
-            '7af2125e2f08369b611298d2fddbd58817d321ca47704c9390f1e66e8ba910c0'
+            'cf68c85c6e74828f72e5f9e5a0cdbbc88f6f2bf1a5edfa6f99e0242faac9d8d7'
 
             # H.H. patches
             #'e3d6b665a33a2d22a68968f197888f4a7a833c6f272c6f1e7a7988897a7092ae'
-            #'ce4b858984d7b2f973283d19a3c7a2dea7abecbb2479fe6e416222876227d185'
-
-            # PSI
-            #'2eaca8e69f70a3d0c71acd281827460217b4c41088a052bc403113d8bd0abb39'
 
             # GraySky
             '9f7177679c8d3f8d699ef0566a51349d828436dba04603bc2223f98c60d2d178')
@@ -286,12 +276,6 @@ prepare() {
   # echo '--- --- ---'
   # echo ' '
 
-  ## PSI Metrics
-  #echo 'Patching: PSI Metrics'
-  #patch -Np1 -i "${srcdir}/psimetrics.patch"
-  #echo '--- --- ---'
-  #echo ' '
-
   # Clear Linux
   echo 'Patching: CLEAR LINUX PROJECT - Kernel'
   #patch -Np1 -i "${srcdir}/0010-drm-i915-cfl-Add-a-new-CFL-PCI-ID.patch"
@@ -313,7 +297,7 @@ prepare() {
   # Requires specially-built compiler. Safe to comment if needed! (one patch, below!)
   patch -Np1 -i "${srcdir}/0501-zero-extra-registers.patch"
   patch -Np1 -i "${srcdir}/0502-locking-rwsem-spin-faster.patch"
-  #patch -Np1 -i "${srcdir}/turbo3-scheduler.patch" # FIXME: Causes errors on Linux 4.20.x
+  patch -Np1 -i "${srcdir}/turbo3-scheduler.patch" # FIXME: Causes errors on Linux 4.20.x
   patch -Np1 -i "${srcdir}/lfence.patch"
   patch -Np1 -i "${srcdir}/lifo-accept.patch"
   echo '--- --- ---'
@@ -321,8 +305,8 @@ prepare() {
 
   # Clear Linux
   echo 'Patching: CLEAR LINUX PROJECT - CVE Fixes'
-  echo 'None.'
-  #patch -Np1 -i "${srcdir}/CVE-2018-19406.patch"
+  patch -Np1 -i "${srcdir}/CVE-2019-3701.patch"
+  patch -Np1 -i "${srcdir}/CVE-2019-5489.patch"
   echo '--- --- ---'
   echo ' '
 
@@ -341,7 +325,7 @@ prepare() {
 
   # PDS Scheduler - With patches
   echo 'Patching: PDS Scheduler - With patches'
-  patch -Np1 -i "${srcdir}/v4.20_pds099j.patch"
+  patch -Np1 -i "${srcdir}/v4.20_pds099k.patch"
   echo '--- --- ---'
   echo ' '
 
@@ -379,14 +363,6 @@ prepare() {
 
   # get kernel version
   make prepare
-
-  # load configuration
-  # Configure the kernel. Replace the line below with one of your choice.
-  #make menuconfig # CLI menu for configuration
-  #make nconfig # new CLI menu for configuration
-  #make xconfig # X-based configuration
-  #make oldconfig # using old config from previous kernel version
-  # ... or manually edit .config
 
   # rewrite configuration
   yes "" | make config >/dev/null
