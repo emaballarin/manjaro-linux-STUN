@@ -297,7 +297,7 @@ prepare() {
   # Requires specially-built compiler. Safe to comment if needed! (one patch, below!)
   patch -Np1 -i "${srcdir}/0501-zero-extra-registers.patch"
   patch -Np1 -i "${srcdir}/0502-locking-rwsem-spin-faster.patch"
-  patch -Np1 -i "${srcdir}/turbo3-scheduler.patch" # FIXME: Causes errors on Linux 4.20.x
+  #patch -Np1 -i "${srcdir}/turbo3-scheduler.patch" # FIXME: Causes errors on Linux 4.20.x
   patch -Np1 -i "${srcdir}/lfence.patch"
   patch -Np1 -i "${srcdir}/lifo-accept.patch"
   echo '--- --- ---'
