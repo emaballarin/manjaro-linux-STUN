@@ -86,6 +86,7 @@ source=(## LINUX KERNEL (base, before the patches)
         ## STUN PATCHES (Intel Clear Linux Project - Kernel)
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0101-i8042-decrease-debug-message-level-to-info.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0103-silence-rapl.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0104-pci-pme-wakeups.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0105-ksm-wakeups.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0106-intel_idle-tweak-cpuidle-cstates.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0108-smpboot-reuse-timer-calibration.patch"
@@ -105,7 +106,7 @@ source=(## LINUX KERNEL (base, before the patches)
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0501-zero-extra-registers.patch"
 
         ## STUN PATCHES (Intel Clear Linux Project - CVE Fixes)
-        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-3701.patch"
+        #"https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-3701.patch"
         #"https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-5489.patch"
         #"https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2018-19824.patch"
 
@@ -163,6 +164,7 @@ sha256sums=('ad0823183522e743972382df0aa08fb5ae3077f662b125f1e599b0b2aaa12438'
             # Clear Linux
             '672646f867f94e206e36ded0c11552a31c90823d8f978cf95ecbc96e45dc9cb1'
             '742074f41787d9596e9ebf0dee347979032095bdc4ca87f4af79f0c1596b9310'
+            'aae37ec6461c0a13d1f0ce8d79cc6f9562b2d940d84b3af0e1dd2dfa81e1a030'
             'f10a1d266ac272028683805d0f87f48efaaa283565263776ed812000146f4fc3'
             'a8bd3192b295b1eeb31e70bcd65abeff2db7c8457f428e4720298fd9e10d6960'
             'b97d4bb24dd34a6a67afdbdfda3930ec1503405ac0cf98b168e72cd1da1d5c2b'
@@ -182,7 +184,7 @@ sha256sums=('ad0823183522e743972382df0aa08fb5ae3077f662b125f1e599b0b2aaa12438'
             'ae46064c455f32357c93f9966b0f1d0bd9fb8e504b19f83aa638604098ea10c8'
 
             # Clear Linux - CVE Fixes
-            '26def6ede2278159032e9743b37842208348d4aaefc0575b9d1c573392216d55'
+            #'26def6ede2278159032e9743b37842208348d4aaefc0575b9d1c573392216d55'
             #'42654d82714855e1137d8842e37edef79187444878a39669f18d34606bdf3a1d'
 
             # WireGuard
@@ -281,7 +283,7 @@ prepare() {
   #patch -Np1 -i "${srcdir}/0010-drm-i915-cfl-Add-a-new-CFL-PCI-ID.patch"
   patch -Np1 -i "${srcdir}/0101-i8042-decrease-debug-message-level-to-info.patch"
   patch -Np1 -i "${srcdir}/0103-silence-rapl.patch"
-  #patch -Np1 -i "${srcdir}/0104-pci-pme-wakeups.patch"
+  patch -Np1 -i "${srcdir}/0104-pci-pme-wakeups.patch"
   patch -Np1 -i "${srcdir}/0105-ksm-wakeups.patch"
   patch -Np1 -i "${srcdir}/0106-intel_idle-tweak-cpuidle-cstates.patch"
   patch -Np1 -i "${srcdir}/0108-smpboot-reuse-timer-calibration.patch"
@@ -294,18 +296,18 @@ prepare() {
   patch -Np1 -i "${srcdir}/0116-kernel-time-reduce-ntp-wakeups.patch"
   patch -Np1 -i "${srcdir}/0120-Enable-stateless-firmware-loading.patch"
   patch -Np1 -i "${srcdir}/0122-xattr-allow-setting-user.-attributes-on-symlinks-by-.patch"
+  patch -Np1 -i "${srcdir}/turbo3-scheduler.patch" # FIXME: Causes errors on Linux 4.20.x
+  patch -Np1 -i "${srcdir}/lfence.patch"
+  patch -Np1 -i "${srcdir}/lifo-accept.patch"
   # Requires specially-built compiler. Safe to comment if needed! (one patch, below!)
   patch -Np1 -i "${srcdir}/0501-zero-extra-registers.patch"
   patch -Np1 -i "${srcdir}/0502-locking-rwsem-spin-faster.patch"
-  #patch -Np1 -i "${srcdir}/turbo3-scheduler.patch" # FIXME: Causes errors on Linux 4.20.x
-  patch -Np1 -i "${srcdir}/lfence.patch"
-  patch -Np1 -i "${srcdir}/lifo-accept.patch"
   echo '--- --- ---'
   echo ' '
 
   # Clear Linux
   echo 'Patching: CLEAR LINUX PROJECT - CVE Fixes'
-  patch -Np1 -i "${srcdir}/CVE-2019-3701.patch"
+  #patch -Np1 -i "${srcdir}/CVE-2019-3701.patch"
   #patch -Np1 -i "${srcdir}/CVE-2019-5489.patch"
   echo '--- --- ---'
   echo ' '
