@@ -296,7 +296,7 @@ prepare() {
   patch -Np1 -i "${srcdir}/0116-kernel-time-reduce-ntp-wakeups.patch"
   patch -Np1 -i "${srcdir}/0120-Enable-stateless-firmware-loading.patch"
   patch -Np1 -i "${srcdir}/0122-xattr-allow-setting-user.-attributes-on-symlinks-by-.patch"
-  patch -Np1 -i "${srcdir}/turbo3-scheduler.patch" # FIXME: Causes errors on Linux 4.20.x
+  #patch -Np1 -i "${srcdir}/turbo3-scheduler.patch" # FIXME: Causes errors on Linux 4.20.x
   patch -Np1 -i "${srcdir}/lfence.patch"
   patch -Np1 -i "${srcdir}/lifo-accept.patch"
   # Requires specially-built compiler. Safe to comment if needed! (one patch, below!)
