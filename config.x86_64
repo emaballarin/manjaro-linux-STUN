@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 4.20.0-1 Kernel Configuration
+# Linux/x86 4.20.3-1 Kernel Configuration
 #
 
 #
@@ -9324,7 +9324,7 @@ CONFIG_CRYPTO_CBC=m
 CONFIG_CRYPTO_CFB=m
 CONFIG_CRYPTO_CTR=y
 CONFIG_CRYPTO_CTS=m
-CONFIG_CRYPTO_ECB=y
+CONFIG_CRYPTO_ECB=m
 CONFIG_CRYPTO_LRW=m
 CONFIG_CRYPTO_OFB=m
 CONFIG_CRYPTO_PCBC=m
