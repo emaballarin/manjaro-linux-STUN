@@ -19,9 +19,9 @@ _aufs=20181217
 _basekernel=4.20
 _basever=420
 _bfq=v9
-_bfqdate=20181212
+_bfqdate=20190124
 _wireguard=0.0.20181218
-_sub=3
+_sub=5
 _commit=
 pkgver=${_basekernel}.${_sub}
 pkgrel=1
@@ -60,7 +60,7 @@ source=(## LINUX KERNEL (base, before the patches)
 
         ## MANJARO VANILLA (BFQ upstream support)
         #"0001-BFQ-${_bfq}-${_bfqdate}.patch::https://github.com/Algodev-github/bfq-mq/compare/0adb328...698937e.patch"
-        0001-BFQ-${_bfq}-${_bfqdate}.patch::https://github.com/sirlucjan/kernel-patches/raw/master/4.19/bfq-sq-mq/4.19-bfq-sq-mq-v9r1-2K181212-rc1.patch
+        0001-BFQ-${_bfq}-${_bfqdate}.patch::https://github.com/sirlucjan/kernel-patches/raw/master/4.20/bfq-sq-mq/4.20-bfq-sq-mq-v9r1-2K190124-rc1.patch
 
         ## MANJARO VANILLA (ARCH Patches)
         0001-add-sysctl-to-disallow-unprivileged-CLONE_NEWUSER-by.patch
@@ -127,7 +127,7 @@ source=(## LINUX KERNEL (base, before the patches)
         "grayskygcc.patch::https://raw.githubusercontent.com/graysky2/kernel_gcc_patch/master/enable_additional_cpu_optimizations_for_gcc_v8.1%2B_kernel_v4.13%2B.patch")
 
 sha256sums=('ad0823183522e743972382df0aa08fb5ae3077f662b125f1e599b0b2aaa12438'
-            'b0ad35e03bb580923bcae60b7041e3e52f1cc42dfd702b1c843a32f8ef851a6c'
+            'ca74dd464797d164274e718da902a234766eec42b973c0c143708f00eb684ad5'
 
             ## CONFIGURATION FILE (due to frequent updates, for now)
             'SKIP'
@@ -145,7 +145,7 @@ sha256sums=('ad0823183522e743972382df0aa08fb5ae3077f662b125f1e599b0b2aaa12438'
             '94f46f8bf35af4374c1742b9440cea47cd71568904ce31892253ca7378ddab05'
             'ba64b5173e202312a33f0d2f519caf4bbcb7408b5f33b592e8e687c7fda8eb81'
             '3272786e2850f2486483f5804058b81aae103a9ca25fa3cac9fb60ef359af046'
-            '8761152216a204b0bbf2bd581abc3f5cdf851cec8b807316528b72a7b552ef12'
+            'a38c95869911375cd6654863cfc614b5e6e31381485197183ca2925a0a54c64a'
             '37b86ca3de148a34258e3176dbf41488d9dbd19e93adbd22a062b3c41332ce85'
             'a504f6cf84094e08eaa3cc5b28440261797bf4f06f04993ee46a20628ff2b53c'
             'e096b127a5208f56d368d2cb938933454d7200d70c86b763aa22c38e0ddb8717'
@@ -258,7 +258,7 @@ prepare() {
   patch -Np1 -i "${srcdir}/aufs4.x-rcN-${_aufs}.patch"
   patch -Np1 -i "${srcdir}/aufs4-base.patch"
   patch -Np1 -i "${srcdir}/aufs4-kbuild.patch"
-  patch -Np1 -i "${srcdir}/aufs4-loopback.patch"
+  # patch -Np1 -i "${srcdir}/aufs4-loopback.patch" # currently broken
   patch -Np1 -i "${srcdir}/aufs4-mmap.patch"
   patch -Np1 -i "${srcdir}/aufs4-standalone.patch"
   patch -Np1 -i "${srcdir}/tmpfs-idr.patch"
