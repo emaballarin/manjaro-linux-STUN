@@ -100,7 +100,7 @@ source=(## LINUX KERNEL (base, before the patches)
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0120-Enable-stateless-firmware-loading.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0122-xattr-allow-setting-user.-attributes-on-symlinks-by-.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0502-locking-rwsem-spin-faster.patch"
-        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/turbo3-scheduler.patch"
+        #"https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/turbo3-scheduler.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/lfence.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/lifo-accept.patch"
         #"https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0501-zero-extra-registers.patch"
@@ -178,7 +178,7 @@ sha256sums=('ad0823183522e743972382df0aa08fb5ae3077f662b125f1e599b0b2aaa12438'
             '4ab024df99d69063fdcd5de27138ff48c5f1304d4333709fd66514009837bcb3'
             '0b1d7371d230b08cdedb73dc1e38040d19a94fafde26bba86a9f807868123dc6'
             'b7f84870dd0c9bba4bae2e177c57485e428a4097d28b1765afad6796694296ca'
-            'fca95d3cd1e759301437cb29793cd31b3eb897432803ca8697e09f8ad54a04e1'
+            #'fca95d3cd1e759301437cb29793cd31b3eb897432803ca8697e09f8ad54a04e1'
             '96560bb27c5d30e9e92ac1621abeb725e6ac58e48d0f40ce0368e4eba3b4ee8e'
             'cbc3954d99f086d060ab272f8bd4b9850646ace82728fdedee667114c2247189'
             #'ae46064c455f32357c93f9966b0f1d0bd9fb8e504b19f83aa638604098ea10c8'
