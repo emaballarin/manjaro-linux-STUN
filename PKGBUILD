@@ -20,7 +20,7 @@ _basekernel=4.20
 _basever=420
 _bfq=v9
 _bfqdate=20190124
-_wireguard=0.0.20181218
+_wireguard=0.0.20190123
 _sub=5
 _commit=
 pkgver=${_basekernel}.${_sub}
@@ -103,7 +103,7 @@ source=(## LINUX KERNEL (base, before the patches)
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/turbo3-scheduler.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/lfence.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/lifo-accept.patch"
-        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0501-zero-extra-registers.patch"
+        #"https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0501-zero-extra-registers.patch"
 
         ## STUN PATCHES (Intel Clear Linux Project - CVE Fixes)
         #"https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-3701.patch"
@@ -118,7 +118,7 @@ source=(## LINUX KERNEL (base, before the patches)
         "000ker2-manjaro-stun-tcpcake.patch"
 
         ## STUN PATCHES (Alfred Chen's PDS Scheduler - downloaded locally, with patches)
-        "v4.20_pds099k.patch"
+        "v4.20_pds099l.patch"
 
         ## Holger Hoffstaette patches (cherry-picked)
         # None.
@@ -181,7 +181,7 @@ sha256sums=('ad0823183522e743972382df0aa08fb5ae3077f662b125f1e599b0b2aaa12438'
             'fca95d3cd1e759301437cb29793cd31b3eb897432803ca8697e09f8ad54a04e1'
             '96560bb27c5d30e9e92ac1621abeb725e6ac58e48d0f40ce0368e4eba3b4ee8e'
             'cbc3954d99f086d060ab272f8bd4b9850646ace82728fdedee667114c2247189'
-            'ae46064c455f32357c93f9966b0f1d0bd9fb8e504b19f83aa638604098ea10c8'
+            #'ae46064c455f32357c93f9966b0f1d0bd9fb8e504b19f83aa638604098ea10c8'
 
             # Clear Linux - CVE Fixes
             #'26def6ede2278159032e9743b37842208348d4aaefc0575b9d1c573392216d55'
@@ -195,7 +195,7 @@ sha256sums=('ad0823183522e743972382df0aa08fb5ae3077f662b125f1e599b0b2aaa12438'
             '2d0ba1fabc10195a9edf4f114027eae93ec8c95000fca662a8fd8c0421b6fe21'
 
             # PDS Scheduler
-            'cf68c85c6e74828f72e5f9e5a0cdbbc88f6f2bf1a5edfa6f99e0242faac9d8d7'
+            'ebed7ad91b3bcc5f9807b97addaef7dbbcf40cca1ab8d325257af47096505a6f'
 
             # H.H. patches
             #'e3d6b665a33a2d22a68968f197888f4a7a833c6f272c6f1e7a7988897a7092ae'
@@ -300,7 +300,7 @@ prepare() {
   patch -Np1 -i "${srcdir}/lfence.patch"
   patch -Np1 -i "${srcdir}/lifo-accept.patch"
   # Requires specially-built compiler. Safe to comment if needed! (one patch, below!)
-  patch -Np1 -i "${srcdir}/0501-zero-extra-registers.patch"
+  #patch -Np1 -i "${srcdir}/0501-zero-extra-registers.patch"
   patch -Np1 -i "${srcdir}/0502-locking-rwsem-spin-faster.patch"
   echo '--- --- ---'
   echo ' '
@@ -327,7 +327,7 @@ prepare() {
 
   # PDS Scheduler - With patches
   echo 'Patching: PDS Scheduler - With patches'
-  patch -Np1 -i "${srcdir}/v4.20_pds099k.patch"
+  patch -Np1 -i "${srcdir}/v4.20_pds099l.patch"
   echo '--- --- ---'
   echo ' '
 
