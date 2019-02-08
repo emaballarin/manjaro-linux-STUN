@@ -19,9 +19,9 @@ _aufs=20181217
 _basekernel=4.20
 _basever=420
 _bfq=v9
-_bfqdate=20190124
+_bfqdate=20190204
 _wireguard=0.0.20190123
-_sub=5
+_sub=7
 _commit=
 pkgver=${_basekernel}.${_sub}
 pkgrel=1
@@ -60,7 +60,7 @@ source=(## LINUX KERNEL (base, before the patches)
 
         ## MANJARO VANILLA (BFQ upstream support)
         #"0001-BFQ-${_bfq}-${_bfqdate}.patch::https://github.com/Algodev-github/bfq-mq/compare/0adb328...698937e.patch"
-        0001-BFQ-${_bfq}-${_bfqdate}.patch::https://github.com/sirlucjan/kernel-patches/raw/master/4.20/bfq-sq-mq/4.20-bfq-sq-mq-v9r1-2K190124-rc1.patch
+        0001-BFQ-${_bfq}-${_bfqdate}.patch::https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/4.20/bfq-sq-mq/4.20-bfq-sq-mq-v9r1-2K190204-rc1.patch
 
         ## MANJARO VANILLA (ARCH Patches)
         0001-add-sysctl-to-disallow-unprivileged-CLONE_NEWUSER-by.patch
@@ -127,7 +127,7 @@ source=(## LINUX KERNEL (base, before the patches)
         "grayskygcc.patch::https://raw.githubusercontent.com/graysky2/kernel_gcc_patch/master/enable_additional_cpu_optimizations_for_gcc_v8.1%2B_kernel_v4.13%2B.patch")
 
 sha256sums=('ad0823183522e743972382df0aa08fb5ae3077f662b125f1e599b0b2aaa12438'
-            'ca74dd464797d164274e718da902a234766eec42b973c0c143708f00eb684ad5'
+            '2520e8d99dd754e77e897bc2dbe17b263b4fc11bb88abfdbc5f3c91c75f8b88f'
 
             ## CONFIGURATION FILE (due to frequent updates, for now)
             'SKIP'
@@ -145,7 +145,7 @@ sha256sums=('ad0823183522e743972382df0aa08fb5ae3077f662b125f1e599b0b2aaa12438'
             '94f46f8bf35af4374c1742b9440cea47cd71568904ce31892253ca7378ddab05'
             'ba64b5173e202312a33f0d2f519caf4bbcb7408b5f33b592e8e687c7fda8eb81'
             '3272786e2850f2486483f5804058b81aae103a9ca25fa3cac9fb60ef359af046'
-            'a38c95869911375cd6654863cfc614b5e6e31381485197183ca2925a0a54c64a'
+            '0998de1fd20f531f4f147e42af78137ee44c549dcfc9b6027ca91b5c791af11e'
             '37b86ca3de148a34258e3176dbf41488d9dbd19e93adbd22a062b3c41332ce85'
             'a504f6cf84094e08eaa3cc5b28440261797bf4f06f04993ee46a20628ff2b53c'
             'e096b127a5208f56d368d2cb938933454d7200d70c86b763aa22c38e0ddb8717'
