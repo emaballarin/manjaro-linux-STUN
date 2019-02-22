@@ -116,7 +116,7 @@ source=(## LINUX KERNEL (base, before the patches)
         "000ker2-manjaro-stun-tcpcake.patch"
 
         ## STUN PATCHES (Alfred Chen's PDS Scheduler - downloaded locally, with patches)
-        "v4.20_pds099l.patch"
+        "v4.20_pds099m.patch"
 
         ## STUN PATCHES (GraySky patch - GCC optimizations)
         "grayskygcc.patch::https://raw.githubusercontent.com/graysky2/kernel_gcc_patch/master/enable_additional_cpu_optimizations_for_gcc_v8.1%2B_kernel_v4.13%2B.patch")
@@ -189,7 +189,7 @@ sha256sums=('ad0823183522e743972382df0aa08fb5ae3077f662b125f1e599b0b2aaa12438'
             '2d0ba1fabc10195a9edf4f114027eae93ec8c95000fca662a8fd8c0421b6fe21'
 
             # PDS Scheduler
-            'ebed7ad91b3bcc5f9807b97addaef7dbbcf40cca1ab8d325257af47096505a6f'
+            '2fc5f7e8551e5a8f53673d7a372cedc15c9d884e9e29b6f338d3d2f25924d485'
 
             # GraySky
             '9f7177679c8d3f8d699ef0566a51349d828436dba04603bc2223f98c60d2d178')
@@ -309,7 +309,7 @@ prepare() {
 
   # PDS Scheduler - With patches
   echo 'Patching: PDS Scheduler - With patches'
-  patch -Np1 -i "${srcdir}/v4.20_pds099l.patch"
+  patch -Np1 -i "${srcdir}/v4.20_pds099m.patch"
   echo '--- --- ---'
   echo ' '
 
