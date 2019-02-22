@@ -18,11 +18,11 @@ _kernelname=-STUN
 _aufs=20181217
 _basekernel=4.20
 _basever=420
+_aufs=20190211
 _bfq=v9
 _bfqdate=20190204
 _wireguard=0.0.20190123
-_sub=7
-_commit=
+_sub=10
 pkgver=${_basekernel}.${_sub}
 pkgrel=1
 arch=('i686' 'x86_64')
@@ -49,7 +49,7 @@ source=(## LINUX KERNEL (base, before the patches)
         '90-linux.hook'     # pacman hook for initramfs regeneration
 
         ## MANJARO VANILLA (AUFS4 support)
-        "aufs4.x-rcN-${_aufs}.patch.bz2"
+        "aufs4.20.4+-${_aufs}.patch.bz2"
         'aufs4-base.patch'
         'aufs4-kbuild.patch'
         'aufs4-loopback.patch'
@@ -126,7 +126,7 @@ source=(## LINUX KERNEL (base, before the patches)
         "grayskygcc.patch::https://raw.githubusercontent.com/graysky2/kernel_gcc_patch/master/enable_additional_cpu_optimizations_for_gcc_v8.1%2B_kernel_v4.13%2B.patch")
 
 sha256sums=('ad0823183522e743972382df0aa08fb5ae3077f662b125f1e599b0b2aaa12438'
-            '2520e8d99dd754e77e897bc2dbe17b263b4fc11bb88abfdbc5f3c91c75f8b88f'
+            '1e653ce01ea5ffb2a6f60b1947a67173be9e8f836467e537208bf2b243e1425b'
 
             ## CONFIGURATION FILE (due to frequent updates, for now)
             'SKIP'
@@ -135,15 +135,15 @@ sha256sums=('ad0823183522e743972382df0aa08fb5ae3077f662b125f1e599b0b2aaa12438'
             'b44d81446d8b53d5637287c30ae3eb64cae0078c3fbc45fcf1081dd6699818b5'
             '8634091ef2d9c59baf3474f1ea6311086baa524cc0ea060bb11143afcb8b1c58'
             'ae2e95db94ef7176207c690224169594d49445e04249d2499e9d2fbc117a0b21'
-            'f7fff46bf963f6b1cf53b65b51d77749a59586e429c4c056e01dfdab78a6120b'
-            'f58c6a81728e58464ab9ffbc3fffcd334287c02812f2df6a63dd7238189cbf8f'
-            '77e948328e08f1248f6b2871d51d0b536875ea0e528c3e172760a5e161002414'
-            'de7051f531e4f5c3ccb995489f23946c867b4c36c7b464559e43a15f3ad76f6d'
-            '675923ad36f42417a680014887547d03abbae37caf0afb51b9414ced86fe2031'
-            'dc9fb4f3392e9c3715ada792ae2a52ce0bb89f5b76738115821f4dd00a331a7e'
-            '94f46f8bf35af4374c1742b9440cea47cd71568904ce31892253ca7378ddab05'
-            'ba64b5173e202312a33f0d2f519caf4bbcb7408b5f33b592e8e687c7fda8eb81'
-            '3272786e2850f2486483f5804058b81aae103a9ca25fa3cac9fb60ef359af046'
+            '90831589b7ab43d6fab11bfa3ad788db14ba77ea4dc03d10ee29ad07194691e1'
+            '2891876a566e91aa7b12823ec523ac6b0ac988cab4dfb61f7630b8299a7f2417'
+            'a42d5d3732e794aa618d86b5d35b78d67b2954247c7c9f79f899521003fe36ee'
+            '298703c7dc231cc28c5949e2c96f2b86a1a11ff592862ff61e4f35a348db2e14'
+            '6d03acb120c076c22ad5846f68090e24f0f4388cf0a6d3f2ba0d099731f6454f'
+            '6c9520147d7c7c3e0eb187c22429f32741765f302f36ebcd9444a25f9cf0f641'
+            'ff4ec0fc6bd3d43ae22c3a84e21fde96729521802cbe2b4f8fa5ef80da8819d3'
+            '78fd61b9d76f5009f3fd3aa77c2d6b968c3e870cd2fad4d1d7cb72864f1bb32b'
+            '5504d2c0c1c0937624bae1c9d10b6044532e059c3c86fde5e7a88b61ccac0adc'
             '0998de1fd20f531f4f147e42af78137ee44c549dcfc9b6027ca91b5c791af11e'
             '37b86ca3de148a34258e3176dbf41488d9dbd19e93adbd22a062b3c41332ce85'
             'a504f6cf84094e08eaa3cc5b28440261797bf4f06f04993ee46a20628ff2b53c'
@@ -254,10 +254,10 @@ prepare() {
 
   # add aufs4 support
   echo 'Patching: MANJARO - AUFS4'
-  patch -Np1 -i "${srcdir}/aufs4.x-rcN-${_aufs}.patch"
+  patch -Np1 -i "${srcdir}/aufs4.20.4+-${_aufs}.patch"
   patch -Np1 -i "${srcdir}/aufs4-base.patch"
   patch -Np1 -i "${srcdir}/aufs4-kbuild.patch"
-  # patch -Np1 -i "${srcdir}/aufs4-loopback.patch" # currently broken
+  patch -Np1 -i "${srcdir}/aufs4-loopback.patch"
   patch -Np1 -i "${srcdir}/aufs4-mmap.patch"
   patch -Np1 -i "${srcdir}/aufs4-standalone.patch"
   patch -Np1 -i "${srcdir}/tmpfs-idr.patch"
