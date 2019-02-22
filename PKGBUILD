@@ -99,11 +99,9 @@ source=(## LINUX KERNEL (base, before the patches)
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0116-kernel-time-reduce-ntp-wakeups.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0120-Enable-stateless-firmware-loading.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0122-xattr-allow-setting-user.-attributes-on-symlinks-by-.patch"
-        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0502-locking-rwsem-spin-faster.patch"
-        #"https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/turbo3-scheduler.patch"
-        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/lfence.patch"
-        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/lifo-accept.patch"
-        #"https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0501-zero-extra-registers.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0124-use-lfence-instead-of-rep-and-nop.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0125-do-accept-in-LIFO-order-for-cache-efficiency.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0127-locking-rwsem-spin-faster.patch"
 
         ## STUN PATCHES (Intel Clear Linux Project - CVE Fixes)
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0002-vhost-vsock-fix-vhost-vsock-cid-hashing-inconsistent.patch"
@@ -119,9 +117,6 @@ source=(## LINUX KERNEL (base, before the patches)
 
         ## STUN PATCHES (Alfred Chen's PDS Scheduler - downloaded locally, with patches)
         "v4.20_pds099l.patch"
-
-        ## Holger Hoffstaette patches (cherry-picked)
-        # None.
 
         ## STUN PATCHES (GraySky patch - GCC optimizations)
         "grayskygcc.patch::https://raw.githubusercontent.com/graysky2/kernel_gcc_patch/master/enable_additional_cpu_optimizations_for_gcc_v8.1%2B_kernel_v4.13%2B.patch")
@@ -162,26 +157,24 @@ sha256sums=('ad0823183522e743972382df0aa08fb5ae3077f662b125f1e599b0b2aaa12438'
             'SKIP'
 
             # Clear Linux
-            '672646f867f94e206e36ded0c11552a31c90823d8f978cf95ecbc96e45dc9cb1'
-            '742074f41787d9596e9ebf0dee347979032095bdc4ca87f4af79f0c1596b9310'
-            'aae37ec6461c0a13d1f0ce8d79cc6f9562b2d940d84b3af0e1dd2dfa81e1a030'
-            'f10a1d266ac272028683805d0f87f48efaaa283565263776ed812000146f4fc3'
-            'a8bd3192b295b1eeb31e70bcd65abeff2db7c8457f428e4720298fd9e10d6960'
-            'b97d4bb24dd34a6a67afdbdfda3930ec1503405ac0cf98b168e72cd1da1d5c2b'
-            'f293fb065a92aa9d823d47628501ec76c8f7c8a85d488bf25d08456499eae504'
-            '7fbd514701aadd869bb634a1c734b830fda8d65240003f48f22e99ea3848d7b0'
-            '410a66cd9d7f964b3b43743c927346850b2bb054102ad7403d1f92e6ec6fab75'
-            '16d2ed058a378b23e17dcfe7ab8c9fe532b0f324480c5eeb2a860351ac718aec'
-            '4e4a7e88cb717437ee4241a2ad5604dfd15e125e04805b6769a872602f4dc778'
-            '44512886edccfb9896dee733b6acde564e8ef85612354ab31ef954294cff5ca0'
-            'cce373a7b21052e3e448d409fb9dcde737155c5322d4bc42fb729c1350aece75'
-            '4ab024df99d69063fdcd5de27138ff48c5f1304d4333709fd66514009837bcb3'
-            '0b1d7371d230b08cdedb73dc1e38040d19a94fafde26bba86a9f807868123dc6'
-            'b7f84870dd0c9bba4bae2e177c57485e428a4097d28b1765afad6796694296ca'
-            #'fca95d3cd1e759301437cb29793cd31b3eb897432803ca8697e09f8ad54a04e1'
-            '96560bb27c5d30e9e92ac1621abeb725e6ac58e48d0f40ce0368e4eba3b4ee8e'
-            'cbc3954d99f086d060ab272f8bd4b9850646ace82728fdedee667114c2247189'
-            #'ae46064c455f32357c93f9966b0f1d0bd9fb8e504b19f83aa638604098ea10c8'
+            'eb26172f27859c264a67b788eac8c8a8a9d6ee207e1ec783188153cf5192d695'
+            '300146e9c6e12466524ecd2cdbeccb6989445915bb35bc209463afb21fbc355a'
+            '9901e3ee35a72a1a8dec53819fd05766f0d62d5658aec79ef47a7b8f598b6f12'
+            '60400b4af3f9f4e870096f60a02ef736625a853d6422cca1fe4bf2b096057d62'
+            '1b068866602ffd07d71630a6d1bd9f53d0880d2f0b3c84c1720b6437abb82c34'
+            '1e0962b8719eb81205ecde9fb541886fe0b9dae0469a5383b214b1c214ec2e23'
+            '8f0ed08305f03e456bdf69c5c82d0064dbe6d1ded4bf849188399c37bddefb46'
+            '3fde44ba09f41fcbec6a8de4cff56db180bbadde6ad41994e262190d1f63b727'
+            '20222d7e15ca01bbcd94239a5a070b55e11552dbc737e7c2256735b91a71525e'
+            'a583f494a5013e729dc7788868fbbcaf10f47ed845ed05d084743bb72adbe359'
+            '156cd64bb4f6e74c02fdb97aee62c9740079539b06cbf6fb85ca44f531115a6a'
+            'e03aed7207b828f23f84aa6fbf9aaafe741b24fafe04526e80aa40d52f8b9c16'
+            '5a345edd54e5a5c4476383933eac39051d17cc7ba91ccf2de188c8424f2e2271'
+            '1452ff50ec90b999c89eac17a4223ab53ba70b1df4fb5f19932b189fb962e309'
+            '4092058ce0fd5fcd81b3576471e62cb1b095257fb70752c13f3a4405f699cb5a'
+            '47490f334b417b51ee777747504c9ea85a321a5801933f2d734fabdc5d2aa5e0'
+            'ea681694766c1a94c09a3c6979a4f41c567b77f6452dbdb12f7909acb5e8aa93'
+            'c2192ee4b6129450e207428527cbbb08f3a1ccbbaf4fdb94ec786a23191b41c6'
 
             # Clear Linux - CVE Fixes
             'e6bcab5cf7c112e69f746e4ad465f989123f01c6bf23d85071b51895c099dcaa'
@@ -197,9 +190,6 @@ sha256sums=('ad0823183522e743972382df0aa08fb5ae3077f662b125f1e599b0b2aaa12438'
 
             # PDS Scheduler
             'ebed7ad91b3bcc5f9807b97addaef7dbbcf40cca1ab8d325257af47096505a6f'
-
-            # H.H. patches
-            #'e3d6b665a33a2d22a68968f197888f4a7a833c6f272c6f1e7a7988897a7092ae'
 
             # GraySky
             '9f7177679c8d3f8d699ef0566a51349d828436dba04603bc2223f98c60d2d178')
@@ -273,15 +263,8 @@ prepare() {
   echo '--- --- ---'
   echo ' '
 
-  # # HHO TCPv4 (Google: rmem)
-  # echo 'Patching: H.H. - TCPv4'
-  # patch -Np1 -i "${srcdir}/net-20180928-up-initial-rmem-to-128KB-and-SYN-rwin-to-around-64KB.patch"
-  # echo '--- --- ---'
-  # echo ' '
-
   # Clear Linux
   echo 'Patching: CLEAR LINUX PROJECT - Kernel'
-  #patch -Np1 -i "${srcdir}/0010-drm-i915-cfl-Add-a-new-CFL-PCI-ID.patch"
   patch -Np1 -i "${srcdir}/0101-i8042-decrease-debug-message-level-to-info.patch"
   patch -Np1 -i "${srcdir}/0103-silence-rapl.patch"
   patch -Np1 -i "${srcdir}/0104-pci-pme-wakeups.patch"
@@ -297,19 +280,17 @@ prepare() {
   patch -Np1 -i "${srcdir}/0116-kernel-time-reduce-ntp-wakeups.patch"
   patch -Np1 -i "${srcdir}/0120-Enable-stateless-firmware-loading.patch"
   patch -Np1 -i "${srcdir}/0122-xattr-allow-setting-user.-attributes-on-symlinks-by-.patch"
-  #patch -Np1 -i "${srcdir}/turbo3-scheduler.patch" # FIXME: Causes errors on Linux 4.20.x
-  patch -Np1 -i "${srcdir}/lfence.patch"
-  patch -Np1 -i "${srcdir}/lifo-accept.patch"
-  # Requires specially-built compiler. Safe to comment if needed! (one patch, below!)
-  #patch -Np1 -i "${srcdir}/0501-zero-extra-registers.patch"
-  patch -Np1 -i "${srcdir}/0502-locking-rwsem-spin-faster.patch"
+  patch -Np1 -i "${srcdir}/0124-use-lfence-instead-of-rep-and-nop.patch"
+  patch -Np1 -i "${srcdir}/0125-do-accept-in-LIFO-order-for-cache-efficiency.patch"
+  patch -Np1 -i "${srcdir}/0127-locking-rwsem-spin-faster.patch"
   echo '--- --- ---'
   echo ' '
 
   # Clear Linux
   echo 'Patching: CLEAR LINUX PROJECT - CVE Fixes'
-  #patch -Np1 -i "${srcdir}/CVE-2019-3701.patch"
-  #patch -Np1 -i "${srcdir}/CVE-2019-5489.patch"
+  patch -Np1 -i "${srcdir}/https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0002-vhost-vsock-fix-vhost-vsock-cid-hashing-inconsistent.patch"
+  patch -Np1 -i "${srcdir}/https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-8912.patch"
+  patch -Np1 -i "${srcdir}/https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-8980.patch"
   echo '--- --- ---'
   echo ' '
 
