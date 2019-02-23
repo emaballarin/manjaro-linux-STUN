@@ -288,9 +288,9 @@ prepare() {
 
   # Clear Linux
   echo 'Patching: CLEAR LINUX PROJECT - CVE Fixes'
-  patch -Np1 -i "${srcdir}/https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0002-vhost-vsock-fix-vhost-vsock-cid-hashing-inconsistent.patch"
-  patch -Np1 -i "${srcdir}/https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-8912.patch"
-  patch -Np1 -i "${srcdir}/https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-8980.patch"
+  patch -Np1 -i "${srcdir}/0002-vhost-vsock-fix-vhost-vsock-cid-hashing-inconsistent.patch"
+  #patch -Np1 -i "${srcdir}/CVE-2019-8912.patch" # Already applied in 4.20.12
+  patch -Np1 -i "${srcdir}/CVE-2019-8980.patch"
   echo '--- --- ---'
   echo ' '
 
