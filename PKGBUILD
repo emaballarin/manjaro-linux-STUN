@@ -105,7 +105,6 @@ source=(## LINUX KERNEL (base, before the patches)
 
         ## STUN PATCHES (Intel Clear Linux Project - CVE Fixes)
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0002-vhost-vsock-fix-vhost-vsock-cid-hashing-inconsistent.patch"
-        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-8912.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-8980.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/bbr.patch"
 
@@ -179,7 +178,6 @@ sha256sums=('ad0823183522e743972382df0aa08fb5ae3077f662b125f1e599b0b2aaa12438'
 
             # Clear Linux - CVE Fixes
             'e6bcab5cf7c112e69f746e4ad465f989123f01c6bf23d85071b51895c099dcaa'
-            'afeb51de582575106484601bd2e96c7273f718cea55cba5c7330134966cffe89'
             '69ae4a51eb793319ba176b1cb9b788fa217f4ed04bddfd583c910ef2fa143b6b'
             'fe3c58af296180a29f539669c2cb4e127e781c5a2afc778ffe89f2b3d3dc74a5'
 
