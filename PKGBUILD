@@ -21,8 +21,8 @@ _basever=420
 _aufs=20190211
 _bfq=v9
 _bfqdate=20190204
-_wireguard=0.0.20190123
-_sub=12
+_wireguard=0.0.20190227
+_sub=13
 pkgver=${_basekernel}.${_sub}
 pkgrel=1
 arch=('i686' 'x86_64')
@@ -117,13 +117,13 @@ source=(## LINUX KERNEL (base, before the patches)
         "000ker2-manjaro-stun-tcpcake.patch"
 
         ## STUN PATCHES (Alfred Chen's PDS Scheduler - downloaded locally, with patches)
-        "v4.20_pds099m.patch"
+        "v4.20_pds099n.patch"
 
         ## STUN PATCHES (GraySky patch - GCC optimizations)
         "grayskygcc.patch::https://raw.githubusercontent.com/graysky2/kernel_gcc_patch/master/enable_additional_cpu_optimizations_for_gcc_v8.1%2B_kernel_v4.13%2B.patch")
 
 sha256sums=('ad0823183522e743972382df0aa08fb5ae3077f662b125f1e599b0b2aaa12438'
-            'af0fbaa56775a90e8f85132802067c35c16e0ae1ea052650ab0eeb11ac2c2ae7'
+            'db8a5472aaf0c7500c95661c81a9cd501d8fa3996238b6ddcf6ac55a511a2a43'
 
             ## CONFIGURATION FILE (due to frequent updates, for now)
             'SKIP'
@@ -191,7 +191,7 @@ sha256sums=('ad0823183522e743972382df0aa08fb5ae3077f662b125f1e599b0b2aaa12438'
             '2d0ba1fabc10195a9edf4f114027eae93ec8c95000fca662a8fd8c0421b6fe21'
 
             # PDS Scheduler
-            '2fc5f7e8551e5a8f53673d7a372cedc15c9d884e9e29b6f338d3d2f25924d485'
+            'db1160adfbdb978695cc0b2bde16347c49445ada379a8fb7efe32d02b1105393'
 
             # GraySky
             '9f7177679c8d3f8d699ef0566a51349d828436dba04603bc2223f98c60d2d178')
@@ -312,7 +312,7 @@ prepare() {
 
   # PDS Scheduler - With patches
   echo 'Patching: PDS Scheduler - With patches'
-  patch -Np1 -i "${srcdir}/v4.20_pds099m.patch"
+  patch -Np1 -i "${srcdir}/v4.20_pds099n.patch"
   echo '--- --- ---'
   echo ' '
 
